@@ -1,0 +1,88 @@
+.rfto-calendar-content {
+    gap: 1rem;
+
+    .calendar-header-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .day-header {
+            text-align: center;
+            font-weight: 700;
+            color: #6b7294;
+            font-size: 10px;
+        }
+
+    }
+
+    .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+
+        .calendar-day {
+            border: 1px solid #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+
+            &:hover {
+                background: #f8fafc;
+            }
+        }
+
+        .other-month {
+            color: #d1d5db;
+            background: #fafafa;
+        }
+
+        .today {
+            background: #ddd6fe;
+            border-color: #8b5cf6;
+            font-weight: bold;
+        }
+
+    }
+
+}
+
+
+
+
+.calendar-day .calendar-day.has-entry {
+    background: #ecfdf5;
+    border-color: #22c55e;
+}
+
+.calendar-day.has-entry::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+.day-number {
+    font-weight: 600;
+    color: #4c5670;
+    font-size: 10px;
+}
+
+.day-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.day-mood {
+    font-size: 10px;
+}
+
+.day-streak {
+    font-size: 10px;
+}

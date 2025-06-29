@@ -1,0 +1,17 @@
+<div class="rfto-calendar-content">
+    <div class="calendar-header-days">
+        <div *ngFor="let day of weekDays" class="day-header">{{ day }}</div>
+    </div>
+
+    <div class="calendar-days">
+        <div *ngFor="let day of calendarDays" class="calendar-day" [class.other-month]="!day.isCurrentMonth"
+            [class.today]="day.isToday" [class.has-entry]="day.hasEntry">
+            <div class="day-number">{{ day.date }}</div>
+            <div class="day-content">
+                <span *ngIf="day.mood" class="day-mood">{{ day.mood }}</span>
+                <span *ngIf="day.streak" class="day-streak">🔥</span>
+            </div>
+        </div>
+    </div>
+
+</div>
