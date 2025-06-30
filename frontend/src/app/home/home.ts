@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Calendar } from '../shared/calendar/calendar';
+import { Progressbar } from '../shared/progressbar/progressbar';
+import { Notebook } from '../shared/notebook/notebook';
 
 @Component({
   selector: 'app-home',
-  imports: [Calendar],
+  imports: [ Progressbar, Notebook],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

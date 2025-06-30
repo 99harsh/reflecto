@@ -1,0 +1,234 @@
+.notebook-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf1 100%);
+  padding: 40px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.notebook-page {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  position: relative;
+  padding: 60px 80px 40px 120px;
+  min-height: auto;
+  border-radius: 8px;
+  border: 1px solid #e1e8ed;
+}
+
+.spiral-holes {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  bottom: 40px;
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 35px;
+  padding-top: 60px;
+}
+
+.hole {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #4a90e2;
+  box-shadow: inset 0 2px 4px rgba(74, 144, 226, 0.3);
+}
+
+.margin-line {
+  position: absolute;
+  left: 80px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e74c3c;
+  opacity: 0.9;
+}
+
+.page-header {
+  margin-bottom: 40px;
+  border-bottom: 3px solid #2c3e50;
+  padding-bottom: 20px;
+}
+
+.journal-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.date {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.writing-area {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.journal-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 28px;
+  color: #2c3e50;
+  resize: none;
+  z-index: 2;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.journal-textarea::placeholder {
+  color: #95a5a6;
+  font-style: italic;
+}
+
+.ruled-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.line {
+  height: 28px;
+  border-bottom: 1px solid #bdc3c7;
+  margin: 0;
+  position: relative;
+}
+
+.line:nth-child(5n) {
+  border-bottom: 2px solid #95a5a6;
+}
+
+.line:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, #bdc3c7 10%, #bdc3c7 90%, transparent 100%);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.save-btn,
+.clear-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.save-btn {
+  background: #27ae60;
+  color: white;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.save-btn:hover:not(:disabled) {
+  background: #229954;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(39, 174, 96, 0.4);
+}
+
+.clear-btn {
+  background: #e67e22;
+  color: white;
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+}
+
+.clear-btn:hover:not(:disabled) {
+  background: #d35400;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(230, 126, 34, 0.4);
+}
+
+.save-btn:disabled,
+.clear-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .notebook-container {
+    padding: 20px 10px;
+  }
+
+  .notebook-page {
+    padding: 40px 40px 30px 80px;
+  }
+
+  .journal-title {
+    font-size: 2rem;
+  }
+
+  .spiral-holes {
+    left: 15px;
+    gap: 30px;
+  }
+
+  .margin-line {
+    left: 60px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .notebook-page {
+    padding: 30px 20px 20px 60px;
+  }
+
+  .journal-title {
+    font-size: 1.5rem;
+  }
+
+  .journal-textarea {
+    font-size: 14px;
+    line-height: 26px;
+  }
+
+  .line {
+    height: 26px;
+  }
+
+  .spiral-holes {
+    gap: 25px;
+  }
+}

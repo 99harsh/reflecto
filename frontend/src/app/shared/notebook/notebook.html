@@ -1,0 +1,45 @@
+<div class="notebook-container">
+  <div class="notebook-page">
+    <!-- Spiral binding holes -->
+    <div class="spiral-holes">
+      <div class="hole" *ngFor="let hole of getHoleArray()"></div>
+    </div>
+    
+    <!-- Red margin line -->
+    <div class="margin-line"></div>
+    
+    <!-- Page header -->
+    <div class="page-header">
+      <h1 class="journal-title">My Journal</h1>
+      <div class="date">{{ currentDate }}</div>
+    </div>
+    
+    <!-- Writing area -->
+    <div class="writing-area">
+      <textarea 
+        class="journal-textarea"
+        [value]="journalContent"
+        (input)="onContentChange($event)"
+        (keypress)="onKeyPress($event)"
+        placeholder="Start writing your thoughts here... Use **bold**, *italic*, ~~strikethrough~~, or ==highlight== for formatting!"
+        [rows]="textareaRows"
+        autocomplete="off"
+        spellcheck="true"></textarea>
+      
+      <!-- Ruled lines background -->
+      <div class="ruled-lines">
+        <div class="line" *ngFor="let line of getLineArray()"></div>
+      </div>
+    </div>
+    
+    <!-- Action buttons -->
+    <div class="action-buttons">
+      <button class="save-btn" (click)="saveEntry()" [disabled]="!journalContent.trim()">
+        Save Entry
+      </button>
+      <button class="clear-btn" (click)="clearEntry()" [disabled]="!journalContent.trim()">
+        Clear
+      </button>
+    </div>
+  </div>
+</div>

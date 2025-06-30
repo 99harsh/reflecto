@@ -29,9 +29,6 @@
             </div>
 
             <div class="rfto-left-flex-container">
-                <div class="rfto-card rfto-calendar-container">
-                    <app-calendar></app-calendar>
-                </div>
                 <div class="rfto-card rfto-mood-card">
                     <div class="rfto-mood-container">
                         <div class="rfto-mood-svg">
@@ -56,9 +53,249 @@
                     </div>
                 </div>
 
+                <div class="rfto-card rfto-level-card">
+                    <div class="rfto-card-header">
+                        <div class="rfto-level-info-container">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" stroke="#9271f7">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M2.63303 16H21.367C21.4471 15.2813 21.5232 14.4732 21.609 13.5616L21.8382 11.1263C22.0182 9.2137 22.1082 8.25739 21.781 7.86207C21.604 7.64823 21.3633 7.5172 21.106 7.4946C20.6303 7.45282 20.0329 8.1329 18.8381 9.49307C18.2202 10.1965 17.9113 10.5482 17.5666 10.6027C17.3757 10.6328 17.1811 10.6018 17.0047 10.5131C16.6865 10.3529 16.4743 9.91812 16.0499 9.04851L13.8131 4.46485C13.0112 2.82162 12.6102 2 12 2C11.3898 2 10.9888 2.82162 10.1869 4.46485L7.95007 9.04852C7.5257 9.91811 7.31351 10.3529 6.99526 10.5131C6.81892 10.6018 6.62434 10.6328 6.43337 10.6027C6.08872 10.5482 5.77977 10.1965 5.16187 9.49307C3.96708 8.1329 3.36968 7.45282 2.89399 7.4946C2.63666 7.5172 2.39598 7.64823 2.21899 7.86207C1.8918 8.25739 1.9818 9.2137 2.16181 11.1263L2.391 13.5616C2.4768 14.4732 2.55286 15.2813 2.63303 16Z"
+                                        fill="#9271f7e5"></path>
+                                    <path
+                                        d="M13.3597 22C16.9046 22 18.6771 22 19.8597 20.7902C20.7736 19.8553 21.094 18.4447 21.3667 16H2.63281C2.90553 18.4447 3.22594 19.8553 4.13987 20.7902C5.32249 22 7.09495 22 10.6399 22H13.3597Z"
+                                        fill="#9271f7e5"></path>
+                                </g>
+                            </svg>
+                            <h3 class="rfto-level-info">Level 1</h3>
+                        </div>
+                        <div class="rfto-level-tag-container">
+                            <span class="rfto-level-tag">Beginner</span>
+                        </div>
+                    </div>
+                    <div class="rfto-xp-progress-container">
+                        <div class="rfto-xp-progress-header">
+                            <span>XP</span>
+                            <span>0/100</span>
+                        </div>
+                        <div class="rfto-xp-progressbar">
+                            <app-progressbar [progress]="70"></app-progressbar>
+                            <span class="rfto-xp-progressbar-nextlevel">100 XP to next level</span>
+                        </div>
+                        <div class="rfto-overview-card-container">
+                            <div class="rfto-overview-card">
+                                <div class="rfto-overview-icon">
+                                    <svg width="30px" height="30px" viewBox="-33 0 255 255"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        preserveAspectRatio="xMidYMid" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <defs>
+                                                <style>
+                                                    .cls-3 {
+                                                        fill: url(#linear-gradient-1);
+                                                    }
+
+                                                    .cls-4 {
+                                                        fill: #fc9502;
+                                                    }
+
+                                                    .cls-5 {
+                                                        fill: #fce202;
+                                                    }
+                                                </style>
+                                                <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse"
+                                                    x1="94.141" y1="255" x2="94.141" y2="0.188">
+                                                    <stop offset="0" stop-color="#ff4c0d"></stop>
+                                                    <stop offset="1" stop-color="#fc9502"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                            <g id="fire">
+                                                <path
+                                                    d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                                                    id="path-1" class="cls-3" fill-rule="evenodd"></path>
+                                                <path
+                                                    d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                                                    id="path-2" class="cls-4" fill-rule="evenodd"></path>
+                                                <path
+                                                    d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                                                    id="path-3" class="cls-5" fill-rule="evenodd"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="rfto-overview-details">
+                                    <h3 class="rfto-overview-count">1</h3>
+                                    <h5 class="rfto-overview-heading">Daily Streak</h5>
+                                </div>
+                            </div>
+                            <div class="rfto-overview-card">
+                                <div class="rfto-overview-icon">
+                                    <svg height="30px" width="30px" version="1.1" id="Layer_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 512.002 512.002" xml:space="preserve" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path style="fill:#3CB54A;"
+                                                d="M119.287,388.062c-4.552-2.96-7.288-8.016-7.28-13.439V31.999h287.987v342.624 c0.008,5.424-2.728,10.48-7.28,13.439l-136.714,88.796L119.287,388.062z">
+                                            </path>
+                                            <path style="fill:#0E9347;"
+                                                d="M387.995,103.995c-6.624,0-11.999,5.376-11.999,11.999v73.197c0,5.968-4.832,10.799-10.799,10.799 c-0.024,0-0.056,0-0.08,0h-1.12c-6.584-0.048-11.951,5.256-11.999,11.839c0,0.024,0,0.056,0,0.08v73.277 c0,5.968-4.832,10.799-10.799,10.799c-0.024,0-0.056,0-0.08,0h-1.04c-6.624-0.048-12.031,5.296-12.079,11.919 c0,0.024,0,0.056,0,0.08v35.998c-0.056,35.566-18.119,68.693-47.998,87.996l0,0c-15.015,9.88-24.039,26.663-23.999,44.638 l136.714-88.556c4.168-2.68,6.856-7.144,7.28-12.079l0,0V103.995H387.995z">
+                                            </path>
+                                            <path style="fill:#89C763;"
+                                                d="M112.008,31.999v231.989h11.999c6.624,0,11.999-5.376,11.999-11.999l0,0v-81.196 c0.16-6.136,5.272-10.983,11.415-10.815c0.144,0,0.288,0.008,0.424,0.016l0,0c6.624,0.088,12.071-5.216,12.159-11.839 c0-0.056,0-0.104,0-0.16V87.996c0-17.671,14.327-31.999,31.998-31.999h151.993c13.255,0,23.999-10.743,23.999-23.999H112.008z">
+                                            </path>
+                                            <path style="fill:#0E9347;"
+                                                d="M287.44,221.03l-15.999-39.998c-1.624-4.112-6.272-6.12-10.384-4.496 c-2.056,0.816-3.688,2.44-4.496,4.496l-15.999,39.998c-0.76,1.904-0.76,4.016,0,5.92l15.999,39.998 c1.624,4.112,6.272,6.12,10.384,4.496c2.056-0.816,3.688-2.44,4.496-4.496l15.999-39.998 C288.192,225.045,288.192,222.934,287.44,221.03z">
+                                            </path>
+                                            <path style="fill:#FFFFFF;"
+                                                d="M279.44,213.03l-15.999-39.998c-1.624-4.112-6.272-6.12-10.384-4.496 c-2.056,0.816-3.688,2.44-4.496,4.496l-15.999,39.998c-0.76,1.904-0.76,4.016,0,5.92l15.999,39.998 c1.624,4.112,6.272,6.12,10.383,4.496c2.056-0.816,3.688-2.44,4.496-4.496l15.999-39.998 C280.192,217.046,280.192,214.934,279.44,213.03z">
+                                            </path>
+                                            <g>
+                                                <circle style="fill:#2D4961;" cx="255.985" cy="359.983" r="8"></circle>
+                                                <circle style="fill:#2D4961;" cx="255.985" cy="119.994" r="8"></circle>
+                                                <circle style="fill:#2D4961;" cx="319.982" cy="215.99" r="8"></circle>
+                                                <circle style="fill:#2D4961;" cx="191.988" cy="215.99" r="8"></circle>
+                                                <circle style="fill:#2D4961;" cx="255.985" cy="71.997" r="8"></circle>
+                                                <circle style="fill:#2D4961;" cx="255.985" cy="311.985" r="8"></circle>
+                                                <path style="fill:#2D4961;"
+                                                    d="M399.994,0H112.008C94.337,0,80.009,14.327,80.009,31.999v342.624 c0.08,16.159,8.288,31.191,21.839,39.998l145.433,94.796c5.304,3.448,12.135,3.448,17.439,0l145.433-94.556 c13.551-8.808,21.759-23.839,21.839-39.998V31.999C431.993,14.327,417.665,0,399.994,0z M399.994,68.477 c-6.872-6.24-15.399-10.352-24.559-11.839c-1.496-9.2-5.64-17.759-11.919-24.639h36.478V68.477z M148.486,31.999 c-6.264,6.864-10.408,15.391-11.919,24.559c-9.168,1.512-17.695,5.656-24.559,11.919V31.999H148.486z M256.001,476.858 l-26.479-17.199c11.047-4.6,20.327-12.623,26.479-22.879c6.152,10.256,15.431,18.279,26.479,22.879L256.001,476.858z M399.994,374.622c0.008,5.424-2.728,10.48-7.28,13.439l-91.756,59.917c-20.895-1.592-37.022-19.039-36.958-39.998 c0-4.416-3.584-8-8-8s-8,3.584-8,8c0.064,20.959-16.063,38.406-36.958,39.998l-91.756-59.917c-4.552-2.96-7.288-8.016-7.28-13.439 V103.995c0-17.671,14.327-31.998,31.998-31.998c4.416,0,8-3.584,8-8c0-17.671,14.327-31.999,31.999-31.999h143.993 c17.671,0,31.999,14.327,31.999,31.999c0,4.416,3.584,8,8,8c17.671,0,31.999,14.327,31.999,31.998L399.994,374.622L399.994,374.622 z">
+                                                </path>
+                                            </g>
+                                            <path style="fill:#DDDFE1;"
+                                                d="M263.441,258.948l15.999-39.998c0.76-1.904,0.76-4.016,0-5.92l-15.999-39.998 c-1.2-3.04-7.44,0-7.44,10.959v79.996C259.273,263.988,262.225,261.996,263.441,258.948z">
+                                            </path>
+                                            <path style="fill:#44637F;"
+                                                d="M80.009,31.999v271.987l0,0c8.84,0,15.999-7.16,15.999-15.999V31.999 c0-8.84,7.16-15.999,15.999-15.999h271.987c8.84,0,15.999-7.16,15.999-15.999H112.008C94.329,0,80.009,14.327,80.009,31.999z">
+                                            </path>
+                                            <path style="fill:#123247;"
+                                                d="M410.154,414.861c13.551-8.808,21.759-23.839,21.839-39.998V55.997l0,0 c-8.84,0-15.999,7.16-15.999,15.999v304.466c0,8.04-4.024,15.551-10.719,19.999L269.28,487.097 c-8.304,5.56-13.287,14.887-13.279,24.879l0,0c3.096,0.008,6.12-0.88,8.72-2.56L410.154,414.861z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="rfto-overview-details">
+                                    <h3 class="rfto-overview-count">#2</h3>
+                                    <h5 class="rfto-overview-heading">Global Rank</h5>
+                                </div>
+                            </div>
+
+                            <div class="rfto-overview-card">
+                                <div class="rfto-overview-icon">
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
+                                        xml:space="preserve" width="30px" height="30px" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path style="fill:#FE5F1A;"
+                                                d="M222.242,67.516V512c122.74,0,222.242-99.501,222.242-222.242S344.982,67.516,222.242,67.516z">
+                                            </path>
+                                            <path style="fill:#FE834D;"
+                                                d="M410.725,289.758c0-122.74-84.387-222.242-188.484-222.242C99.501,67.516,0,167.018,0,289.758 S99.501,512,222.242,512C326.339,512,410.725,412.499,410.725,289.758z">
+                                            </path>
+                                            <circle style="fill:#FFFFFF;" cx="222.242" cy="289.758" r="163.165">
+                                            </circle>
+                                            <circle style="fill:#FEA680;" cx="222.242" cy="289.758" r="104.088">
+                                            </circle>
+                                            <g>
+                                                <circle style="fill:#FE5F1A;" cx="222.242" cy="289.758" r="45.011">
+                                                </circle>
+                                                <path style="fill:#FE5F1A;"
+                                                    d="M498.816,13.184l-67.634,35.805l55.698,39.784l11.936-11.936 C516.394,59.261,516.394,30.76,498.816,13.184z">
+                                                </path>
+                                            </g>
+                                            <path style="fill:#FE834D;"
+                                                d="M435.162,13.184l-11.935,11.935l23.87,39.784l51.72-51.72C481.238-4.394,452.74-4.394,435.162,13.184 z">
+                                            </path>
+                                            <polygon style="fill:#FEDC3D;"
+                                                points="265.548,246.452 311.359,264.295 463.01,112.644 431.183,64.903 ">
+                                            </polygon>
+                                            <polygon style="fill:#FFE777;"
+                                                points="399.356,48.99 247.705,200.641 265.548,246.452 439.14,72.86 ">
+                                            </polygon>
+                                            <polygon style="fill:#B9B9B9;"
+                                                points="455.054,56.946 435.162,60.924 431.183,80.817 463.01,112.644 486.882,88.774 ">
+                                            </polygon>
+                                            <rect x="410.318" y="30.472"
+                                                transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 766.7312 -211.6355)"
+                                                style="fill:#DCDCDC;" width="33.758" height="45.011"></rect>
+                                            <polygon style="fill:#FFC1A6;"
+                                                points="279.532,232.468 234.178,261.909 265.563,277.381 311.359,264.297 ">
+                                            </polygon>
+                                            <polygon style="fill:#FFDBCC;"
+                                                points="247.705,200.641 234.62,246.437 242.134,269.866 279.532,232.468 ">
+                                            </polygon>
+                                            <polygon style="fill:#272727;"
+                                                points="250.091,261.909 235.764,263.505 222.242,289.758 265.563,277.381 ">
+                                            </polygon>
+                                            <polygon style="fill:#4D4D4D;"
+                                                points="234.62,246.437 222.242,289.758 250.091,261.909 "></polygon>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="rfto-overview-details">
+                                    <h3 class="rfto-overview-count">0/3</h3>
+                                    <h5 class="rfto-overview-heading">Goals</h5>
+                                </div>
+                            </div>
+                            <div class="rfto-overview-card">
+                                <div class="rfto-overview-icon">
+                                    <svg width="30px" height="30px" viewBox="0 0 32 32"
+                                        xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g id="journal" transform="translate(-124 -62)">
+                                                <path id="Path_94" data-name="Path 94"
+                                                    d="M130,93a4,4,0,0,0,4-4V63h21V89a4,4,0,0,1-4,4H130a5,5,0,0,1-5-5V82h9"
+                                                    fill="none" stroke="#498efc" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"></path>
+                                                <line id="Line_48" data-name="Line 48" x2="17"
+                                                    transform="translate(138 89)" fill="none" stroke="#498efc"
+                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                                </line>
+                                                <line id="Line_49" data-name="Line 49" x1="9"
+                                                    transform="translate(140 70)" fill="none" stroke="#f1d17c"
+                                                    stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                                                </line>
+                                                <line id="Line_50" data-name="Line 50" x1="9"
+                                                    transform="translate(140 74)" fill="none" stroke="#f1d17c"
+                                                    stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                                                </line>
+                                                <line id="Line_51" data-name="Line 51" x1="9"
+                                                    transform="translate(140 78)" fill="none" stroke="#f1d17c"
+                                                    stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                                                </line>
+                                                <line id="Line_52" data-name="Line 52" x1="9"
+                                                    transform="translate(140 82)" fill="none" stroke="#f1d17c"
+                                                    stroke-linecap="square" stroke-miterlimit="10" stroke-width="2">
+                                                </line>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="rfto-overview-details">
+                                    <h3 class="rfto-overview-count">6</h3>
+                                    <h5 class="rfto-overview-heading">Jounral</h5>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-
         </div>
 
         <div class="rfto-home-right-container">
@@ -81,8 +318,6 @@
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
-                                    <title>delete [#ff0000]</title>
-                                    <desc>Created with Sketch.</desc>
                                     <defs> </defs>
                                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <g id="Dribbble-Light-Preview" transform="translate(-179.000000, -360.000000)"
@@ -147,4 +382,8 @@
             </div>
         </div>
     </div>
+</section>
+
+<section class="rfto-notebook-container">
+    <app-notebook></app-notebook>
 </section>
