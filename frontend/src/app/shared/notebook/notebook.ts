@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component,  } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild,  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -8,53 +8,74 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './notebook.html',
   styleUrl: './notebook.scss'
 })
-export class Notebook {
+export class Notebook implements AfterViewInit{
+  @ViewChild("journalTextarea", { static: false }) textareaRef!: ElementRef<HTMLTextAreaElement>
+
   journalContent = ""
-  currentDate = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
-
-  lineCount = 25 // Start with 25 lines
+  currentDate: any;
+  lineCount = 25
   textareaRows = 25
+  private expandTimeout: any
 
-  onContentChange(event: any) {
-    this.journalContent = event.target.value
+  constructor(private cdr: ChangeDetectorRef) {
+    // Initialize date in constructor to avoid expression changed error
+   
+  }
+
+  ngAfterViewInit(): void {
+       this.currentDate = new Date().toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    this.cdr.detectChanges();
+  }
+
+  onContentChange(event: Event) {
+    const target = event.target as HTMLTextAreaElement
+    this.journalContent = target.value
   }
 
   onKeyPress(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      // Add more lines when Enter is pressed
-      setTimeout(() => {
-        this.lineCount += 5
-        this.textareaRows += 5
-      }, 100)
-    }
+    
   }
 
-  saveEntry() {
-    console.log("Saving journal entry:", this.journalContent)
-    alert("Journal entry saved!")
-  }
+  
 
-  clearEntry() {
-    this.journalContent = ""
-    // Reset to original size
-    this.lineCount = 25
-    this.textareaRows = 25
-  }
-
-  getLineArray() {
+  getLineArray(): number[] {
     return Array(this.lineCount)
       .fill(0)
       .map((_, i) => i + 1)
   }
 
-  getHoleArray() {
-    return Array(Math.min(20, Math.floor(this.lineCount / 2)))
+  getHoleArray(): number[] {
+    return Array(Math.min(20, Math.floor(this.lineCount / 2.5)))
       .fill(0)
       .map((_, i) => i + 1)
+  }
+
+  trackByIndex(index: number): number {
+    return index
+  }
+
+  saveEntry() {
+    if (this.journalContent.trim()) {
+      console.log("Saving journal entry:", this.journalContent)
+      alert("Journal entry saved!")
+    }
+  }
+
+  clearEntry() {
+    this.journalContent = ""
+    this.lineCount = 25
+    this.textareaRows = 25
+  }
+
+  ngOnDestroy() {
+    // Clean up timeout on component destroy
+    if (this.expandTimeout) {
+      clearTimeout(this.expandTimeout)
+    }
   }
 }

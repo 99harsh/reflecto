@@ -238,10 +238,28 @@
         .rfto-mood-card {
             display: flex;
             align-items: center;
-
+            justify-content: center;
+            text-align: center;
             .rfto-mood-svg {
-
                 margin: auto;
+            }
+
+            .rfto-mood-details{
+                margin-top: .625rem;
+                margin-bottom: .75rem;
+            }
+
+            .rfto-update-mood-container{
+                .rfto-update-mood-btn{
+                background-color: var(--color-primary);
+                border: none;
+                padding: .5rem;
+                border-radius: .312rem;
+                color: var(--color-white);
+                font-weight: 600;
+                font-size: var(--font-small);
+                cursor: pointer;
+                }
             }
         }
 
