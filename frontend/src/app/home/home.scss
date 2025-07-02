@@ -3,15 +3,6 @@
 
     padding: 1.5rem 4rem;
 
-    .rfto-card {
-        flex: 1;
-        padding: 1.25rem;
-        border-radius: 1rem;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-            0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        background-color: var(--color-white);
-        // margin-bottom: 2rem;
-    }
 
     .rfto-home-card-container {
         display: flex;
@@ -273,3 +264,8 @@
 
 }
 
+
+.rfto-quotes-container{
+    padding: 2rem 0px;
+    background-image: var(--background-asset-1);
+}

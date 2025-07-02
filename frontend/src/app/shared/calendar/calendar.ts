@@ -1,28 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-calendar',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './calendar.html',
   styleUrl: './calendar.scss'
 })
-export class Calendar implements OnInit{
+export class Calendar implements OnInit {
   currentMonth = new Date().getMonth();
   currentYear = new Date().getFullYear();
   weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  monthStats = {
-    entries: 15,
-    streak: 7,
-    bestMood: '😊 Happy'
-  };
+  monthList = Array.from({ length: 12 }, (_, i) =>
+    new Date(0, i).toLocaleString('default', { month: 'long' })
+  );
+  yearList: number[] = [];
+
   calendarDays: any[] = [];
   entries: any[] = [];
+
   ngOnInit(): void {
+    const baseYear = new Date().getFullYear();
+    this.yearList = Array.from({ length: 21 }, (_, i) => baseYear - 10 + i);
 
-    this.entries = [];
+    this.entries = [
+      { date: new Date(this.currentYear, this.currentMonth, 3), mood: '😊' },
+      { date: new Date(this.currentYear, this.currentMonth, 8), mood: '😞' },
+      { date: new Date(this.currentYear, this.currentMonth, 15), mood: '😎' }
+    ];
+
     this.generateCalendar();
-
   }
 
   generateCalendar(): void {
@@ -68,7 +77,6 @@ export class Calendar implements OnInit{
   }
 
   hasStreakForDate(date: Date): boolean {
-    // Mock streak logic - in real app, this would be calculated
     return Math.random() > 0.7;
   }
 

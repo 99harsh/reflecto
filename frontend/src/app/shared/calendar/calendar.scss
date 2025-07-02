@@ -1,88 +1,165 @@
-.rfto-calendar-content {
-    gap: 1rem;
+.rfto-calendar-container {
+    display: flex;
+    padding: 1.5rem 4rem;
+    gap: 1.5rem;
 
-    .calendar-header-days {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-
-        .day-header {
-            text-align: center;
-            font-weight: 700;
-            color: #6b7294;
-            font-size: 10px;
+    .rfto-card{
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+        transition: .1s ease-in-out;
+        border-radius: .312rem;
+        &:hover{
+            border-color: var(--color-primary);
         }
-
     }
 
-    .calendar-days {
+    .rfto-streak-card{
+        cursor: unset !important;
+        &:hover{
+            border-color: var(--color-border);
+        }
+    }
+
+    .rfto-data-heading-container{
+        .rfto-data-heading{
+            color: var(--color-text-primary);
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: .5rem;
+        }
+        .rfto-streak-highlight{
+            margin-top: 1rem;
+        }
+    }
+
+    .rfto-date-card-container{
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 1px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
 
-        .calendar-day {
-            border: 1px solid #f3f4f6;
+        .rfto-data-card{
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            gap: .5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+             .rfto-data-container{
+                .rfto-data{
+                    font-size: var(--font-xl);
+                    color: var(--color-text-primary);
+                    margin-bottom: .12rem;
+                }
+                .rfto-data-unit{
+                    font-size: var(--font-small);
+                    color: var(--color-text-secondary);
+                }
+            }
+        }
+    }
 
-            &:hover {
-                background: #f8fafc;
+  
+    .rfto-calendar-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        background: #fff;
+
+        .calendar-controls {
+            display: flex;
+        justify-content: flex-end;
+            gap: 1rem;
+
+            select {
+                padding: 0.5rem;
+                border-radius: 6px;
+                border: 1px solid #d1d5db;
+                font-size: 0.875rem;
+                color: #374151;
+                background-color: white;
             }
         }
 
-        .other-month {
-            color: #d1d5db;
-            background: #fafafa;
+        .calendar-header-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+
+            .day-header {
+                padding:0.5rem;
+                font-weight: 700;
+                color: #6b7294;
+                font-size: var(--font-medium);
+            }
         }
 
-        .today {
-            background: #ddd6fe;
-            border-color: #8b5cf6;
-            font-weight: bold;
-        }
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
 
+            .calendar-day {
+                height: 60px;
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+                background: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                transition: all 0.2s ease;
+                cursor: pointer;
+                border: 1px solid #f3f4f6;
+
+                &:hover {
+                    background: #f3f4f6;
+                    transform: scale(1.02);
+                }
+
+                &.today {
+                    background: #ede9fe;
+                    border: 2px solid #8b5cf6;
+                }
+
+                &.has-entry {
+                    background: #ecfdf5;
+                  //  border-color: #22c55e;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 4px;
+                        right: 4px;
+                        width: 8px;
+                        height: 8px;
+                        background: #22c55e;
+                        border-radius: 50%;
+                    }
+                }
+
+
+
+                .day-number {
+                    font-weight: 600;
+                    font-size: var(--font-medium);
+                    color: #4c5670;
+                }
+
+                .day-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: auto;
+
+                    .day-mood,
+                    .day-streak {
+                        font-size: var(--font-large);
+                    }
+                }
+            }
+            .other-month{
+                background-color: #cccccc4f;
+            }
+        }
     }
 
-}
-
-
-
-
-.calendar-day .calendar-day.has-entry {
-    background: #ecfdf5;
-    border-color: #22c55e;
-}
-
-.calendar-day.has-entry::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 8px;
-    height: 8px;
-    background: #22c55e;
-    border-radius: 50%;
-}
-
-.day-number {
-    font-weight: 600;
-    color: #4c5670;
-    font-size: 10px;
-}
-
-.day-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-.day-mood {
-    font-size: 10px;
-}
-
-.day-streak {
-    font-size: 10px;
 }

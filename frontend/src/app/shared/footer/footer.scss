@@ -1,0 +1,17 @@
+.rfto-footer {
+  text-align: center;
+    padding: .5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+
+  p {
+    margin: 0.25rem 0;
+  }
+
+  strong {
+    // color: #444;
+    color: var(--color-primary);
+  }
+}

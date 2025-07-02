@@ -1,0 +1,98 @@
+.rfto-reflection-container {
+    background-image: var(--background-asset-1);
+    min-height: 100vh;
+
+
+    .rfto-reflection-heading-container {
+        background-color: var(--color-background);
+        padding: 2rem 4rem;
+        text-align: center;
+
+        .rfto-reflection-heading {
+            margin-bottom: .5rem;
+            color: var(--color-text-primary);
+        }
+
+        .rfto-today-date {
+            color: rgb(107 114 128);
+            margin-bottom: 1rem;
+        }
+
+        .rfto-reflection-subheading {
+            color: rgb(107 114 128);
+            font-weight: 500;
+            max-width: 40rem;
+            margin: auto;
+        }
+    }
+
+    .rfto-reflection-card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        padding: 2rem 4rem;
+
+        .rfto-card {
+            border: 1px solid var(--color-border);
+            border-radius: .312rem;
+        }
+
+        .rfto-reflection-card {
+            &:nth-child(1) {
+                background-color: #fef1f2;
+
+                .rfto-reflection-input {
+                    background-color: #fff9fa;
+                }
+            }
+
+              &:nth-child(2) {
+                background-color: #edfef4;
+
+                .rfto-reflection-input {
+                    background-color: #f8fefb;
+                }
+            }
+
+             &:nth-child(3) {
+                background-color: #eff8ff;
+
+                .rfto-reflection-input {
+                    background-color: #f7fcff;
+                }
+            }
+        }
+
+        .rfto-card-header {
+            .rfto-reflection-heading {
+                font-weight: 500;
+                font-size: var(--font-xl);
+                color: var(--color-text-primary);
+                margin-bottom: .312rem;
+            }
+
+            .rfto-reflection-subheading {
+                font-size: var(--font-medium);
+                color: var(--color-text-secondary);
+            }
+        }
+
+        .rfto-card-body {
+            margin-top: .612rem;
+
+            .rfto-reflection-input {
+                width: -webkit-fill-available;
+                height: 18.75rem;
+                border: 1px solid var(--color-border);
+                // background-color: var(--prompt-gradient-start);
+
+                border-radius: .312rem;
+                padding: .5rem;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+}

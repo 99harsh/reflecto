@@ -1,21 +1,24 @@
 <header class="rfto-header-container">
     <div class="rfto-logo-container">
-        <a href="">
-            <span class="rfto-logo-heading">Reflecto</span>  
+        <a [routerLink]="['home']">
+            <span class="rfto-logo-heading">Reflecto</span>
         </a>
     </div>
     <div class="rfto-nav-container">
         <div class="rfto-nav-item">
-            <a href="" class="rfto-nav-active">Home</a>
+            <a [routerLink]="['home']" class="rfto-nav-active">Home</a>
         </div>
           <div class="rfto-nav-item">
-            <a href="">Moods & Goals</a>
+            <a [routerLink]="['journal']">Journal</a>
+        </div>
+            <div class="rfto-nav-item">
+            <a [routerLink]="['reflection']">Reflection</a>
         </div>
         <div class="rfto-nav-item">
-            <a href="">Prompt</a>
+            <a [routerLink]="['mood']">Mood</a>
         </div>
         <div class="rfto-nav-item">
-            <a href="">Calendar</a>
+            <a [routerLink]="['calendar']">Calendar</a>
         </div>
         <div class="rfto-nav-item rfto-user-logo">
             <img src="user-icon.png" />

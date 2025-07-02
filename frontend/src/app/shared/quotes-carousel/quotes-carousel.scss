@@ -1,0 +1,115 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 1rem;
+    background: linear-gradient(to top right, #667eea 0%, #764ba2 100%);
+    // background: linear-gradient(to top right, var(--prompt-gradient-start), var(--prompt-gradient-end));
+    border-radius: .5rem;
+    overflow: hidden;
+}
+
+.carousel-wrapper {
+    position: relative;
+    height: 15.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quotes-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.quote-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.quote-slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.quote-slide.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.quote-content {
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    position: relative;
+}
+
+.quote-icon {
+    margin-bottom: 1.5rem;
+    opacity: 0.3;
+}
+
+.quote-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.quote-text {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 1cqh 0;
+    font-style: italic;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quote-attribution {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quote-author {
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.quote-category {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+
+/* Animation for smooth transitions */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.quote-slide.active .quote-content {
+    animation: fadeInUp 0.6s ease-out;
+}

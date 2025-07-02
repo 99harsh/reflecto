@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Progressbar } from '../shared/progressbar/progressbar';
-import { Notebook } from '../shared/notebook/notebook';
+import { Router } from '@angular/router';
+import { QuotesCarousel } from '../shared/quotes-carousel/quotes-carousel';
 
 @Component({
   selector: 'app-home',
-  imports: [ Progressbar, Notebook],
+  imports: [ Progressbar, QuotesCarousel],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
 export class Home {
 
+  router = inject(Router);
   progress = 75; // or dynamically from goal progress
   date = new Date().toLocaleDateString('en-GB', {
     weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
@@ -19,5 +21,13 @@ export class Home {
   // Circle math for stroke
   radius = 35;
   circumference = 2 * Math.PI * this.radius;
+
+  redirectToReflection = () => {
+    this.router.navigate(['reflection'])
+  }
+
+  redirectToMood = () => {
+    this.router.navigate(['mood'])
+  }
 
 }
