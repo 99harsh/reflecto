@@ -63,6 +63,8 @@
                 padding: 2rem;
                 cursor: pointer;
                 border: 2px solid var(--color-border);
+                transition: .2s ease-in-out;
+
                 .rfto-mood-name {
                     font-size: var(--font-large);
                     color: var(--color-text-primary);
@@ -106,5 +108,13 @@
                 border: 2px solid var(--color-primary);
             }
         }
+    }
+
+    .rfto-mood-container{
+        width: 100%;
+        min-height: 15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

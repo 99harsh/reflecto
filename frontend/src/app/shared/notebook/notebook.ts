@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild,  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SavingLoading } from '../saving-loading/saving-loading';
 
 @Component({
   selector: 'app-notebook',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SavingLoading],
   templateUrl: './notebook.html',
   styleUrl: './notebook.scss'
 })

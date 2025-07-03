@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { Progressbar } from '../shared/progressbar/progressbar';
 import { Router } from '@angular/router';
 import { QuotesCarousel } from '../shared/quotes-carousel/quotes-carousel';
+import { Spinner } from '../shared/spinner/spinner';
 
 @Component({
   selector: 'app-home',
-  imports: [ Progressbar, QuotesCarousel],
+  imports: [ Progressbar, QuotesCarousel, Spinner],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

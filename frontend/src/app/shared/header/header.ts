@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
@@ -15,14 +17,22 @@ export class Header {
 
   elementRef = inject(ElementRef);
   router = inject(Router);
+  currentRoute = "";
+
+  constructor() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.urlAfterRedirects;
+      });
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
     const profileWrapper = this.elementRef.nativeElement.querySelector('.profile-wrapper');
     const dropdownWrapper = this.elementRef.nativeElement.querySelector('.rfto-dropdown-menu')
-    console.log(profileWrapper, target, profileWrapper.contains(target))
-    // Check if the click is outside the profile wrapper
+
     if (profileWrapper && !profileWrapper.contains(target) && !dropdownWrapper.contains(target)) {
       this.isDropdownOpen = false;
     }

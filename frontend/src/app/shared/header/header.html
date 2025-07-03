@@ -6,19 +6,33 @@
     </div>
     <div class="rfto-nav-container">
         <div class="rfto-nav-item">
-            <a [routerLink]="['home']" class="rfto-nav-active">Home</a>
+            <a [routerLink]="['home']" [ngClass]="{
+                'rfto-nav-active': currentRoute === '/home'
+            }">Home</a>
         </div>
         <div class="rfto-nav-item">
-            <a [routerLink]="['journal']">Journal</a>
+            <a [routerLink]="['journal']"
+            [ngClass]="{
+                'rfto-nav-active': currentRoute === '/journal'
+            }">Journal</a>
         </div>
         <div class="rfto-nav-item">
-            <a [routerLink]="['reflection']">Reflection</a>
+            <a [routerLink]="['reflection']"
+              [ngClass]="{
+                'rfto-nav-active': currentRoute === '/reflection'
+            }">Reflection</a>
         </div>
         <div class="rfto-nav-item">
-            <a [routerLink]="['mood']">Mood</a>
+            <a [routerLink]="['mood']"
+              [ngClass]="{
+                'rfto-nav-active': currentRoute === '/mood'
+            }">Mood</a>
         </div>
         <div class="rfto-nav-item">
-            <a [routerLink]="['calendar']">Calendar</a>
+            <a [routerLink]="['calendar']"
+              [ngClass]="{
+                'rfto-nav-active': currentRoute === '/calendar'
+            }">Calendar</a>
         </div>
         <div (click)="toggleDropdown()" class="rfto-nav-item rfto-user-logo profile-wrapper" #profileWrapper>
             <img src="user-icon.png" />

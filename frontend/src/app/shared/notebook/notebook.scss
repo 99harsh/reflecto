@@ -12,6 +12,12 @@
     border-radius: 12px;
     border: 2px solid #d1e7dd;
 
+    .rfto-loading{
+      height: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
     .rfto-spiral-holes {
       position: absolute;
       left: .7rem;

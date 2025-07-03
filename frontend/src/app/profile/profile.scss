@@ -1,6 +1,6 @@
 .rfto-profile-section {
     padding: 1.5rem 4rem;
-
+    background: var(--background-asset-1);
     .rfto-profile-container {
         width: 50%;
         margin: auto;
@@ -47,6 +47,7 @@
 
                 .rfto-leaderboard-card-container {
                     .rfto-leaderboard-card {
+                        background-color: var(--color-white);
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
@@ -112,6 +113,10 @@
 
                             }
                         }
+                    }
+
+                    .rfto-leaderboard-card-active{
+                        border-color: var(--color-primary);
                     }
                 }
             }
@@ -182,5 +187,13 @@
             }
         }
 
+    }
+
+    .rfto-loading-container{
+        display: flex;
+        width: 100%;
+        height: 70vh;
+        justify-content: center;
+        align-items: center;
     }
 }

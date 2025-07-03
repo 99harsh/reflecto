@@ -31,6 +31,13 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
         padding: 2rem 4rem;
+      
+
+        .rfto-loading-container{
+            display: flex;
+            justify-content: flex-end;
+            margin-top: .5rem;
+        }
 
         .rfto-card {
             border: 1px solid var(--color-border);
@@ -38,6 +45,7 @@
         }
 
         .rfto-reflection-card {
+              position: relative;
             &:nth-child(1) {
                 background-color: #fef1f2;
 
@@ -94,5 +102,12 @@
                 }
             }
         }
+    }
+
+    .rfto-spinner-container{
+        height: 13rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

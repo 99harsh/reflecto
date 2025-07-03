@@ -1,5 +1,8 @@
 <div class="rfto-notebook-container">
   <div class="rfto-notebook-page">
+    <div class="rfto-loading">
+      <app-saving-loading></app-saving-loading>
+    </div>
     <!-- Spiral binding holes -->
     <div class="rfto-spiral-holes">
       <div class="rfto-hole" *ngFor="let hole of getHoleArray(); trackBy: trackByIndex"></div>
