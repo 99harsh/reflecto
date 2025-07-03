@@ -1,0 +1,35 @@
+  .rfto-xp-progress-container {
+      margin: .5rem 0px;
+
+      .rfto-xp-progress-level{
+        display: flex;
+        margin-bottom: .312rem;
+        h3{
+            margin-left: .312rem;
+        }
+      }
+
+      .rfto-xp-progress-header {
+          display: flex;
+          justify-content: space-between;
+
+          span {
+              font-size: var(--font-medium);
+              font-weight: 500;
+          }
+      }
+
+      .rfto-xp-progressbar {
+          margin: .25rem 0px;
+          text-align: center;
+
+          .rfto-xp-progressbar-nextlevel {
+              font-size: var(--font-medium);
+              font-weight: 500;
+              color: var(--color-primary);
+
+          }
+      }
+
+     
+  }
