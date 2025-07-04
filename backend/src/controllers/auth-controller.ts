@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { authSchema } from '../utils/validations';
-import { BADREQ, SUCCESS, UNAUTHACCESS } from '../utils/responses';
+import { BADREQ, ISE, SUCCESS, UNAUTHACCESS } from '../utils/responses';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 import prisma from '../utils/db';
 import { createUserAuthToken } from '../middlewares/auth-middleware';
@@ -39,7 +39,8 @@ export const authenticate = async(req: Request, res: Response) => {
                 }
             })
 
-            const token = createUserAuthToken({name: user_data.name, email: user_data.email, user_id: user_data.user_id });
+            const token = await createUserAuthToken({name: user_data.name, email: user_data.email, user_id: user_data.user_id });
+
             res.cookie('token', token, {httpOnly: true});
             res.json(SUCCESS({name: user_data.name, email: user_data.email, profile_photo: user_data.profile_photo, xp: user_data.xp}));
 
@@ -48,7 +49,7 @@ export const authenticate = async(req: Request, res: Response) => {
         }
 
     }catch(error){
-        console.log("Error", error);
-        res.json(BADREQ())
+        console.log(`AUTHENTICATION FAILED ${error}`);
+        res.json(ISE())
     }
 }

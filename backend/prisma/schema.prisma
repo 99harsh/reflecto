@@ -28,7 +28,7 @@ model task{
   user user @relation(fields: [user_id], references: [user_id])
   user_id Int
 
-  goal String
+  task String
 
   created_at DateTime @default(now())
 }

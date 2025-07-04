@@ -1,4 +1,7 @@
 import jwt from 'jsonwebtoken';
+import { NextFunction,  Response } from 'express';
+import { UNAUTHACCESS } from '../utils/responses';
+import { IRequest } from '../utils/interfaces';
 const { JWT_SECRET } = process.env; 
 interface UserPayload{
     name: string,
@@ -20,4 +23,18 @@ export const createUserAuthToken = (payload: UserPayload) => {
             reject(error);
         }
     });
+}
+
+export const verifyUserAuthToken = (req: any, res: Response, next:NextFunction) => {
+    try{
+        const {token} = req.cookies;
+        if(token && JWT_SECRET){
+            const payload = jwt.verify(token, JWT_SECRET);
+            req.payload = payload;
+            return next();
+        }
+    }catch(error){  
+        console.log(`VERIFY AUTH TOKEN FAILED ${error}`)
+        res.json(UNAUTHACCESS());
+    }
 }
