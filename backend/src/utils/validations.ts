@@ -22,3 +22,13 @@ export const updateJournalSchema = zod.object({
     journal_id: zod.number(),
     journal: zod.string()
 })
+
+//Mood
+export const createMoodSchema = zod.object({
+    mood_id: zod.number()
+})
+
+export const updateMoodSchema = zod.object({
+    user_mood_id: zod.number(),
+    mood_id: zod.number()
+})

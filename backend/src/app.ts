@@ -6,6 +6,7 @@ import cookieParse from 'cookie-parser';
 import authRoute from './routers/auth-router';
 import taskRoute from './routers/task-router';
 import journalRoute from './routers/journal-router';
+import moodRouter from './routers/mood-router';
 
 dotenv.config();
 const app = express();
@@ -31,6 +32,7 @@ app.get("/health", (req, res) => {
  app.use("/api/v1/auth", authRoute);
  app.use("/api/v1/task", taskRoute);
  app.use("/api/v1/journal", journalRoute);
+ app.use("/api/v1/mood", moodRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`SERVER IS RUNNING ON: ${process.env.PORT}`);
