@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // or postgresql/mysql if needed
+  url      = env("DATABASE_URL")
+}
+
+model user{
+    user_id Int @id @default(autoincrement())
+    name String
+    email String @unique
+    profile_photo String
+    xp Int
+    created_at DateTime @default(now())
+    last_login DateTime @updatedAt
+
+    task task[]
+    user_mood user_mood[]
+    journals journals[]
+    self_reflection self_reflection[]
+}
+
+model task{
+  task_id Int @id @default(autoincrement())
+
+  user user @relation(fields: [user_id], references: [user_id])
+  user_id Int
+
+  goal String
+
+  created_at DateTime @default(now())
+}
+
+model all_moods {
+  mood_id Int @id @default(autoincrement())
+  mood String @unique
+  created_at DateTime @default(now())
+  
+  user_mood user_mood[]
+}
+
+model user_mood{
+  user_mood_id Int @id @default(autoincrement())
+
+  all_moods all_moods @relation(fields: [mood_id], references: [mood_id])
+  mood_id Int
+
+  user user @relation(fields: [user_id], references: [user_id])
+  user_id Int
+
+  updated_at DateTime @updatedAt
+}
+
+model journals{
+  journal_id Int @id @default(autoincrement())
+
+  user user @relation(fields: [user_id], references: [user_id])
+  user_id Int
+
+  journal String
+
+  updated_at DateTime @updatedAt
+}
+
+model prompts{
+  prompt_id Int @id @default(autoincrement())
+  prompt String
+  created_at DateTime @default(now())
+
+  self_reflection self_reflection[]
+}
+
+model self_reflection{
+  self_reflection_id Int @id @default(autoincrement())
+  
+  user user @relation(fields: [user_id], references: [user_id])
+  user_id Int
+
+  prompts prompts @relation(fields: [prompt_id], references: [prompt_id])
+  prompt_id Int
+
+  self_reflection String
+
+  updated_at DateTime @updatedAt
+}
