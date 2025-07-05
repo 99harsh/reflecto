@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user{
+model users{
     user_id Int @id @default(autoincrement())
     name String
     email String @unique
@@ -20,12 +20,13 @@ model user{
     user_mood user_mood[]
     journals journals[]
     self_reflection self_reflection[]
+    user_prompts user_prompts[]
 }
 
 model task{
   task_id Int @id @default(autoincrement())
 
-  user user @relation(fields: [user_id], references: [user_id])
+  users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
   task String
@@ -47,7 +48,7 @@ model user_mood{
   all_moods all_moods @relation(fields: [mood_id], references: [mood_id])
   mood_id Int
 
-  user user @relation(fields: [user_id], references: [user_id])
+  users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
   updated_at DateTime @updatedAt
@@ -56,7 +57,7 @@ model user_mood{
 model journals{
   journal_id Int @id @default(autoincrement())
 
-  user user @relation(fields: [user_id], references: [user_id])
+  users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
   journal String
@@ -67,15 +68,27 @@ model journals{
 model prompts{
   prompt_id Int @id @default(autoincrement())
   prompt String
+  description String
   created_at DateTime @default(now())
 
   self_reflection self_reflection[]
+  user_prompts user_prompts[]
+}
+
+model user_prompts{
+  user_prompt_id Int @id @default(autoincrement())
+  
+  prompts prompts @relation(fields: [prompt_id],  references: [prompt_id])
+  prompt_id Int
+  
+  users users @relation(fields: [user_id], references: [user_id])
+  user_id Int
 }
 
 model self_reflection{
   self_reflection_id Int @id @default(autoincrement())
   
-  user user @relation(fields: [user_id], references: [user_id])
+  users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
   prompts prompts @relation(fields: [prompt_id], references: [prompt_id])

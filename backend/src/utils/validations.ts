@@ -32,3 +32,25 @@ export const updateMoodSchema = zod.object({
     user_mood_id: zod.number(),
     mood_id: zod.number()
 })
+
+//Self Reflection
+export const createSelfReflectionSchema = zod.object({
+    prompt_id: zod.number(),
+    self_reflection: zod.string()
+})
+
+export const updateSelfReflectionSchema = zod.object({
+    self_reflection_id: zod.number(),
+    prompt_id: zod.number(),
+    self_reflection: zod.string()
+})
+
+//Prompts
+export const addUserPromptSchema = zod.object({
+    prompt_id: zod.number()
+})
+
+export const deleteUserPromptSchema = zod.object({
+    user_prompt_id: zod.number(),
+    prompt_id: zod.number()
+})

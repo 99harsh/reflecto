@@ -24,7 +24,7 @@ export const authenticate = async(req: Request, res: Response) => {
 
         const user_payload = ticket.getPayload();
         if(typeof user_payload == "object" && user_payload && user_payload.name && user_payload.email && user_payload.picture){
-            const user_data = await prisma.user.upsert({
+            const user_data = await prisma.users.upsert({
                 where: {
                     email: user_payload.email
                 },
