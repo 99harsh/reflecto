@@ -10,7 +10,9 @@
         gap:1.5rem;
 
         .rfto-journal-card {
-            background: linear-gradient(to bottom right, var(--prompt-gradient-start), var(--prompt-gradient-end));
+            // background: linear-gradient(to bottom right, var(--prompt-gradient-start), var(--prompt-gradient-end));
+            background-color: #fef3c7;
+            border: 3px dotted var(--color-border);
             display: flex;
             flex-direction: column;
             align-items: center;

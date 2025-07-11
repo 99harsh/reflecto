@@ -1,160 +1,230 @@
+// .rfto-header-container {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     padding: 1rem 4rem;
+//     border-bottom: 1px solid var(--color-border);
+//     background-color: var(--color-surface);
+
+//     .rfto-logo-container {
+//         a {
+//             text-decoration: none;
+
+//             .rfto-logo-heading {
+//                 color: var(--color-text-primary);
+//                 font-weight: 600;
+//                 font-size: var(--font-xl);
+//             }
+//         }
+//     }
+
+//     .rfto-nav-container {
+//         display: flex;
+//         align-items: center;
+//         position: relative;
+
+//         .rfto-nav-item {
+//             margin: 0px 0.75rem;
+
+//             a {
+//                 text-decoration: none;
+//                 font-size: var(--font-medium);
+//                 color: var(--color-text-secondary);
+//                 font-weight: 500;
+
+//                 &:hover {
+//                     color: var(--color-primary);
+//                 }
+//             }
+
+//             .rfto-nav-active {
+//                 color: var(--color-primary);
+//                 font-weight: 600;
+//             }
+//         }
+
+//         .rfto-user-logo {
+//             width: 1.5rem;
+//             height: 1.5rem;
+//             cursor: pointer;
+//             border-radius: 100%;
+//             background-color: var(--color-background);
+//             border: 1px solid var(--color-border);
+
+//             img {
+//                 width: 100%;
+//                 height: 100%;
+//                 object-fit: contain;
+//             }
+//         }
+
+//         .rfto-dropdown-menu {
+//             position: absolute;
+//             top: 100%;
+//             right: 0;
+//             margin-top: 0.5rem;
+//             width: 280px;
+//             background: white;
+//             border: 1px solid #e5e7eb;
+//             border-radius: 0.75rem;
+//             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+//             opacity: 0;
+//             visibility: hidden;
+//             transform: translateY(-10px);
+//             transition: all 0.2s ease;
+//             z-index: 60;
+//         }
+
+//         .rfto-dropdown-menu.show {
+//             opacity: 1;
+//             visibility: visible;
+//             transform: translateY(0);
+//         }
+
+//         .rfto-dropdown-header {
+//             padding: 1rem;
+//             display: flex;
+//             align-items: center;
+//             gap: 0.75rem;
+//         }
+
+//         .rfto-dropdown-avatar {
+//             width: 40px;
+//             height: 40px;
+//             background: #3b82f6;
+//             border-radius: 50%;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             color: white;
+//         }
+
+//         .rfto-dropdown-user-info {
+//             flex: 1;
+//         }
+
+//         .rfto-dropdown-username {
+//             font-weight: 600;
+//             color: #1f2937;
+//             margin: 0;
+//             font-size: 0.875rem;
+//         }
+
+//         .rfto-dropdown-email {
+//             color: #6b7280;
+//             margin: 0;
+//             font-size: 0.75rem;
+//             margin-top: 0.25rem;
+//         }
+
+//         .rfto-dropdown-divider {
+//             height: 1px;
+//             background: #e5e7eb;
+//             margin: 0 1rem;
+//         }
+
+//         .rfto-dropdown-items {
+//             padding: 0.5rem;
+//         }
+
+//         .rfto-dropdown-item {
+//             width: 100%;
+//             display: flex;
+//             align-items: center;
+//             gap: 0.75rem;
+//             padding: 0.75rem 1rem;
+//             background: transparent;
+//             border: none;
+//             border-radius: 0.5rem;
+//             cursor: pointer;
+//             transition: all 0.2s ease;
+//             color: #374151;
+//             font-size: 0.875rem;
+//             text-align: left;
+//         }
+
+//         .rfto-dropdown-item:hover {
+//             background: #f3f4f6;
+//             color: #1f2937;
+//         }
+
+//         .rfto-dropdown-item:last-child {
+//             color: #dc2626;
+//         }
+
+//         .rfto-dropdown-item:last-child:hover {
+//             background: #fef2f2;
+//             color: #dc2626;
+//         }
+//     }
+// }
+
+
+:host {
+    --c-text-primary: #78350f;
+    --c-text-secondary: #b45309;
+    --c-backdrop: #fffbeb;
+    --c-background-light: #fef3c7;
+    --c-background-dark: #fde68a;
+    --c-border-1: #d97706;
+
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+
+}
+
+
 .rfto-header-container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1rem 4rem;
-    border-bottom: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background-color: #fffbeb;
+    .rfto-appname-container {
+        display: flex;
+        align-items: center;
 
-    .rfto-logo-container {
-        a {
-            text-decoration: none;
+        .rfto-app-name {
+            font-weight: 600;
+            color: var(--c-text-primary);
+        }
 
-            .rfto-logo-heading {
-                color: var(--color-text-primary);
-                font-weight: 600;
-                font-size: var(--font-xl);
-            }
+        .rfto-app-line {
+            margin-left: .5rem;
+            width: 80px;
+            margin-top: 0.3rem;
+            height: 2px;
+            background-color: var(--c-border-1);
         }
     }
 
-    .rfto-nav-container {
+    .rfto-nav-item-container {
         display: flex;
         align-items: center;
-        position: relative;
+        gap: 2rem;
 
         .rfto-nav-item {
-            margin: 0px 0.75rem;
-
             a {
-                text-decoration: none;
-                font-size: var(--font-medium);
-                color: var(--color-text-secondary);
+                font-size: var(--font-large);
+                color: var(--c-text-primary);
                 font-weight: 500;
-
-                &:hover {
-                    color: var(--color-primary);
-                }
+                text-decoration: none;
             }
 
-            .rfto-nav-active {
-                color: var(--color-primary);
-                font-weight: 600;
+            .rfto-signin-button {
+                border: 2px solid var(--c-text-primary);
+                padding: .5rem 1rem;
+                font-size: var(--font-medium);
+                color: var(--c-text-primary);
+                font-weight: 500;
+                background-color: var(--c-background-light);
+                cursor: pointer;
             }
-        }
-
-        .rfto-user-logo {
-            width: 1.5rem;
-            height: 1.5rem;
-            cursor: pointer;
-            border-radius: 100%;
-            background-color: var(--color-background);
-            border: 1px solid var(--color-border);
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-        }
-
-        .rfto-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 0.5rem;
-            width: 280px;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.2s ease;
-            z-index: 60;
-        }
-
-        .rfto-dropdown-menu.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .rfto-dropdown-header {
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .rfto-dropdown-avatar {
-            width: 40px;
-            height: 40px;
-            background: #3b82f6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .rfto-dropdown-user-info {
-            flex: 1;
-        }
-
-        .rfto-dropdown-username {
-            font-weight: 600;
-            color: #1f2937;
-            margin: 0;
-            font-size: 0.875rem;
-        }
-
-        .rfto-dropdown-email {
-            color: #6b7280;
-            margin: 0;
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
-        }
-
-        .rfto-dropdown-divider {
-            height: 1px;
-            background: #e5e7eb;
-            margin: 0 1rem;
-        }
-
-        .rfto-dropdown-items {
-            padding: 0.5rem;
-        }
-
-        .rfto-dropdown-item {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            background: transparent;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #374151;
-            font-size: 0.875rem;
-            text-align: left;
-        }
-
-        .rfto-dropdown-item:hover {
-            background: #f3f4f6;
-            color: #1f2937;
-        }
-
-        .rfto-dropdown-item:last-child {
-            color: #dc2626;
-        }
-
-        .rfto-dropdown-item:last-child:hover {
-            background: #fef2f2;
-            color: #dc2626;
         }
     }
 }

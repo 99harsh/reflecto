@@ -1,17 +1,18 @@
-.rfto-footer {
-  text-align: center;
-    padding: .5rem;
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
-  border-top: 1px solid #e0e0e0;
-  background-color: #fff;
+  .rfto-footer-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #78350f;
+        padding: 2.5rem;
+        p{
+            color: #fde68a;
+            padding: .625rem 2rem;
+            background-color: #92400e;
+            border: 2px dotted var(--c-border-1);
+        }
+    }
 
-  p {
-    margin: 0.25rem 0;
-  }
-
-  strong {
-    // color: #444;
-    color: var(--color-primary);
-  }
-}
+      .rfto-rotate-1 {
+        --tw-rotate: -1deg;
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+    }
