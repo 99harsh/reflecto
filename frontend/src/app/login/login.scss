@@ -1,73 +1,156 @@
-.rfto-login-container{
-    padding: 4rem;
+.rfto-login-container {
+    height: 100vh;
+    background-color: var(--color-background);
     display: flex;
     justify-content: center;
-    .rfto-login-card{
-        border: 1px solid var(--color-border);
-        padding: 1.5rem;
-        background-color: #fff;
-        text-align: center;
 
-        .rfto-header-container{
-            .rfto-app-name{
+    .rfto-login-content {
+        padding: 3rem 0rem;
+
+        .rfto-app-name-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+
+            h1 {
                 font-size: 2rem;
                 color: var(--color-primary);
             }
+        }
 
-            .rfto-app-subtitle{
-                color: var(--color-text-secondary);
-                font-size: var(--font-medium);
-                margin: .612rem 0px;
+        .rfto-welcome-button {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .rfto-signin-headings {
+            margin: 2rem 0;
+            text-align: center;
+
+            h1 {
+                color: var(--color-primary);
+            }
+
+            p {
+                color: var(--color-secondary);
+                margin-top: .5rem;
             }
         }
 
-        .rfto-welcome-back-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .rfto-welcome-back-btn{
-                display: flex;
-                background-color: #faf5ff;
-                padding: .5rem;
-                border-radius: .312rem;
-                margin-top: 1.5rem;
-                margin-bottom: .612rem;
-                .rfto-welcome-back-text{
-                                    color: var(--color-primary);
-                font-size: var(--font-medium);
-                font-weight: 500;
-                margin-left: .12rem;
-                }
-            }
-        }
+        .rfto-yellow-card {
+            text-align: center;
+            max-width: 28rem;
 
-        .rfto-signin-heading-container{
-            h3{
-                font-size: 1.2rem;
-                font-weight: 500;
-                margin-bottom: .612rem;
-            }
-            p{
-                font-size: var(--font-medium);
-                color: var(--color-text-secondary);
-                margin-bottom: .612rem;
-            }
-        }
+            .rfto-card-header {
+                justify-content: center;
 
-        .rfto-sigin-button-container{
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .rfto-terms-container{
-            p{
-                color: var(--color-text-secondary);
-                font-size: var(--font-medium);
-                a{
+                h1 {
                     color: var(--color-primary);
+                    font-size: var(--font-large);
                 }
+            }
+
+            .rfto-signin-button-container {
+                margin: 1.5rem 0px;
+                display: flex;
+
+                .rfto-google-btn {
+                    display: flex;
+                    flex: 1;
+                    justify-content: center;
+                    align-items: center;
+                    gap: .5rem;
+                    padding: 1rem;
+                    font-size: var(--font-large);
+                    background-color: white;
+                    // border: 2px solid #9ca3af;
+                    border: 2px solid rgb(228, 228, 231);
+                    color: rgb(55, 65, 81);
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: .1s linear all;
+
+                    &:hover {
+                        transform: scale(1.05, 1.05);
+                    }
+                }
+            }
+
+            .rfto-why-signin-container {
+                text-align: left;
+                padding: 1rem;
+                background-color: rgb(255, 251, 235);
+                border-top: 0px;
+                border-right: 0px;
+                border-bottom: 0px;
+
+                .rfto-card-header {
+                    justify-content: flex-start;
+                    margin-bottom: 1rem;
+
+                    h3 {
+                        color: var(--color-primary);
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;
+                        font-size: var(--font-large);
+                    }
+                }
+
+                .rfto-card-body {
+                    p {
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;
+                        color: var(--color-secondary);
+                        margin-top: .312rem;
+                        font-size: var(--font-medium);
+                    }
+                }
+            }
+        }
+
+        .rfto-privacy {
+            margin-top: 1rem;
+            font-size: var(--font-small);
+            color: var(--color-secondary);
+            padding: 0rem 1rem;
+        }
+
+        .rfto-guest-card-container {
+            width: 15rem;
+            margin: 2rem auto;
+            border: 2px dashed var(--color-border-yellow);
+            background-color: #fef9c3;
+            padding: 1rem;
+            text-align: center;
+
+            .rfto-guest-heading {
+                font-weight: 600;
+                color: var(--color-primary);
+            }
+
+            .rfto-guest-button {
+                margin: 1rem 0px;
+                border: 1px solid var(--color-secondary);
+                padding: .75rem;
+                background-color: transparent;
+                color: var(--color-primary);
+                font-size: var(--font-medium);
+            }
+
+            .rfto-guest-note {
+                font-size: var(--font-small);
+                color: var(--color-border);
+            }
+        }
+
+        .rfto-home-btn {
+            text-align: center;
+
+            a {
+                color: var(--color-primary);
+                text-decoration: underline;
+                font-size: var(--font-medium);
             }
         }
     }

@@ -1,113 +1,134 @@
 .rfto-reflection-container {
-    background-image: var(--background-asset-1);
-    min-height: 100vh;
-
-
-    .rfto-reflection-heading-container {
-        background-color: var(--color-background);
-        padding: 2rem 4rem;
-        text-align: center;
-
-        .rfto-reflection-heading {
-            margin-bottom: .5rem;
-            color: var(--color-text-primary);
-        }
-
-        .rfto-today-date {
-            color: rgb(107 114 128);
-            margin-bottom: 1rem;
-        }
-
-        .rfto-reflection-subheading {
-            color: rgb(107 114 128);
-            font-weight: 500;
-            max-width: 40rem;
-            margin: auto;
-        }
-    }
-
-    .rfto-reflection-card-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        padding: 2rem 4rem;
-      
-
-        .rfto-loading-container{
-            display: flex;
-            justify-content: flex-end;
-            margin-top: .5rem;
-        }
-
-        .rfto-card {
-            border: 1px solid var(--color-border);
-            border-radius: .312rem;
-        }
-
-        .rfto-reflection-card {
-              position: relative;
-            &:nth-child(1) {
-                background-color: #fef1f2;
-
-                .rfto-reflection-input {
-                    background-color: #fff9fa;
-                }
-            }
-
-              &:nth-child(2) {
-                background-color: #edfef4;
-
-                .rfto-reflection-input {
-                    background-color: #f8fefb;
-                }
-            }
-
-             &:nth-child(3) {
-                background-color: #eff8ff;
-
-                .rfto-reflection-input {
-                    background-color: #f7fcff;
-                }
-            }
-        }
-
-        .rfto-card-header {
-            .rfto-reflection-heading {
-                font-weight: 500;
-                font-size: var(--font-xl);
-                color: var(--color-text-primary);
-                margin-bottom: .312rem;
-            }
-
-            .rfto-reflection-subheading {
-                font-size: var(--font-medium);
-                color: var(--color-text-secondary);
-            }
-        }
-
-        .rfto-card-body {
-            margin-top: .612rem;
-
-            .rfto-reflection-input {
-                width: -webkit-fill-available;
-                height: 18.75rem;
-                border: 1px solid var(--color-border);
-                // background-color: var(--prompt-gradient-start);
-
-                border-radius: .312rem;
-                padding: .5rem;
-
-                &:focus {
-                    outline: none;
-                }
-            }
-        }
-    }
-
-    .rfto-spinner-container{
-        height: 13rem;
+    .rfto-entry-btn-container {
         display: flex;
         justify-content: center;
-        align-items: center;
+    }
+
+    .rfto-time-container {
+        text-align: center;
+        margin-top: 1rem;
+
+        h1 {
+            font-size: var(--font-xl);
+            color: var(--color-primary);
+        }
+
+        p {
+            margin-top: .3rem;
+            font-size: var(--font-medium);
+            color: var(--color-secondary);
+        }
+    }
+
+    .rfto-reflection {
+        display: flex;
+        margin-top: 3rem;
+        gap: 2rem;
+
+        .rfto-reflection-section {
+            flex: 1;
+
+            .rfto-card {
+                .rfto-header {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .rfto-header-content {
+                        display: flex;
+                        align-items: center;
+                        gap: .312rem;
+                    }
+                }
+            }
+        }
+
+        .rfto-reflection-input {
+            flex: 2;
+            .rfto-header{
+                .rfto-header-content{
+                    h1{
+                        color: var(--color-primary);
+                    }
+
+                    p{
+                        color: var(--color-secondary);
+                        font-size: var(--font-medium);
+                    }
+                }
+            }
+            .rfto-body {
+                position: relative;
+                margin-top: 1rem;
+            }
+
+            .rfto-lines-container {
+                position: absolute;
+                width: 100%;
+                z-index: 1;
+
+                .rfto-line {
+                    margin-top: 1rem;
+                    border-top: 1px solid #bfdbfe;
+                }
+            }
+
+            .rfto-input {
+                position: relative;
+                z-index: 10;
+                width: 100%;
+                min-height: 20rem;
+                max-height: 20rem;
+                background-color: transparent;
+                border: none;
+                outline: none;
+            }
+
+        }
+
+        .rfto-reflection-prompts{
+            .rfto-card-header{
+                h1{
+                    display: flex;
+                    align-items: center;
+                    gap: .312rem;
+                    color: var(--color-primary);
+                }
+            }
+
+            .rfto-card-body{
+                .rfto-prompts{
+                    border-left: 4px solid var(--color-border-purple);
+                    background-color: #f3e8ff;
+                    padding: 1rem;
+                    margin-top: 1rem;
+                    color: var(--color-primary);
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+            }
+
+            .rfto-writing-stats{
+                margin-top: 2rem;
+
+                .rfto-card-body{
+                    display: flex;
+                    
+                    .rfto-day-streak{
+                        flex: 1;
+                        margin-top: 1rem;
+                        text-align: center;
+                        h1{
+                            color: var(--color-primary);
+                        }
+                        p{
+                            color: var(--color-secondary);
+                            font-size: var(--font-medium);
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 }

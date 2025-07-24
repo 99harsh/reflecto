@@ -1,0 +1,267 @@
+.rfto-goals-section {
+    .rfto-task-btn-container {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .rfto-task-heading-container {
+        text-align: center;
+
+        h1 {
+            color: var(--color-primary);
+            font-size: var(--font-xl);
+        }
+
+        p {
+            color: var(--color-primary);
+            margin-top: 0.3rem;
+            font-size: var(--font-medium);
+        }
+    }
+
+    .rfto-task-container {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1.5rem;
+
+        .rfto-task-input-container {
+            flex: 1;
+
+            .rfto-input-card {
+                .rfto-card-header {
+                    margin-bottom: 1rem;
+
+                    h1 {
+                        display: flex;
+                        align-items: center;
+                        gap: .3rem;
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-task-input {
+                    display: flex;
+                    gap: .3rem;
+
+                    .rfto-input {
+                        flex-grow: 1;
+                        padding: .5rem;
+                        border: 1px solid var(--color-border-yellow);
+                        color: var(--color-primary);
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .rfto-add-btn {
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;
+                        font-size: var(--font-medium);
+                        cursor: pointer;
+                        color: var(--color-white);
+                        background-color: #16a34a;
+                        border: none;
+                        padding: .3rem .75rem;
+                    }
+                }
+            }
+
+            .rfto-all-tasks {
+                margin-top: 1.5rem;
+
+                .rfto-card-header {
+                    h1 {
+                        display: flex;
+                        align-items: center;
+                        gap: .3rem;
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-card-body {
+                    .rfto-task {
+                        border: 2px solid var(--color-yellow-dark);
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: .625rem;
+                        margin-top: 1rem;
+                        border-radius: .31rem;
+                        transition: .1s linear all;
+
+                        &:hover {
+                            transform: scale(1.01, 1);
+                        }
+
+                        .rfto-task-checkbox-container {
+                            display: flex;
+                            align-items: center;
+                            gap: 1rem;
+
+                            .rfto-task-checkbox {
+                                width: 1rem;
+                                height: 1rem;
+                                margin: 0;
+                                display: flex;
+                                accent-color: var(--color-green-light);
+                                cursor: pointer;
+                            }
+
+                            .rfto-task-name {
+                                color: var(--color-primary);
+                                font-weight: 500;
+                            }
+                        }
+
+                        .rfto-task-remove-btn {
+                            background-color: transparent;
+                            border: none;
+                            cursor: pointer;
+                            border-radius: .312rem;
+                            display: flex;
+                            align-items: center;
+
+                            &:hover {
+                                background-color: #fef2f2;
+
+                            }
+                        }
+                    }
+
+                    .rfto-task-completed {
+                        background-color: #f0fdf4;
+                        border-color: #bbf7d0;
+
+                        .rfto-task-checkbox-container {
+                            .rfto-task-name {
+                                color: #16a34a;
+                                text-decoration: line-through;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .rfto-task-summary-container {
+            flex: .5;
+
+            .rfto-card {
+                .rfto-card-header {
+                    margin-bottom: 1rem;
+
+                    h1 {
+                        display: flex;
+                        align-items: center;
+                        gap: .3rem;
+                    }
+                }
+            }
+
+            .rfto-purple-card {
+                .rfto-card-header {
+                    h1 {
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-card-body {
+                    .rfto-completion-container {
+                        text-align: center;
+                        margin-bottom: 1.2rem;
+
+                        h1 {
+                            font-size: 2rem;
+                            color: #9333ea;
+                        }
+
+                        p {
+                            color: var(--color-secondary);
+                            font-size: var(--font-medium);
+                        }
+                    }
+
+
+                }
+
+                .rfto-overall-progress-container {
+                    margin-top: 1.2rem;
+                    display: flex;
+                    text-align: center;
+                    justify-content: space-evenly;
+
+                    h3 {
+                        color: var(--color-primary);
+                    }
+
+                    p {
+                        color: var(--color-secondary);
+                        font-size: var(--font-medium);
+                    }
+                }
+            }
+
+            .rfto-orange-card{
+                margin-top: 1.5rem;
+
+                .rfto-card-header{
+                    h1{
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-card-body{
+                    .rfto-streak-container{
+                        text-align: center;
+                        h1{
+                            font-size: 2rem;
+                            color: var(--color-secondary);
+                        }
+                        p{
+                            color: var(--color-primary);
+                            font-size: var(--font-medium);
+                        }
+                    }
+
+                    .rfto-streak-data-container{
+                        .rfto-streak-data{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-top: .5rem;
+                            
+                            .rfto-streak-heading{
+                                font-size: var(--font-medium);
+                                color: var(--color-secondary);
+                            }
+
+                            .rfto-streak-number{
+                                font-size: var(--font-small);
+                                padding: .2rem .4rem;
+                                border-radius: .3rem;
+                                font-weight: 500;
+                            }
+
+                            .rfto-streak-solid{
+                                background-color: #ffedd5;
+                                color: var(--color-primary);
+                            }
+
+                            .rfto-streak-ghost{
+                                border: 1px solid #ccc;
+                                font-weight: 600;
+                            }
+
+                            .rfto-streak-success{
+                                background-color: #dcfce7;
+                                color: #166534;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

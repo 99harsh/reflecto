@@ -1,0 +1,52 @@
+<header class="rfto-header-container">
+    <div class="rfto-header-section rfto-logo-container">
+        <h1>Reflecto</h1>
+    </div>
+    <div class="rfto-header-section rfto-nav-container">
+        <a [routerLink]="'home'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'" >
+            <span class="rfto-nav-logo">🏠</span>
+            <span>Dashboard</span>
+        </a>
+        <a [routerLink]="'reflection'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">📝</span>
+            <span>Reflection</span>
+        </a>
+        <a [routerLink]="'journal'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">📝</span>
+            <span>Journal</span>
+        </a>
+        <a [routerLink]="'mood'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">💝</span>
+            <span>Mood</span>
+        </a>
+        <a [routerLink]="'goals'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">🎯</span>
+            <span>Goals</span>
+        </a>
+        <a [routerLink]="'calendar'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">📅</span>
+            <span>Calendar</span>
+        </a>
+    </div>
+   <div class="profile-wrapper" (click)="toggleDropdown()">
+        <div class="rfto-user-logo">
+            <img src="user-placeholder.png" alt="Profile" />
+        </div>
+        <div class="rfto-dropdown-menu" [class.show]="isDropdownOpen">
+            <div class="rfto-dropdown-header">
+                <div class="rfto-dropdown-avatar">
+                    {{ username[0] }}
+                </div>
+                <div class="rfto-dropdown-user-info">
+                    <div class="rfto-dropdown-username">{{ username }}</div>
+                    <div class="rfto-dropdown-email">{{ userEmail }}</div>
+                </div>
+            </div>
+            <div class="rfto-dropdown-divider"></div>
+            <div class="rfto-dropdown-items">
+                <button class="rfto-dropdown-item" (click)="navigateToProfile()">Profile Settings</button>
+                <button class="rfto-dropdown-item" (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</header>

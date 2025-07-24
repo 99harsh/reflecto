@@ -1,120 +1,198 @@
 .rfto-mood-container {
-    .rfto-mood-heading-container {
-        background-color: var(--color-background);
-        padding: 2rem 4rem;
+    .rfto-checkin-btn-container {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .rfto-feeling-heading {
         text-align: center;
 
-        .rfto-mood-heading {
-            margin-bottom: .5rem;
-            color: var(--color-text-primary);
+        h1 {
+            font-size: var(--font-xl);
+            color: var(--color-primary);
         }
 
-        .rfto-today-date {
-            color: rgb(107 114 128);
-            margin-bottom: 1rem;
-        }
-
-        .rfto-mood-subheading {
-            color: rgb(107 114 128);
-            font-weight: 400;
-            max-width: 40rem;
-            margin: auto;
+        p {
+            font-size: var(--font-medium);
+            color: var(--color-primary);
+            margin-top: .3rem;
         }
     }
 
-    .rfto-mood-card-container {
-        padding: 2rem 4rem;
-
-        .rfto-mood-card-main {
-
-            .rfto-card-header{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: .5rem;
-                h3{
-                    color: var(--color-text-primary);
-                    font-weight: 500;
-      
-                }
-                .rfto-update-btn{
-                    background-color: var(--color-primary);
-                    color: #fff;
-                    border: none;
-                    padding: .5rem 1rem;
-                    cursor: pointer;
-                    font-size: var(--font-small);
-                    border-radius: .312rem;
-                }
-            }
-            border: 1px solid var(--color-border);
-            padding: 1rem;
-            border-radius: .312rem;
-
-            .rfto-mood-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2rem;
-            }
-
-            .rfto-mood-card {
-                border-radius: .312rem;
-                text-align: center;
-                padding: 2rem;
-                cursor: pointer;
-                border: 2px solid var(--color-border);
-                transition: .2s ease-in-out;
-
-                .rfto-mood-name {
-                    font-size: var(--font-large);
-                    color: var(--color-text-primary);
-                    font-weight: 500;
-                    margin: .625rem 0px;
-                }
-
-                .rfto-mood-description {
-                    font-size: var(--font-medium);
-                    color: var(--color-text-secondary);
-                }
-            }
-
-
-
-            .rfto-mood-amazing {
-                background-color: #fefce8;
-            }
-
-            .rfto-mood-happy{
-                background-color: #effdf4;
-            }
-
-            .rfto-mood-content{
-                background-color: #fff7ed;
-            }
-
-            .rfto-mood-neutral{
-                background-color: #f9fafb;
-            }
-
-            .rfto-mood-low{
-                background-color: #eff6ff;
-            }
-
-            .rfto-mood-sad{
-                background-color: #eef2ff;
-            }
-
-            .rfto-mood-selected {
-                border: 2px solid var(--color-primary);
-            }
-        }
-    }
-
-    .rfto-mood-container{
-        width: 100%;
-        min-height: 15rem;
+    .rfto-mood {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        margin-top: 2rem;
+        gap: 2rem;
+
+        .rfto-mood-section {
+            flex: 1;
+
+            .rfto-card-header {
+                h1 {
+                    display: flex;
+                    gap: .5rem;
+                    align-items: center;
+                    color: var(--color-primary);
+                }
+            }
+
+            .rfto-card-body {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: .625rem;
+                margin-top: 1rem;
+
+                .rfto-mood-card {
+                    border: 2px solid #fcd34d;
+                    padding: 1rem;
+                    border-radius: .5rem;
+                    text-align: center;
+                    cursor: pointer;
+
+                    &:hover {
+                        border-color: #f472b6;
+                    }
+
+                    .rfto-mood-emoj {
+                        font-size: 2rem;
+                    }
+
+                    .rfto-mood-name {
+                        font-size: var(--font-medium);
+                        color: var(--color-primary);
+                        font-weight: 600;
+                    }
+                }
+
+                .rfto-mood-card-active {
+                    border-color: #db2777;
+                    background-color: #fce7f3;
+                }
+            }
+
+            .rfto-card-footer {
+                margin-top: 1rem;
+
+                .rfto-intensity-container {
+                    padding: 1rem;
+                    border-radius: .5rem;
+                    border: 2px dashed #f9a8d4;
+                    background-color: #fdf2f8;
+
+                    .rfto-intensity-heading {
+                        margin-bottom: 1rem;
+
+                        h1 {
+                            color: var(--color-primary);
+                        }
+                    }
+
+                    .rfto-intensity-progressbar {
+                        .rfto-high-low {
+                            display: flex;
+                            justify-content: space-between;
+
+                            span {
+                                color: var(--color-secondary);
+                                font-size: var(--font-high);
+                            }
+                        }
+
+                        .rfto-range {
+                            width: 100%;
+                            background-color: #f9a8d4;
+                        }
+                    }
+
+                    .rfto-intensity {
+                        margin-top: 1rem;
+                        color: #db2777;
+                        font-size: var(--font-xl);
+                        font-weight: 600;
+                        text-align: center;
+                    }
+                }
+
+                .rfto-log-btn-container {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 1rem;
+
+                    .rfto-log-button {
+                        background-color: #db2777;
+                        border: none;
+                        padding: .5rem 1rem;
+                        display: flex;
+                        align-items: center;
+                        color: var(--color-white);
+                        font-weight: 500;
+                        gap: .3rem;
+                        font-size: 1rem;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #be185d;
+                        }
+                    }
+                }
+            }
+        }
+
+        .rfto-select-mood-container{
+            flex: 2;
+        }
+
+        .rfto-summary-section{
+            .rfto-card-header{
+                h1{
+                    color: var(--color-primary);
+                    font-weight: 600;
+                }
+            }
+
+            .rfto-card-body{
+                display: inline;
+                text-align: center;
+                .rfto-summary-emoj{
+                    margin-top: 1rem;
+                    margin-bottom: .2rem;
+                    font-size: 3rem;
+                }
+                .rfto-summary-mood-name{
+                    color: var(--color-primary);
+                    font-size: var(--font-large);
+                }
+                .rfto-summary-intensity{
+                    font-size: var(--font-medium);
+                    color: var(--color-primary);
+                    margin: .3rem 0px;
+                }
+                .rfto-summary-logged{
+                    font-size: var(--font-small);
+                    color: var(--color-secondary);
+                }
+            }
+
+            .rfto-week-summary{
+                margin-top: 1rem;
+                .rfto-card-body{
+                    .rfto-week-data-container{
+                        margin-top: 1rem;
+                        display: flex;
+                        justify-content: space-between;
+                        span{
+                            font-size: var(--font-medium);
+                        }
+                        .rfto-data-heading{
+                            color: var(--color-secondary);
+                        }
+                        .rfto-week-data{
+                            color: var(--color-secondary);
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

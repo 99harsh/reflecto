@@ -1,0 +1,156 @@
+<section class="rfto-goals-section">
+    <div class="rfto-task-btn-container">
+        <span class="rfto-btn-lg-green">✅ Your Tasks</span>
+    </div>
+    <div class="rfto-task-heading-container">
+        <h1>Daily Tasks</h1>
+        <p>Stay organized and accomplish your goals</p>
+    </div>
+
+    <div class="rfto-task-container">
+        <div class="rfto-task-input-container">
+            <div class="rfto-card rfto-green-card rfto-input-card">
+                <div class="rfto-card-header">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-plus w-5 h-5 mr-2">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5v14"></path>
+                        </svg>
+                        Add New Task
+                    </h1>
+                </div>
+                <div class="rfto-task-input">
+                    <input type="text" class="rfto-input" />
+                    <button class="rfto-add-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-plus w-4 h-4 mr-2">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5v14"></path>
+                        </svg>
+                        Add</button>
+                </div>
+            </div>
+            <div class="rfto-card rfto-blue-card rfto-all-tasks">
+                <div class="rfto-card-header">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-circle-check-big w-5 h-5 mr-2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <path d="m9 11 3 3L22 4"></path>
+                        </svg>
+                        Your Tasks (0/1)
+                    </h1>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-task">
+                        <div class="rfto-task-checkbox-container">
+                            <div>
+                                <input type="checkbox" class="rfto-task-checkbox" />
+                            </div>
+                            <div>
+                                <p class="rfto-task-name">Hello</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="rfto-task-remove-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="red" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-x w-4 h-4">
+                                    <path d="M18 6 6 18"></path>
+                                    <path d="m6 6 12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="rfto-task rfto-task-completed">
+                        <div class="rfto-task-checkbox-container">
+                            <div>
+                                <input type="checkbox" class="rfto-task-checkbox" checked />
+                            </div>
+                            <div>
+                                <p class="rfto-task-name">Hello</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="rfto-task-remove-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="red" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-x w-4 h-4">
+                                    <path d="M18 6 6 18"></path>
+                                    <path d="m6 6 12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rfto-task-summary-container">
+            <div class="rfto-card rfto-purple-card">
+                <div class="rfto-card-header">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-trending-up w-5 h-5 mr-2">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                            <polyline points="16 7 22 7 22 13"></polyline>
+                        </svg>
+                        Today's Progress
+                    </h1>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-completion-container">
+                        <h1>0%</h1>
+                        <p>Completion Rate</p>
+                    </div>
+                    <div class="rfto-progress-container">
+                        <app-progressbar [progress]="10"></app-progressbar>
+                    </div>
+                </div>
+                <div class="rfto-overall-progress-container">
+                    <div>
+                        <h3>0</h3>
+                        <p>Completed</p>
+                    </div>
+                    <div>
+                        <h3>1</h3>
+                        <p>Remaining</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rfto-card rfto-orange-card">
+                <div class="rfto-card-header">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame w-5 h-5 mr-2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                        Quick Stats
+                    </h1>
+                </div> 
+                <div class="rfto-card-body">
+                    <div class="rfto-streak-container">
+                        <h1>7</h1>
+                        <p>Day Streak</p>
+                    </div>
+                    <div class="rfto-streak-data-container">
+                        <div class="rfto-streak-data">
+                            <p class="rfto-streak-heading">This Week</p>
+                            <p class="rfto-streak-number rfto-streak-solid">24 tasks</p>
+                        </div>
+                        <div class="rfto-streak-data">
+                            <p class="rfto-streak-heading">Completed</p>
+                            <p class="rfto-streak-number rfto-streak-ghost">10 tasks</p>
+                        </div>
+                        <div class="rfto-streak-data">
+                            <p class="rfto-streak-heading">Success Rate</p>
+                            <p class="rfto-streak-number rfto-streak-success">50%</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

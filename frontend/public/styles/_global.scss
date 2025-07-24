@@ -1,0 +1,118 @@
+
+
+.rfto-btn-sm-yellow{
+    background-color: #fef08a;
+    border: 1px solid #facc15;
+    padding: .5rem 1rem;
+    color: var(--color-primary);
+    font-size: var(--font-medium);
+    font-weight: 500;
+}
+
+.rfto-card{
+    background-color: var(--color-white);
+    padding: 1.5rem;
+    border-radius: .625rem;
+    border: 1px solid;
+    border-left-width: 4px;
+
+    &:hover{
+           --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    }
+
+    .rfto-card-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.rfto-blue-card{
+    border-color: var(--color-border-blue);
+}
+
+.rfto-pink-card{
+    border-color: var(--color-border-pink);
+}
+
+.rfto-green-card{
+    border-color: var(--color-border-green);
+}
+
+.rfto-purple-card{
+    border-color: var(--color-border-purple);
+}
+
+.rfto-brown-card{
+    border-color: var(--color-border-brown);
+}
+
+.rfto-yellow-card{
+    border-color: var(--color-border-yellow);
+}
+
+.rfto-orange-card{
+    border-color: var(--color-border-orange)
+}
+
+.rfto-purple-card{
+    border-color: var(--color-border-purple);
+}
+
+.rfto-card-ghost-btn{
+    border: 1px solid var(--color-border);
+    padding: .5rem 1rem;
+    font-size: var(--font-medium);
+    font-weight: 500;
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+.rfto-card-type{
+    padding: 1rem;
+}
+
+.rfto-card-type{
+    text-align: left;
+}
+
+.rfto-card-type-yellow{
+    border-left: 2px solid #fbbf24;
+    background-color: #fffbeb;
+    &:hover{
+        background-color: #fef3c7;
+    }
+}
+
+.rfto-btn-lg-blue{
+    padding: .5rem 1rem;
+    border: 2px dashed #2563eb;
+    background-color: #bfdbfe;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.rfto-btn-lg-pink{
+    padding: .5rem 1rem;
+    border: 2px dashed #db2777;
+    background-color: #fbcfe8;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.rfto-btn-lg-green{
+   padding: .5rem 1rem;
+    border: 2px dashed #16a34a;
+    background-color: #bbf7d0;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.rfto-shadow{
+       --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
