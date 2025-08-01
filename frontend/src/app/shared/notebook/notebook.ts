@@ -62,7 +62,6 @@ export class Notebook implements AfterViewInit{
 
   saveEntry() {
     if (this.journalContent.trim()) {
-      console.log("Saving journal entry:", this.journalContent)
       alert("Journal entry saved!")
     }
   }

@@ -3,9 +3,10 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-header',
-  imports: [RouterLink, RouterLinkActive, Router],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './dashboard-header.html',
-  styleUrl: './dashboard-header.scss'
+  styleUrl: './dashboard-header.scss',
+  standalone: true
 })
 export class DashboardHeader {
 isDropdownOpen = false;
