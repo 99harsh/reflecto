@@ -5,7 +5,7 @@
         </span>
     </div>
     <div class="rfto-time-container">
-        <h1>Sunday, July 13, 2025</h1>
+        <h1>{{currentDate()}}</h1>
         <p>Take a moment to reflect on your day</p>
     </div>
     <div class="rfto-reflection">
@@ -45,11 +45,24 @@
                     </div>
                 </div>
                 <div class="rfto-body">
-                    <div class="rfto-lines-container">
-                        <div class="rfto-line" *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"></div>
+
+                    @if(isEditor()){
+                    <div class="rfto-input-container">
+                        <div class="rfto-editor-menu-container">
+                            <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+                            <app-saving-loading [isLoading]="isSaving()" [isUpdated]="!isSaving()"
+                                [updatedAt]="reflectionData()?.updated_at"></app-saving-loading>
+                        </div>
+                        <ngx-editor [editor]="editor" [ngModel]="reflectionText()"
+                            (ngModelChange)="onTextChange($event)" [disabled]="false"
+                            [placeholder]="'Type here...'"></ngx-editor>
                     </div>
-                    <textarea class="rfto-input" placeholder="Self Reflection"></textarea>
+                    }
                 </div>
+                <div>
+                   
+                </div>
+
             </div>
         </div>
         <div class="rfto-reflection-section rfto-reflection-prompts">
@@ -69,21 +82,23 @@
                     </h1>
                 </div>
                 <div class="rfto-card-body">
-                    <div class="rfto-prompts">
-                        <p>What am I most gratful for today?</p>
+                    @for(prompt of prompts(); track prompt){
+                          <div class="rfto-prompts" (click)="addPromptToEditor(prompt.prompt)">
+                        <p>{{prompt.prompt}}</p>
                     </div>
-                              <div class="rfto-prompts">
-                        <p>What am I most gratful for today?</p>
-                    </div>
-                              <div class="rfto-prompts">
-                        <p>What am I most gratful for today?</p>
-                    </div>
+                    }
                 </div>
             </div>
             <div class="rfto-card rfto-green-card rfto-writing-stats">
                 <div class="rfto-card-header">
                     <h1>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-5 h-5 mr-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-star w-5 h-5 mr-2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
                         Writing Stats
                     </h1>
                 </div>
@@ -92,11 +107,11 @@
                         <h1>15</h1>
                         <p>Day Streak</p>
                     </div>
-                      <div class="rfto-day-streak">
+                    <div class="rfto-day-streak">
                         <h1>125</h1>
                         <p>Total Entries</p>
                     </div>
-                      <div class="rfto-day-streak">
+                    <div class="rfto-day-streak">
                         <h1>2.5k</h1>
                         <p>Words Written</p>
                     </div>

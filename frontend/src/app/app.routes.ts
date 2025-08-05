@@ -36,7 +36,7 @@ export const routes: Routes = [
                 loadComponent: () => import('./mood/mood').then(c => c.Mood)
             },
             {
-                path: 'goals',
+                path: 'tasks',
                 loadComponent: () => import('./goals/goals').then(c => c.Goals)
             },
             {

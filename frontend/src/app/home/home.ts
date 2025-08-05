@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Progressbar } from '../shared/progressbar/progressbar';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { QuotesCarousel } from '../shared/quotes-carousel/quotes-carousel';
 import { Spinner } from '../shared/spinner/spinner';
 import { AuthGoogleService } from '../services/auth-google.service';
@@ -8,7 +8,7 @@ import { SmartHttpService } from '../services/smart-http.service';
 
 @Component({
   selector: 'app-home',
-  imports: [Progressbar, QuotesCarousel, Spinner],
+  imports: [Progressbar, QuotesCarousel, Spinner,RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

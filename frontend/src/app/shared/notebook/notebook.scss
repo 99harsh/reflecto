@@ -72,88 +72,15 @@
         font-weight: 600;
       }
     }
-
-    .rfto-writing-area {
-      position: relative;
-      margin-bottom: 3rem;
-
-      .rfto-journal-textarea {
-        width: 100%;
-        background: transparent;
-        border: none;
-        outline: none;
-        font-family: 'Georgia', 'Times New Roman', serif;
-        font-size: 18px;
-        line-height: 32px;
-        color: #1f2937;
-        resize: none;
-        z-index: 2;
-        position: relative;
-        padding: 0;
-        margin: 0;
-        overflow-x: scroll;
-        overflow-y: hidden;
-
-        &::placeholder {
-          color: #9ca3af;
-          font-style: italic;
-          font-size: 16px;
-        }
+    .rfto-writing-area{
+      padding-bottom: 3rem;
+      .rfto-editor-menu-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
-
-      .rfto-ruled-lines {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: none;
-        z-index: 1;
-
-        .rfto-line {
-          height: 30px;
-          border-bottom: 2px solid #d1d5db;
-          margin: 0;
-          position: relative;
-
-          &:nth-child(5n) {
-            border-bottom: 3px solid #9ca3af;
-            overflow: hidden;
-          }
-
-          &::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1px;
-            height: 1px;
-            background: linear-gradient(
-              to right,
-              transparent 0%,
-              #d1d5db 5%,
-              #d1d5db 95%,
-              transparent 100%
-            );
-          }
-
-          // Add subtle dot pattern for better line visibility
-          &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -2px;
-            height: 1px;
-            background: repeating-linear-gradient(
-              to right,
-              transparent 0px,
-              transparent 8px,
-              #e5e7eb 8px,
-              #e5e7eb 10px
-            );
-          }
-        }
+      .NgxEditor__Content{
+        min-height: 40rem;
       }
     }
   }

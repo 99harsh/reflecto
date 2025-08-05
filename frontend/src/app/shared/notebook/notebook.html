@@ -14,11 +14,22 @@
     <!-- Page header -->
     <div class="rfto-page-header">
       <h1 class="rfto-journal-title">My Journal</h1>
-      <div class="rfto-date">{{ currentDate }}</div>
+      <div class="rfto-date">{{ currentDate() }}</div>
     </div>
 
-    <!-- Writing area -->
+    @if(isEditor()){
     <div class="rfto-writing-area">
+      <div class="rfto-editor-menu-container">
+        <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+        <app-saving-loading [isLoading]="isSaving()" [isUpdated]="!isSaving()" [updatedAt]="updatedAt()"></app-saving-loading>
+      </div>
+      <ngx-editor [editor]="editor" [ngModel]="journalText()" (ngModelChange)="onTextChange($event)" [disabled]="false"
+        [placeholder]="'Type here...'"></ngx-editor>
+    </div>
+    }
+
+    <!-- Writing area -->
+    <!-- <div class="rfto-writing-area">
       <textarea 
         #journalTextarea
         class="rfto-journal-textarea"
@@ -29,11 +40,9 @@
         [rows]="textareaRows"
         autocomplete="off"
         spellcheck="true"></textarea>
-
-      <!-- Ruled lines background -->
       <div class="rfto-ruled-lines">
         <div class="rfto-line" *ngFor="let line of getLineArray(); trackBy: trackByIndex"></div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

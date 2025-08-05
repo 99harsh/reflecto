@@ -1,7 +1,11 @@
+@if(isLoading()){
 <div class="rfto-spinner-overlay">
   <div class="rfto-spinner"></div>
   <span class="rfto-saving-text">Saving</span>
 </div>
-<!-- <div class="rfto-spinner-overlay">
-    <span class="rfto-saved-text">Saved : Today 3:05 PM</span>
-</div> -->
+}
+@if(isUpdated() && updatedAt()){
+<div class="rfto-spinner-overlay">
+  <span class="rfto-saved-text">Saved: {{ savedAt }}</span>
+</div>
+}

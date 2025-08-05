@@ -9,7 +9,8 @@
     <div class="rfto-mood">
         <div class="rfto-mood-section rfto-select-mood-container">
             <div class="rfto-card rfto-pink-card">
-                <div class="rfto-card-header">
+                @if(userMood() === null){
+                      <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -21,39 +22,15 @@
                         Select Your Mood
                     </h1>
                 </div>
+                }
                 <div class="rfto-card-body">
-                    <div class="rfto-mood-card rfto-mood-card-active">
-                        <div class="rfto-mood-emoj">😊</div>
-                        <p class="rfto-mood-name">Happy</p>
+                    @for(mood of allMoods(); track mood){
+                    <div class="rfto-mood-card" [ngClass]="{'rfto-mood-card-active': selectedMoodID() === mood.mood_id}"
+                        (click)="updateMood(mood.mood_id)">
+                        <div class="rfto-mood-emoj">{{mood.mood_emoj}}</div>
+                        <p class="rfto-mood-name">{{mood.mood}}</p>
                     </div>
-                    <div class="rfto-mood-card">
-                        <div class="rfto-mood-emoj">😌</div>
-                        <p class="rfto-mood-name">Peaceful</p>
-                    </div>
-                    <div class="rfto-mood-card">
-                        <div class="rfto-mood-emoj">😍</div>
-                        <p class="rfto-mood-name">Excited</p>
-                    </div>
-                    <div class="rfto-mood-card">
-                        <div class="rfto-mood-emoj">🤔</div>
-                        <p class="rfto-mood-name">Thoughtful</p>
-                    </div>
-                    <div class="rfto-mood-card">
-                        <div class="rfto-mood-emoj">😔</div>
-                        <p class="rfto-mood-name">Sad</p>
-                    </div>
-                       <div class="rfto-mood-card">
-                        <div class="rfto-mood-emoj">😤</div>
-                        <p class="rfto-mood-name">Frustrated</p>
-                    </div>
-                          <div class="rfto-mood-card">
-                        <div class="rfto-mood-emoj">😴</div>
-                        <p class="rfto-mood-name">Tired</p>
-                    </div>
-                        <div class="rfto-mood-card">
-                        <div class="rfto-mood-emoj">😰</div>
-                        <p class="rfto-mood-name">Anxious</p>
-                    </div>
+                }
                 </div>
                 <div class="rfto-card-footer">
                     <div class="rfto-intensity-container">
@@ -65,18 +42,20 @@
                                 <span>Low</span>
                                 <span>High</span>
                             </div>
-                            <input class="rfto-range" type="range" min="1" max="10" value="2" />
+                            <input [disabled]="userMood() !== null" (ngModelChange)="updateIntensityLevel($event)" [ngModel]="selectedIntensityLevel()" class="rfto-range" type="range" min="1" max="10" value="2" />
                         </div>
                         <div class="rfto-intensity">
-                            <span>5/10</span>
+                            <span>{{selectedIntensityLevel()}}/10</span>
                         </div>
                     </div>
-                    <div class="rfto-log-btn-container">
-                        <button class="rfto-log-button">
+                    @if(userMood() === null){
+                             <div class="rfto-log-btn-container">
+                        <button class="rfto-log-button" (click)="logMood()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-5 h-5 mr-2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                             Log My Mood
                         </button>
                     </div>
+                    }
                 </div>
             </div>
         </div>
@@ -87,12 +66,18 @@
                         📊 Today's Summary
                     </h1>
                 </div>
+                @if(userMood() !== null){
                 <div class="rfto-card-body">
-                    <div class="rfto-summary-emoj">😊</div>
-                    <h3 class="rfto-summary-mood-name">Happy</h3>
-                    <p class="rfto-summary-intensity">Intensity: 8/10</p>
-                    <p class="rfto-summary-logged">Logged 2 hour ago</p>
+                    <div class="rfto-summary-emoj">{{userMood().mood_emoj}}</div>
+                    <h3 class="rfto-summary-mood-name">{{userMood().mood}}</h3>
+                    <p class="rfto-summary-intensity">Intensity: {{userMood().intensity}}/10</p>
+                    <p class="rfto-summary-logged">Logged {{loggedAt()}}</p>
                 </div>
+                } @else{
+                    <div class="rfto-card-body">
+                        <p class="rfto-summary-mood-name">Log your mood now!</p>
+                    </div>
+                }
             </div>
             <div class="rfto-card rfto-blue-card rfto-week-summary">
                 <div class="rfto-card-header">

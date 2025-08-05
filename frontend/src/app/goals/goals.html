@@ -22,8 +22,9 @@
                     </h1>
                 </div>
                 <div class="rfto-task-input">
-                    <input type="text" class="rfto-input" />
-                    <button class="rfto-add-btn">
+                    <input type="text" class="rfto-input" [ngModel]="newTaskInput()"
+                        (ngModelChange)="taskInputChange($event)" />
+                    <button class="rfto-add-btn" (click)="addNewTask()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-plus w-4 h-4 mr-2">
@@ -42,21 +43,23 @@
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                             <path d="m9 11 3 3L22 4"></path>
                         </svg>
-                        Your Tasks (0/1)
+                        Your Tasks ({{completedTasks()}}/{{totalTasks()}})
                     </h1>
                 </div>
                 <div class="rfto-card-body">
-                    <div class="rfto-task">
+                    @for(task of allTasks(); track task; let i = $index){
+                    <div class="rfto-task" [ngClass]="{'rfto-task-completed': task.completed}">
                         <div class="rfto-task-checkbox-container">
                             <div>
-                                <input type="checkbox" class="rfto-task-checkbox" />
+                                <input type="checkbox" class="rfto-task-checkbox"
+                                    (input)="updateTask($event, task.task_id, i)" [checked]="task.completed" />
                             </div>
                             <div>
-                                <p class="rfto-task-name">Hello</p>
+                                <p class="rfto-task-name">{{task.task}}</p>
                             </div>
                         </div>
                         <div>
-                            <button class="rfto-task-remove-btn">
+                            <button class="rfto-task-remove-btn" (click)="deleteTask(task.task_id, task.completed)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                     fill="none" stroke="red" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="lucide lucide-x w-4 h-4">
@@ -66,26 +69,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="rfto-task rfto-task-completed">
-                        <div class="rfto-task-checkbox-container">
-                            <div>
-                                <input type="checkbox" class="rfto-task-checkbox" checked />
-                            </div>
-                            <div>
-                                <p class="rfto-task-name">Hello</p>
-                            </div>
-                        </div>
-                        <div>
-                            <button class="rfto-task-remove-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                    fill="none" stroke="red" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-x w-4 h-4">
-                                    <path d="M18 6 6 18"></path>
-                                    <path d="m6 6 12 12"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -104,20 +88,24 @@
                 </div>
                 <div class="rfto-card-body">
                     <div class="rfto-completion-container">
-                        <h1>0%</h1>
+                        <h1>{{
+                            totalTasks() === 0
+                            ? '0'
+                            : ((100 * completedTasks()) / totalTasks() | number : '1.0-0')
+                            }}%</h1>
                         <p>Completion Rate</p>
                     </div>
                     <div class="rfto-progress-container">
-                        <app-progressbar [progress]="10"></app-progressbar>
+                        <app-progressbar [progress]="progressCount"></app-progressbar>
                     </div>
                 </div>
                 <div class="rfto-overall-progress-container">
                     <div>
-                        <h3>0</h3>
+                        <h3>{{completedTasks()}}</h3>
                         <p>Completed</p>
                     </div>
                     <div>
-                        <h3>1</h3>
+                        <h3>{{ totalTasks() - completedTasks() }}</h3>
                         <p>Remaining</p>
                     </div>
                 </div>
@@ -125,10 +113,16 @@
             <div class="rfto-card rfto-orange-card">
                 <div class="rfto-card-header">
                     <h1>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame w-5 h-5 mr-2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-flame w-5 h-5 mr-2">
+                            <path
+                                d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z">
+                            </path>
+                        </svg>
                         Quick Stats
                     </h1>
-                </div> 
+                </div>
                 <div class="rfto-card-body">
                     <div class="rfto-streak-container">
                         <h1>7</h1>
@@ -147,7 +141,7 @@
                             <p class="rfto-streak-heading">Success Rate</p>
                             <p class="rfto-streak-number rfto-streak-success">50%</p>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

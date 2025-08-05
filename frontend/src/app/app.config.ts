@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './interceptor/http-interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideClientHydration(withEventReplay()),
     provideOAuthClient(),
-    provideHttpClient(withInterceptors([httpInterceptor]))
+    provideHttpClient(withInterceptors([httpInterceptor]), withFetch())
   ]
 };
