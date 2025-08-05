@@ -14,6 +14,11 @@ export const deleteTaskSchema = zod.object({
     task_id: zod.number()
 })
 
+export const updateTaskSchema = zod.object({
+    task_id: zod.number(),
+    completed: zod.boolean()
+})
+
 //Journal
 export const createJournalSchema = zod.object({
     journal: zod.string()
@@ -23,15 +28,16 @@ export const updateJournalSchema = zod.object({
     journal: zod.string()
 })
 
-//Mood
-export const createMoodSchema = zod.object({
-    mood_id: zod.number()
+export const saveJournalSchema = zod.object({
+    journal_id: zod.number().optional(),
+    journal: zod.string()
 })
 
-export const updateMoodSchema = zod.object({
-    user_mood_id: zod.number(),
-    mood_id: zod.number()
-})
+//Mood
+export const logMoodSchema = zod.object({
+    mood_id: zod.number(),
+    intensity: zod.number()
+});
 
 //Self Reflection
 export const createSelfReflectionSchema = zod.object({
@@ -43,6 +49,11 @@ export const updateSelfReflectionSchema = zod.object({
     self_reflection_id: zod.number(),
     prompt_id: zod.number(),
     self_reflection: zod.string()
+})
+
+export const saveSelfReflectionSchema = zod.object({
+     self_reflection_id: zod.number().optional(),
+     self_reflection: zod.string()
 })
 
 //Prompts

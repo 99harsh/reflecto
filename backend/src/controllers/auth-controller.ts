@@ -41,7 +41,7 @@ export const authenticate = async(req: Request, res: Response) => {
 
             const token = await createUserAuthToken({name: user_data.name, email: user_data.email, user_id: user_data.user_id });
 
-            res.cookie('token', token, {httpOnly: true});
+            res.cookie('token', token, {httpOnly: true, secure: false, sameSite: 'none'});
             res.json(SUCCESS({name: user_data.name, email: user_data.email, profile_photo: user_data.profile_photo, xp: user_data.xp}));
 
         }else{  
@@ -50,6 +50,29 @@ export const authenticate = async(req: Request, res: Response) => {
 
     }catch(error){
         console.log(`AUTHENTICATION FAILED ${error}`);
+        res.json(ISE())
+    }
+}
+
+export const profile = async(req: any, res:any) => {
+    try{
+        const user_id = req.payload.user_id;
+        console.log("Profile")
+        const data = await prisma.users.findFirst({
+            where: {
+                user_id: user_id
+            },
+            select: {
+                name: true,
+                email: true,
+                profile_photo: true,
+                xp: true
+            }
+        });
+
+        res.json(SUCCESS(data));
+    }catch(error){
+        console.log(`PROFILE ERROR ${error}`)
         res.json(ISE())
     }
 }

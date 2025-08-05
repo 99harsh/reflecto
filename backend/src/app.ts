@@ -14,29 +14,30 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:4200"],
+    origin: ['http://localhost:4000', 'http://localhost', "http://localhost:3000", "http://localhost:4200", 'http://192.168.0.227:4200', 'http://192.168.0.214:4200', 'http://localhost:4400', '*'], // Replace with your Angular app's URL
     credentials: true
 }));
 
 app.use(cookieParse());
 app.use(express.json());
-app.use(session({
-    secret: process.env.AUTH_SECRET || "KEREzaman@123",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false, httpOnly: true } // Set secure to true in production (with HTTPS)
-}));
+// app.use(session({
+//     secret: process.env.AUTH_SECRET || "KEREzaman@123",
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false, httpOnly: true } // Set secure to true in production (with HTTPS)
+// }));
 
-app.get("/health", (req, res) => { 
+
+app.get("/health", (req, res) => {
     res.json({ status: 200 })
- })
+})
 
- app.use("/api/v1/auth", authRoute);
- app.use("/api/v1/task", taskRoute);
- app.use("/api/v1/journal", journalRoute);
- app.use("/api/v1/mood", moodRouter);
- app.use("/api/v1/prompt", promptRouter);
- app.use("/api/v1/self-reflection", selfReflectionRouter);
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/task", taskRoute);
+app.use("/api/v1/journal", journalRoute);
+app.use("/api/v1/mood", moodRouter);
+app.use("/api/v1/prompt", promptRouter);
+app.use("/api/v1/self-reflection", selfReflectionRouter);
 
 
 app.listen(process.env.PORT, () => {

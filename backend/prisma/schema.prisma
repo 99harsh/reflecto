@@ -20,7 +20,6 @@ model users{
     user_mood user_mood[]
     journals journals[]
     self_reflection self_reflection[]
-    user_prompts user_prompts[]
 }
 
 model task{
@@ -30,6 +29,7 @@ model task{
   user_id Int
 
   task String
+  completed Boolean
 
   created_at DateTime @default(now())
 }
@@ -37,6 +37,7 @@ model task{
 model all_moods {
   mood_id Int @id @default(autoincrement())
   mood String @unique
+  mood_emoj String
   created_at DateTime @default(now())
   
   user_mood user_mood[]
@@ -47,6 +48,8 @@ model user_mood{
 
   all_moods all_moods @relation(fields: [mood_id], references: [mood_id])
   mood_id Int
+
+  intensity Int
 
   users users @relation(fields: [user_id], references: [user_id])
   user_id Int
@@ -71,19 +74,9 @@ model prompts{
   description String
   created_at DateTime @default(now())
 
-  self_reflection self_reflection[]
-  user_prompts user_prompts[]
 }
 
-model user_prompts{
-  user_prompt_id Int @id @default(autoincrement())
-  
-  prompts prompts @relation(fields: [prompt_id],  references: [prompt_id])
-  prompt_id Int
-  
-  users users @relation(fields: [user_id], references: [user_id])
-  user_id Int
-}
+
 
 model self_reflection{
   self_reflection_id Int @id @default(autoincrement())
@@ -91,10 +84,7 @@ model self_reflection{
   users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
-  prompts prompts @relation(fields: [prompt_id], references: [prompt_id])
-  prompt_id Int
-
   self_reflection String
 
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @unique
 }

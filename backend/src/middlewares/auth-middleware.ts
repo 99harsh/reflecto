@@ -28,10 +28,13 @@ export const createUserAuthToken = (payload: UserPayload) => {
 export const verifyUserAuthToken = (req: any, res: Response, next:NextFunction) => {
     try{
         const {token} = req.cookies;
+        console.log(JSON.stringify(req.cookies));
         if(token && JWT_SECRET){
             const payload = jwt.verify(token, JWT_SECRET);
             req.payload = payload;
             return next();
+        }else{
+            res.json(UNAUTHACCESS());
         }
     }catch(error){  
         console.log(`VERIFY AUTH TOKEN FAILED ${error}`)

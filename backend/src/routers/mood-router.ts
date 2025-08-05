@@ -1,11 +1,10 @@
 import { Router } from 'express';
 import { verifyUserAuthToken } from '../middlewares/auth-middleware';
-import { createMood, getMood, updateMood } from '../controllers/mood-controller';
+import { allMoods, getMood, logMood } from '../controllers/mood-controller';
 
 const router = Router();
 
+router.get("/all", verifyUserAuthToken, allMoods);
 router.get("/get", verifyUserAuthToken, getMood);
-router.post("/add", verifyUserAuthToken, createMood);
-router.post("/update", verifyUserAuthToken, updateMood);
-
+router.post("/log", verifyUserAuthToken, logMood);
 export default router;
