@@ -1,8 +1,9 @@
 .rfto-home-container {
     .rfto-home-welcome {
         display: flex;
-        align-items: center;    
+        align-items: center;
         justify-content: space-between;
+
         .rfto-welcome-back-heading {
             margin-top: 1rem;
             font-size: 2rem;
@@ -42,14 +43,17 @@
         align-items: center;
         align-items: flex-start;
         gap: 1rem;
+
         .rfto-card {
             // cursor: pointer;
             flex: 1;
             text-align: center;
             transition: .1s linear all;
-            h2{
+
+            h2 {
                 margin: .3rem 0rem;
             }
+
             p {
                 font-size: var(--font-small);
                 font-weight: 600;
@@ -57,113 +61,319 @@
 
         }
 
-        .rfto-mood{
+        .rfto-mood {
             background: linear-gradient(to bottom right, #fce7f3, #fbcfe8);
-                h2{
-                    color: #9d174d;
-                }
-                p{
-                    color: #be185d;
-                }
+
+            h2 {
+                color: #9d174d;
+            }
+
+            p {
+                color: #be185d;
+            }
         }
 
         .rfto-journal {
             background: linear-gradient(to bottom right, #dbeafe, #bfdbfe);
-            h2{
+
+            h2 {
                 color: #1e40af;
             }
-            p{
+
+            p {
                 color: #1d4ed8;
             }
         }
 
-        .rfto-goal{
+        .rfto-goal {
             background: linear-gradient(to bottom right, #dcfce7, #bbf7d0);
-            h2{
+
+            h2 {
                 color: #166534;
             }
-            p{
+
+            p {
                 color: #15803d;
             }
         }
 
-        .rfto-reflection{
-            background: linear-gradient(to bottom right, #f3e8ff,  #e9d5ff);
-            h2{
+        .rfto-reflection {
+            background: linear-gradient(to bottom right, #f3e8ff, #e9d5ff);
+
+            h2 {
                 color: #6b21a8;
             }
-            p{
+
+            p {
                 color: #7e22ce;
             }
         }
     }
 
-    .rfto-reflection-card{
-        .rfto-card-heading{
-            display: flex;
-            gap: .312rem;
+    .rfto-section-card {
+        .rfto-xp-card-container {
+            flex: 1;
+            padding: 1rem;
+            background: linear-gradient(to bottom right, #faf5ff, #eef2ff);
+            border: 1px solid #c084fc;
+            border-radius: .312rem;
 
-            .rfto-card-heading-text{
-                color: var(--color-secondary);
+            .rfto-card-header {
+                margin-bottom: 1rem;
+
+                .rfto-card-heading {
+                    color: #9333ea;
+                    display: flex;
+                    align-items: center;
+                    gap: .312rem;
+                }
+            }
+
+            .rfto-card-body {
+                .rfto-xp-container {
+                    background-color: #f3e8ff;
+                    border: 2px dashed #d8b4fe;
+                    padding: 1rem;
+                    border-radius: .312rem;
+
+                    .rfto-xp-info {
+                        display: flex;
+                        justify-content: space-between;
+
+                        h4 {
+                            font-size: var(--font-xl);
+                            color: #6b21a8;
+                            font-weight: 600;
+                        }
+
+                        p {
+                            font-size: var(--font-large);
+                            color: #9333ea;
+                        }
+                    }
+
+                    .rfto-progress-container {
+                        margin: .612rem 0px;
+
+                        .rfto-progress-container {
+                            height: 1rem;
+                            background-color: #fff;
+
+                            .rfto-progress-fill {
+                                background-color: #000;
+                            }
+                        }
+                    }
+
+                    .rfto-xplevel-info-container {
+                        display: flex;
+                        justify-content: space-between;
+
+                        p {
+                            font-size: var(--font-medium);
+                            color: #9333ea;
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                .rfto-xp-activity-container {
+                    display: flex;
+                    margin-top: 1rem;
+                    gap: 2rem;
+
+                    .rfto-xp-activity-section {
+                        flex: 1;
+
+                        h3 {
+                            font-size: var(--font-large);
+                            display: flex;
+                            align-items: center;
+                            gap: .312rem;
+                            color: var(--color-primary);
+                        }
+
+                        .rfto-card-container {
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: 1rem;
+                        }
+
+                        .rfto-xp-earned-claim {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-top: 1rem;
+                            padding: .612rem;
+                            border-radius: 5px;
+                        }
+
+                        .rfto-xp-earned-card {
+                            background-color: #f0fdf4;
+                            border: 2px solid #bbf7d0;
+
+                            .rfto-xp-earned-heading {
+                                h4 {
+                                    color: #166534;
+                                    font-weight: 500;
+                                    text-decoration: line-through;
+                                }
+                            }
+
+                            .rfto-xp-number-completed {
+                                .rfto-xp-earned {
+                                    display: flex;
+                                    align-items: center;
+                                    font-size: var(--font-small);
+                                    gap: .5rem;
+
+                                    .rfto-xp {
+                                        background-color: #dcfce7;
+                                        color: #166534;
+                                        padding: .312rem;
+                                        border-radius: 5px;
+                                        font-weight: 500;
+                                    }
+
+                                    .rfto-tick {
+                                        color: #166534;
+                                    }
+                                }
+                            }
+                        }
+
+                        .rfto-xp-claim-card {
+                            background-color: #fff;
+                            border: 2px solid #fde68a;
+
+                            .rfto-xp-earned-heading {
+                                h4 {
+                                    color: var(--color-primary);
+                                    font-weight: 400;
+                                }
+                            }
+
+                            .rfto-xp-number-completed {
+                                .rfto-xp-earned {
+                                    background-color: #fef9c3;
+                                    padding: .312rem;
+                                    color: var(--color-primary);
+                                    font-size: var(--font-small);
+                                    font-weight: 500;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        .rfto-body{
-            .rfto-card-type{
+        .rfto-right-card-container {
+            flex: .5;
+
+            .rfto-total-xp-container {
+                .rfto-card-header {
+                    h3 {
+                        display: flex;
+                        align-items: center;
+                        gap: .312rem;
+                        color: #6366f1;
+                    }
+                }
+
+                .rfto-card-body {
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: 1rem;
+
+                    .rfto-xp-card {
+                        flex: 1;
+                        background-color: #fff;
+                        border: 2px solid #c7d2fe;
+                        border-radius: .5rem;
+                        padding: 1rem;
+                        text-align: center;
+
+                        h3 {
+                            color: #4f46e5;
+                        }
+
+                        p {
+                            color: var(--color-primary);
+                            font-size: var(--font-small);
+                        }
+                    }
+
+                    .rfto-rank-card {
+                        flex: 1;
+                        background-color: #fff;
+                        border: 2px solid #e9d5ff;
+                        text-align: center;
+                        padding: 1rem;
+                        border-radius: .5rem;
+
+                        h3 {
+                            color: #9333ea;
+                        }
+
+                        p {
+                            color: var(--color-primary);
+                            font-size: var(--font-small);
+                        }
+                    }
+                }
+            }
+
+            .rfto-streak-container {
                 margin-top: 1rem;
-                h2{
-                    color: var(--color-primary);
-                    font-size: var(--font-large);
-                    margin-bottom: .4rem;
+
+                .rfto-card-header{
+                    h3{
+                        display: flex;
+                    align-items: center;
+                    gap: .312rem;
+                    color: #ef4444;
+                    }
                 }
-                p{
-                    font-size: var(--font-medium);
+
+                .rfto-card-body{
+                    margin-top: .5rem;
+                    .rfto-best-overall{
+                        text-align: center;
+                        .rfto-trophy-icon{
+                            font-size: var(--font-xl);
+                        }
+                        .rfto-best-overall-text{
+                            font-size: var(--font-large);
+                            font-weight: 600;
+                            color: var(--color-primary);
+                            margin-top: .312rem;
+                        }
+                    }
+                    .rfto-streak-info-container{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .rfto-streak-info-heading{
+                            color: var(--color-secondary);
+                            font-weight: 400;
+                            font-size: var(--font-medium);
+                        }
+                        .rfto-streak-info-data{
+                            color: var(--color-primary);
+                            background-color: #fee2e2;
+                            border-radius: .312rem;
+                            padding: .312rem;
+                            font-weight: 500;
+                            margin-top: .5rem;
+                        }
+                    }
                 }
             }
         }
+
+
     }
 
-    .rfto-reflection-card-right{
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        flex: .4;
-        .rfto-card-header{
-            h1{
-                display: flex;
-                align-items: center;
-                gap:.5rem;
-                color: var(--color-primary);
-            }
-        
-        }
 
-        .rfto-card-body{
-            h1{
-                font-size: 4rem
-            }
-            .rfto-mood-info{
-                margin: .4rem 0rem;
-                color: var(--color-primary);
-                font-size: var(--font-large);
-                font-weight: 500;
-            }
-
-            .rfto-mood-info-time{
-                color: var(--color-secondary);
-                font-size: var(--font-medium);
-            }
-            
-        }
-
-        .rfto-goal-card{
-            text-align: left;
-
-            .rfto-card-body{
-                p{
-                    margin-top: .4rem;
-                }
-            }
-        }
-    }
-}   
+}

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { Progressbar } from '../shared/progressbar/progressbar';
 import { Router, RouterLink } from '@angular/router';
 import { QuotesCarousel } from '../shared/quotes-carousel/quotes-carousel';
@@ -10,13 +10,15 @@ import { SmartHttpService } from '../services/smart-http.service';
   selector: 'app-home',
   imports: [Progressbar, QuotesCarousel, Spinner,RouterLink],
   templateUrl: './home.html',
-  styleUrl: './home.scss'
+  styleUrl: './home.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class Home implements OnInit {
 
   router = inject(Router);
   private http = inject(SmartHttpService);
   authService = inject(AuthGoogleService);
+  dashboardStats = signal<any>({});
 
   progress = 75; // or dynamically from goal progress
   date = new Date().toLocaleDateString('en-GB', {
@@ -36,10 +38,16 @@ export class Home implements OnInit {
     this.router.navigate(['mood'])
   }
   ngOnInit(): void {
-   this.http.get("task/get").subscribe({
-    next: (resp) => {
-    }
-   })
+    this.getDasboardData()
   }
 
+  getDasboardData = () => {
+    this.http.get("stats/dashboard").subscribe({
+      next: (resp:any) => {
+        if(resp && resp.status === 200){
+          this.dashboardStats.set(resp.data);
+        }
+      }
+    })
+  }
 }
