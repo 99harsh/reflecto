@@ -8,13 +8,14 @@ import taskRoute from './routers/task-router';
 import journalRoute from './routers/journal-router';
 import moodRouter from './routers/mood-router';
 import promptRouter from './routers/prompt-router';
+import statsRouter from './routers/stat-route';
 import selfReflectionRouter from './routers/self-reflection-router';
 
 dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:4000', 'http://localhost', "http://localhost:3000", "http://localhost:4200", 'http://192.168.0.227:4200', 'http://192.168.0.214:4200', 'http://localhost:4400', '*'], // Replace with your Angular app's URL
+    origin: ['http://localhost:4000', 'http://localhost', "http://localhost:3000", "http://localhost:4200", 'http://192.168.0.227:4200', 'http://192.168.0.214:4200', 'http://localhost:4400'], // Replace with your Angular app's URL
     credentials: true
 }));
 
@@ -38,6 +39,7 @@ app.use("/api/v1/journal", journalRoute);
 app.use("/api/v1/mood", moodRouter);
 app.use("/api/v1/prompt", promptRouter);
 app.use("/api/v1/self-reflection", selfReflectionRouter);
+app.use("/api/v1/stats", statsRouter);
 
 
 app.listen(process.env.PORT, () => {

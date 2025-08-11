@@ -2,7 +2,8 @@ import { Response } from 'express';
 import prisma from '../utils/db';
 import { BADREQ, ISE, SUCCESS } from '../utils/responses';
 import { dateFilter } from '../utils/date-helper';
-import { createSelfReflectionSchema, updateSelfReflectionSchema, saveSelfReflectionSchema } from '../utils/validations';
+import { saveSelfReflectionSchema } from '../utils/validations';
+import { xpInfo } from '../utils/stats-helper';
 
 export const getSelfReflection = async (req: any, res: Response) => {
     try {
@@ -24,54 +25,6 @@ export const getSelfReflection = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`GET SELF REFLECTION FAIELD ${error}`)
-        res.json(ISE());
-    }
-}
-
-export const createSelfReflection = async(req:any, res:Response) => {
-    try{
-        const v_data = createSelfReflectionSchema.safeParse(req.body);
-        if(!v_data.success){
-            res.json(BADREQ());
-            return;
-        }
-        
-        const reflection = await prisma.self_reflection.create({
-            data:{
-                user_id: req.payload.user_id,
-                self_reflection: v_data.data.self_reflection
-            }
-        });
-
-        res.json(SUCCESS({self_reflection_id: reflection.self_reflection_id}));
-
-    }catch(error){
-        console.log(`CREATE SELF REFLECTION FAILED ${error}`);
-        res.json(ISE());
-    }
-}
-
-export const updateSelfReflection = async(req:any, res:Response) => {
-    try{
-        const v_data = updateSelfReflectionSchema.safeParse(req.body);
-        if(!v_data.success){
-            res.json(BADREQ());
-            return;
-        }
-        await prisma.self_reflection.update({
-            data: {
-                self_reflection: v_data.data.self_reflection
-            },
-            where: {
-                self_reflection_id: v_data.data.self_reflection_id,
-
-                user_id: req.payload.user_id
-            }
-        })
-
-        res.json(SUCCESS());
-    }catch(error){
-        console.log(`UPDATE SELF REFLECTION FAILED ${error}`);
         res.json(ISE());
     }
 }
@@ -98,7 +51,24 @@ export const saveSelfReflection = async(req:any, res:any) => {
             res.json(SUCCESS({updated_at: updated.updated_at, self_reflection_id: updated.self_reflection_id}));
             return;
         }
-        
+
+        const userXP:any = await prisma.users.findUnique({
+            where: {
+                user_id: req.payload.user_id
+            }
+        });
+
+        const updatedXP = userXP?.xp + xpInfo.reflection;
+
+        const updatedUserXP = await prisma.users.update({
+            where: {
+                user_id: req.payload.user_id
+            },
+            data: {
+                xp: updatedXP
+            }
+        })
+
         const created = await prisma.self_reflection.create({
             data: {
                 self_reflection: v_data.data.self_reflection,

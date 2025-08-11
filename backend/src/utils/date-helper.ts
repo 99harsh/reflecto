@@ -1,4 +1,4 @@
-export const dateFilter = (body_date: any) => {
+export const dateFilter = (body_date?: any) => {
     //  format: YYYY-MM-DD
     const baseDate = body_date ? new Date(body_date) : new Date(); // default: today
 

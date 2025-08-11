@@ -3,6 +3,7 @@ import { BADREQ, ISE, SUCCESS } from "../utils/responses";
 import { createJournalSchema, saveJournalSchema, updateJournalSchema } from "../utils/validations";
 import prisma from '../utils/db';
 import { dateFilter } from "../utils/date-helper";
+import { xpInfo } from "../utils/stats-helper";
 
 export const getJournal = async(req:any, res: Response) => {
     try{
@@ -91,6 +92,23 @@ export const saveJournal = async(req:any, res:Response) => {
             res.json(SUCCESS({updated_at: updated.updated_at, journal_id: updated.journal_id}));
             return;
         }
+
+        const currentXP:any = await prisma.users.findUnique({
+            where:{
+                user_id: req.payload.user_id
+            }
+        });
+
+        const updatedXP = currentXP.xp + xpInfo.jorunal;
+
+        const updatedUserXP = await prisma.users.update({
+            where: {
+                user_id :req.payload.user_id
+            },
+            data: {
+                xp: updatedXP
+            }
+        }) 
 
         const created = await prisma.journals.create({
             data: {

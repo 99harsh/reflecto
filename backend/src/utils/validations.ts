@@ -40,17 +40,6 @@ export const logMoodSchema = zod.object({
 });
 
 //Self Reflection
-export const createSelfReflectionSchema = zod.object({
-    prompt_id: zod.number(),
-    self_reflection: zod.string()
-})
-
-export const updateSelfReflectionSchema = zod.object({
-    self_reflection_id: zod.number(),
-    prompt_id: zod.number(),
-    self_reflection: zod.string()
-})
-
 export const saveSelfReflectionSchema = zod.object({
      self_reflection_id: zod.number().optional(),
      self_reflection: zod.string()
@@ -64,4 +53,10 @@ export const addUserPromptSchema = zod.object({
 export const deleteUserPromptSchema = zod.object({
     user_prompt_id: zod.number(),
     prompt_id: zod.number()
+});
+
+//Stats
+
+export const getDashboardCardDetailsSchema = zod.object({
+    user_id: zod.number()
 })

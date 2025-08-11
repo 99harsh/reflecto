@@ -3,10 +3,11 @@ import { BADREQ, ISE, SUCCESS } from "../utils/responses";
 import { addTaskSchema, deleteTaskSchema, updateTaskSchema } from "../utils/validations";
 import prisma from '../utils/db';
 import { dateFilter } from '../utils/date-helper';
+import { xpInfo } from '../utils/stats-helper';
 
 export const getTasks = async (req: any, res: Response) => {
     try {
-    
+
         const tasks = await prisma.task.findMany({
             where: {
                 user_id: req.payload.user_id,
@@ -26,6 +27,33 @@ export const addTask = async (req: any, res: Response) => {
         if (!v_data.success) {
             res.json(BADREQ());
             return;
+        }
+
+        const userTask = await prisma.task.count({
+            where: {
+                user_id: req.payload.user_id,
+                created_at: dateFilter()
+            }
+        });
+
+        if (userTask === 0) {
+            const userXP: any = await prisma.users.findUnique({
+                where: {
+                    user_id: req.payload.user_id
+                }
+            });
+
+            const updatedXP = userXP.xp + xpInfo.task;
+
+            const updatedUserXP = await prisma.users.update({
+                where: {
+                    user_id: req.payload.user_id
+                },
+                data: {
+                    xp: updatedXP
+                }
+            })
+
         }
 
         const task = await prisma.task.create({
@@ -66,16 +94,16 @@ export const deleteTask = async (req: any, res: Response) => {
     }
 }
 
-export const updateTask = async(req:any, res: Response) => {
-    try{
+export const updateTask = async (req: any, res: Response) => {
+    try {
         const v_data = updateTaskSchema.safeParse(req.body);
 
-        if(!v_data.success){
+        if (!v_data.success) {
             res.json(BADREQ());
             return;
         }
 
-         await prisma.task.update({
+        await prisma.task.update({
             data: {
                 completed: v_data.data.completed
             },
@@ -87,7 +115,7 @@ export const updateTask = async(req:any, res: Response) => {
 
         res.json(SUCCESS());
 
-    }catch(error){
+    } catch (error) {
         console.log(`UPDATE TASK FAILED ${error}`);
         res.json(ISE());
     }
