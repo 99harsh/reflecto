@@ -124,22 +124,22 @@
                     </h1>
                 </div>
                 <div class="rfto-card-body">
-                    <div class="rfto-streak-container">
+                    <!-- <div class="rfto-streak-container">
                         <h1>7</h1>
                         <p>Day Streak</p>
-                    </div>
+                    </div> -->
                     <div class="rfto-streak-data-container">
                         <div class="rfto-streak-data">
                             <p class="rfto-streak-heading">This Week</p>
-                            <p class="rfto-streak-number rfto-streak-solid">24 tasks</p>
+                            <p class="rfto-streak-number rfto-streak-solid">{{ progress().total_tasks }} {{ progress().total_tasks == 0 ? 'task' : 'tasks' }}</p>
                         </div>
                         <div class="rfto-streak-data">
                             <p class="rfto-streak-heading">Completed</p>
-                            <p class="rfto-streak-number rfto-streak-ghost">10 tasks</p>
+                            <p class="rfto-streak-number rfto-streak-ghost">{{ progress().completed_tasks }} {{ progress().completed_tasks == 0 ? 'task' : 'tasks' }}</p>
                         </div>
                         <div class="rfto-streak-data">
                             <p class="rfto-streak-heading">Success Rate</p>
-                            <p class="rfto-streak-number rfto-streak-success">50%</p>
+                            <p class="rfto-streak-number rfto-streak-success">{{progress().success_rate}}%</p>
                         </div>
 
                     </div>

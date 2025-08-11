@@ -83,8 +83,8 @@
                 </div>
                 <div class="rfto-card-body">
                     @for(prompt of prompts(); track prompt){
-                          <div class="rfto-prompts" (click)="addPromptToEditor(prompt.prompt)">
-                        <p>{{prompt.prompt}}</p>
+                          <div class="rfto-prompts" (click)="addPromptToEditor(prompt.description)">
+                        <p>{{prompt.description}}</p>
                     </div>
                     }
                 </div>
@@ -103,16 +103,16 @@
                     </h1>
                 </div>
                 <div class="rfto-card-body">
-                    <div class="rfto-day-streak">
+                    <!-- <div class="rfto-day-streak">
                         <h1>15</h1>
                         <p>Day Streak</p>
-                    </div>
+                    </div> -->
                     <div class="rfto-day-streak">
-                        <h1>125</h1>
+                        <h1>{{progress().totalEntries}}</h1>
                         <p>Total Entries</p>
                     </div>
                     <div class="rfto-day-streak">
-                        <h1>2.5k</h1>
+                        <h1>{{ progress().totalWords }}</h1>
                         <p>Words Written</p>
                     </div>
                 </div>

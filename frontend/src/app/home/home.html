@@ -1,13 +1,14 @@
 <section class="rfto-home-container">
     <div class="rfto-home-section rfto-home-welcome">
         <div class="rfto-welcome-section">
-            <span class="rfto-btn-sm-yellow rfto-rotate-1">☀️ Good morning!</span>
-            <h1 class="rfto-welcome-back-heading">Welcome back, Harsh</h1>
+            <span class="rfto-btn-sm-yellow rfto-rotate-1">{{ getGreetingTime }}</span>
+            <h1 class="rfto-welcome-back-heading">Welcome back, {{userName}}</h1>
             <p class="rfto-ready-reflect-heading">Ready to reflect and grow today?</p>
         </div>
         <div class="rfto-streak-section">
             <div class="rfto-streak rfto-rotate-2deg rfto-shadow-lg">
-                <p class="rfto-streak-number">🔥 20-day streak!</p>
+                <p class="rfto-streak-number">🔥 {{profileProgress().current_streak}} {{
+                    profileProgress().current_streak > 1 ? 'days' : 'day' }} streak!</p>
                 <p class="rfto-streak-going">Keep it going!</p>
             </div>
         </div>
@@ -94,22 +95,23 @@
                         </path>
                         <path d="M5 21h14"></path>
                     </svg>
-                    Level 12 - Mindful Explorer
+                    Level {{ profileProgress().current_level }}
                 </h3>
             </div>
             <div class="rfto-card-body">
                 <div class="rfto-xp-container">
                     <div class="rfto-xp-info">
-                        <h4>2,450XP</h4>
-                        <p>550 XP to Level 13</p>
+                        <h4>{{profileProgress().xp}} XP</h4>
+                        <p>{{profileProgress().xp_next_level - profileProgress().xp}} XP to Level
+                            {{profileProgress().current_level + 1}}</p>
                     </div>
                     <div class="rfto-progress-container">
-                        <app-progressbar [progress]="20"></app-progressbar>
+                        <app-progressbar [progress]="profileProgress().progress"></app-progressbar>
                     </div>
                     <div class="rfto-xplevel-info-container">
-                        <p class="rfto-xp-level">Level 12</p>
-                        <p class="rfto-xp-level">81.7% Completed</p>
-                        <p class="rfto-xp-level">Level 13</p>
+                        <p class="rfto-xp-level">Level {{profileProgress().current_level}}</p>
+                        <p class="rfto-xp-level">{{profileProgress().progress}}% Completed</p>
+                        <p class="rfto-xp-level">Level {{profileProgress().current_level + 1}}</p>
                     </div>
                 </div>
 
@@ -129,40 +131,47 @@
                             Today's Activites
                         </h3>
                         <div class="rfto-card-container">
+                            @for (activity of profileProgress()?.all_activites; track activity){
+                            @if(activity.is_completed){
                             <div class="rfto-xp-earned-claim rfto-xp-earned-card">
                                 <div class="rfto-xp-earned-heading">
                                     <h4>
-                                        📝 Daily Journal Entry
+                                        {{activity.key}}
                                     </h4>
 
                                 </div>
                                 <div class="rfto-xp-number-completed">
                                     <div class="rfto-xp-earned">
-                                        <p class="rfto-xp">+50 XP</p>
+                                        <p class="rfto-xp">+{{activity.value}} XP</p>
                                         <p class="rfto-tick">✓</p>
                                     </div>
                                 </div>
                             </div>
+                            }
+                            @else {
                             <div class="rfto-xp-earned-claim rfto-xp-claim-card">
                                 <div class="rfto-xp-earned-heading">
                                     <h4>
-                                        🤔 Weekly Reflection
+                                        {{activity.key}}
                                     </h4>
 
                                 </div>
                                 <div class="rfto-xp-number-completed">
                                     <div class="rfto-xp-earned">
-                                        <p>+50 XP</p>
+                                        <p>+{{activity.value}} XP</p>
                                     </div>
                                 </div>
                             </div>
+                            }
+                            }
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="rfto-right-card-container">
-            <div class="rfto-card rfto-blue-card rfto-total-xp-container">
+            <!-- <div class="rfto-card rfto-blue-card rfto-total-xp-container">
                 <div class="rfto-card-header">
                     <h3> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -183,28 +192,39 @@
                         <p>Rank</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="rfto-card rfto-pink-card rfto-streak-container">
                 <div class="rfto-card-header">
-                        <h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy w-4 h-4 mr-2 text-red-500"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
-                            Streak Records
-                        </h3>
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-trophy w-4 h-4 mr-2 text-red-500">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                            <path d="M4 22h16"></path>
+                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                        </svg>
+                        Streak Records
+                    </h3>
                 </div>
                 <div class="rfto-card-body">
                     <div class="rfto-best-overall">
                         <p class="rfto-trophy-icon">🏆</p>
-                        <p class="rfto-best-overall-text">Best Overall: 23 days</p>
+                        <p class="rfto-best-overall-text">Best Overall: {{profileProgress().highest_streak}} {{
+                            profileProgress().highest_streak > 1 ? 'days': 'day' }}</p>
                     </div>
                     <div class="rfto-streak-info-container">
-                        <p class="rfto-streak-info-heading">This Month</p>
-                        <p class="rfto-streak-info-data">15 Days</p>
+                        <p class="rfto-streak-info-heading">Current Streak</p>
+                        <p class="rfto-streak-info-data">{{ profileProgress().current_streak }} {{
+                            profileProgress().current_streak > 1 ? 'days' : 'day' }}</p>
                     </div>
-                     <div class="rfto-streak-info-container">
+                    <!-- <div class="rfto-streak-info-container">
                         <p class="rfto-streak-info-heading">Consistency</p>
                         <p class="rfto-streak-info-data">20%</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

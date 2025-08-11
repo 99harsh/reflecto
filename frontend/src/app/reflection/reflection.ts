@@ -31,6 +31,7 @@ export class Reflection implements OnInit {
   editor!: Editor;
   isEditor = signal<boolean>(false);
   currentDate = signal<string>('');
+  progress = signal<any>({});
 
   private platformId = inject(PLATFORM_ID);
   //Service
@@ -48,6 +49,7 @@ export class Reflection implements OnInit {
     this.fetchPrompts();
     this.fetchReflection();
     this.registerSaveReflectionListener();
+    this.fetchProgress();
   }
 
   /**
@@ -90,6 +92,16 @@ export class Reflection implements OnInit {
         },
         complete: () => this.isSaving.set(false),
       });
+  }
+
+  private fetchProgress(){
+    this.http.get('stats/self-reflection').subscribe({
+      next: (resp:any) => {
+        if(resp && resp.status === 200){
+          this.progress.set(resp.data);
+        }
+      }
+    })
   }
 
   /**
