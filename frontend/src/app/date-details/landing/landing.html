@@ -1,0 +1,54 @@
+<section class="rfto-date-details-container">
+    <div class="rfto-back-btn-container">
+        <button class="rfto-back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-arrow-left w-4 h-4 mr-2">
+                <path d="m12 19-7-7 7-7"></path>
+                <path d="M19 12H5"></path>
+            </svg>
+            Back to Calendar
+        </button>
+    </div>
+    <div class="rfto-date-container rfto-shadow-lg">
+        <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-calendar w-8 h-8 mr-3 text-amber-600">
+                <path d="M8 2v4"></path>
+                <path d="M16 2v4"></path>
+                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                <path d="M3 10h18"></path>
+            </svg>
+            Wednesday, August 20, 2025.
+        </h3>
+        <p>Complete day overview and detailed insights</p>
+    </div>
+
+    <div class="rfto-card-container">
+        <div class="rfto-card rfto-pink-card">
+            <h2 class="rfto-card-emoj">❤️</h2>
+            <h3 class="rfto-card-heading">Mood</h3>
+            <p class="rfto-card-subheading">Intensity: 6.10</p>
+            <button [routerLink]="['/date-details/',dateParam(),'mood']" class="rfto-card-button">View Details <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-4 h-4 mr-2"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+        </div>
+        <div class="rfto-card rfto-blue-card">
+            <h2 class="rfto-card-emoj"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-12 h-12 mx-auto mb-3 text-blue-600"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></h2>
+            <h3 class="rfto-card-heading">Journal</h3>
+            <p class="rfto-card-subheading">"Challenge Accepted"</p>
+            <button [routerLink]="['/date-details/',dateParam(),'jorunal']"  class="rfto-card-button">View Details <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-4 h-4 mr-2"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+        </div>
+        <div class="rfto-card rfto-purple-card">
+            <h2 class="rfto-card-emoj"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star w-12 h-12 mx-auto mb-3 text-purple-600"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></h2>
+            <h3 class="rfto-card-heading">Reflection</h3>
+            <p class="rfto-card-subheading">Rating: 9/10</p>
+            <button [routerLink]="['/date-details/',dateParam(),'reflection']"  class="rfto-card-button">View Details <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-4 h-4 mr-2"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+        </div>
+        <div class="rfto-card rfto-green-card">
+            <h2 class="rfto-card-emoj"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target w-12 h-12 mx-auto mb-3 text-green-600"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></h2>
+            <h3 class="rfto-card-heading">Tasks</h3>
+            <p class="rfto-card-subheading">5/7 Completed</p>
+            <button [routerLink]="['/date-details/',dateParam(),'tasks']"  class="rfto-card-button">View Details <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-4 h-4 mr-2"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg></button>
+        </div>
+    </div>
+</section>

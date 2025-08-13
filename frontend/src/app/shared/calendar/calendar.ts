@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Spinner } from '../spinner/spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -18,9 +19,10 @@ export class Calendar implements OnInit {
     new Date(0, i).toLocaleString('default', { month: 'long' })
   );
   yearList: number[] = [];
-
   calendarDays: any[] = [];
   entries: any[] = [];
+
+  router = inject(Router);
 
   ngOnInit(): void {
     const baseYear = new Date().getFullYear();
@@ -102,5 +104,12 @@ export class Calendar implements OnInit {
       this.currentMonth++;
     }
     this.generateCalendar();
+  }
+
+  redirect = (data:any) => {
+    console.log(data);
+
+    this.router.navigate(["/date-details/10-08-2025"])
+
   }
 }

@@ -1,0 +1,47 @@
+.rfto-mood-container {
+    
+    .rfto-mood-card-container {
+        background-color: #fff1f2;
+        border: 2px solid #fbcfe8;
+        text-align: center;
+
+        .rfto-mood-emoj {
+            font-size: 5rem;
+        }
+
+        .rfto-mood-name {
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        .rfto-intensity-heading {
+            font-size: var(--font-xl);
+            color: var(--color-secondary);
+            margin: .312rem 0px;
+        }
+
+        .rfto-intensity-progressbar {
+            width: 20%;
+            margin: auto;
+            padding: .312rem 0px;
+        }
+
+        .rfto-mood-quote {
+            color: var(--color-secondary);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            font-size: var(--font-large);
+        }
+
+        .rfto-mood-logged {
+            background-color: #fce7f3;
+            color: #9d174d;
+            font-weight: 500;
+            padding: .312rem .612rem;
+            width: fit-content;
+            margin: auto;
+            border-radius: .312rem;
+            font-size: var(--font-medium);
+        }
+    }
+}

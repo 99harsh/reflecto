@@ -1,0 +1,70 @@
+.rfto-section {
+    .rfto-card {
+        border: 1px solid #e4e4e7;
+        background-color: #f0fdf4;
+
+        .rfto-task-insights {
+            text-align: center;
+
+            h2 {
+                font-size: 2rem;
+                margin: .312rem 0px;
+                color: var(--color-primary);
+            }
+
+            h3 {
+                color: var(--color-secondary);
+                font-size: var(--font-xl);
+                font-weight: normal;
+            }
+        }
+
+        .rfto-task-list-container {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: .312rem;
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+
+            .rfto-task-list {
+                flex:1;
+                padding: .612rem;
+
+                .rfto-task-heading {
+                    color: var(--color-primary);
+                    margin-bottom: .612rem;
+                    font-size: var(--font-large);
+                    font-weight: 500;
+                }
+
+                .rfto-task {
+                    padding: .612rem;
+                    border-radius: .312rem;
+                    margin-bottom: .612rem;
+                    p {
+                        font-weight: 500;
+                        font-size: var(--font-medium);
+                    }
+                }
+
+                .rfto-task-completed {
+                    background-color: #f0fdf4;
+                    border: 2px solid #bbf7d0;
+
+                    p {
+                        color: #166534;
+                    }
+                }
+
+                .rfto-task-incomplete {
+                    background-color: #fff;
+                    border: 2px solid #fde68a;
+                    p{
+                        
+                    }
+                }
+            }
+        }
+    }
+}

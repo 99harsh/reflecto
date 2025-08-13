@@ -27,6 +27,7 @@
 
             <div class="calendar-days">
                 <div *ngFor="let day of calendarDays" class="calendar-day" [class.other-month]="!day.isCurrentMonth"
+                    (click)="redirect(day)"
                     [class.today]="day.isToday" [class.has-entry]="day.hasEntry">
                     <div class="day-number">{{ day.date }}</div>
                     <div class="day-content">

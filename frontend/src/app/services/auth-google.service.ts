@@ -39,12 +39,16 @@ export class AuthGoogleService {
 
         return this.smartHTTP.get<any>(`auth/profile`).pipe(
             tap(user => {
-                this.userSubject.next(user);
-            }),
-            map(() => true),
-            catchError(err => {
+            if (user?.status === 401) {
                 this.userSubject.next(null);
-                return of(false);
+            } else {
+                this.userSubject.next(user);
+            }
+            }),
+            map(user => user?.status !== 401),
+            catchError(() => {
+            this.userSubject.next(null);
+            return of(false);
             })
         );
     }

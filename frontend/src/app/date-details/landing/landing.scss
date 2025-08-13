@@ -1,0 +1,119 @@
+.rfto-date-details-container {
+    // .rfto-back-btn-container {
+    //     button {
+    //         display: flex;
+    //         align-items: center;
+    //         gap: .612rem;
+    //         cursor: pointer;
+    //         color: var(--color-secondary);
+    //         background-color: transparent;
+    //         border: none;
+    //         font-size: var(--font-large);
+    //     }
+    // }
+
+    .rfto-date-container {
+        background-color: var(--color-white);
+        padding: 1.5rem;
+        margin: 2rem 0px;
+        border-radius: .312rem;
+        border: 1px solid var(--color-border-yellow);
+
+        h3 {
+            display: flex;
+            align-items: center;
+            gap: .312rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: var(--font-xl);
+        }
+
+        p {
+            color: var(--color-secondary);
+            font-size: var(--font-large);
+            margin-top: .312rem;
+        }
+    }
+
+    .rfto-card-container {
+        display: flex;
+        gap: 1.5rem;
+
+        .rfto-card {
+            flex: 1;
+            text-align: center;
+
+            .rfto-card-emoj {
+                font-size: 2rem;
+                margin-bottom: .312rem;
+            }
+
+            .rfto-card-heading {
+                font-size: var(--font-xl);
+                color: var(--color-primary);
+            }
+
+            .rfto-card-subheading {
+                font-size: var(--font-large);
+                margin: .612rem 0px;
+                color: var(--color-primary);
+            }
+
+            .rfto-card-button{
+                background-color: transparent;
+                border-radius: .312rem;
+                padding: .5rem .612rem;
+                font-weight: 600;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+                gap: .312rem;
+                cursor: pointer;
+                svg{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .rfto-pink-card {
+            background-color: #fff1f2;
+            border: 1px solid #fbcfe8;
+     
+            .rfto-card-button{
+                border: 1px solid #f9a8d4;
+                color: #be185d;
+            }
+        }
+
+        .rfto-blue-card{
+            background-color: #eef2ff;
+            border: 1px solid #bfdbfe;
+
+            .rfto-card-button{
+                border: 1px solid #93c5fd;
+                color: #1d4ed8;
+            }
+        }
+
+        .rfto-green-card{
+            background-color: #ecfdf5;
+            border: 1px solid #bbf7d0;
+
+            .rfto-card-button{
+                border: 1px solid #86efac;
+                color: #15803d;
+            }
+        }
+
+        .rfto-purple-card{
+            border: 1px solid #e9d5ff;
+            background-color: #f5f3ff;
+
+            .rfto-card-button{
+               color: #7e22ce;
+               border: 1px solid #d8b4fe; 
+            }
+        }
+    }
+}

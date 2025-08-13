@@ -1,0 +1,47 @@
+.rfto-date-details-container {
+    max-width: 80%;
+    margin: auto;
+}
+
+.rfto-back-btn {
+    display: flex;
+    align-items: center;
+    gap: .612rem;
+    cursor: pointer;
+    color: var(--color-secondary);
+    background-color: transparent;
+    border: none;
+    font-size: var(--font-large);
+}
+
+.rfto-heading-container {
+    margin: 2rem 0rem;
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+        color: var(--color-primary);
+        font-size: 2rem;
+        margin-bottom: .312rem;
+    }
+
+    p {
+        color: var(--color-secondary);
+    }
+
+     .rfto-export-button{
+            display: flex;
+            align-items: center;
+            gap: .612rem;
+            padding: .312rem .612rem;
+            font-size: var(--font-medium);
+            background-color: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: .312rem;
+            cursor: pointer;
+            font-weight: 500;
+            &:hover{
+                background-color: #f4f4f5;
+            }
+        }
+}

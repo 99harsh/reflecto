@@ -46,7 +46,33 @@ export const routes: Routes = [
             {
                 path: 'profile',
                 loadComponent: () => import('./profile/profile').then(c => c.Profile)
-            }
+            },
+            {
+                path: 'date-details',
+                loadComponent: () => import('./date-details/date-details').then(c => c.DateDetails),
+                children: [
+                    {
+                        path: ':date',
+                        loadComponent: () => import('./date-details/landing/landing').then(c => c.Landing)
+                    },
+                    {
+                        path: ":date/mood",
+                        loadComponent: () => import('./date-details/mood/mood').then(c => c.Mood)
+                    },
+                    {
+                        path: ":date/self-reflection",
+                        loadComponent: () => import('./date-details/self-reflection/self-reflection').then(c => c.SelfReflection)
+                    },
+                    {
+                        path: ":date/journal",
+                        loadComponent: () => import('./date-details/journal/journal').then(c => c.Journal)
+                    },
+                    {
+                        path: ":date/tasks",
+                        loadComponent: () => import('./date-details/tasks/tasks').then(c => c.Tasks)
+                    }
+                ]
+            },
         ]
     }
 ];
