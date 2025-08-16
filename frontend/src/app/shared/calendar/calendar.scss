@@ -22,17 +22,16 @@
     }
 
     .rfto-calendar-card-container {
-
-        margin-top: 1.5rem;
+        width: 70%;
         display: flex;
         gap: 1.5rem;
+        margin:2rem auto;
 
         .rfto-calendar-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             gap: 1rem;
-
             background: #fff;
 
             .calendar-controls {
@@ -116,13 +115,12 @@
 
                     .day-content {
                         display: flex;
-                        justify-content: space-between;
                         align-items: center;
                         margin-top: auto;
+                        gap: .312rem;
 
-                        .day-mood,
-                        .day-streak {
-                            font-size: var(--font-large);
+                        span {
+                            font-size: var(--font-xl);
                         }
                     }
                 }
@@ -132,23 +130,24 @@
                 }
             }
 
-            .rfto-legend-card{
+            .rfto-legend-card {
                 background-color: #fffbeb;
-                .rfto-card-header{
-                    h1{
+
+                .rfto-card-header {
+                    h1 {
                         color: var(--color-primary);
                     }
                 }
 
-                .rfto-card-body{
+                .rfto-card-body {
                     margin-top: 1rem;
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
                     gap: .32rem;
 
-                    .rfto-card-legend-container{
-                        span{
-                            font-size: var(--font-medium);
+                    .rfto-card-legend-container {
+                        span {
+                            font-size: var(--font-large);
                             color: var(--color-primary);
                             font-weight: 600;
                         }
@@ -158,77 +157,85 @@
         }
 
         .rfto-calendar-analytics {
-            flex: .5;
+            flex: .7;
 
-            .rfto-card {
-                margin-bottom: 2rem;
-                .rfto-card-header {
-                    h1 {
-                        color: var(--color-primary);
-                        font-weight: 600;
-                    }
-                }
+            // .rfto-card {
+            //     margin-bottom: 2rem;
 
-                .rfto-card-body {
-                    text-align: center;
-                    margin-top: 1rem;
+            //     .rfto-card-header {
+            //         h1 {
+            //             color: var(--color-primary);
+            //             font-weight: 600;
+            //         }
+            //     }
 
-                    .rfto-streak-number {
-                        color: #ea580c;
-                        font-size: 2rem;
-                    }
+            //     .rfto-card-body {
+            //         text-align: center;
+            //         margin-top: 1rem;
 
-                    .rfto-streak-heading {
-                        color: #b45309;
-                        font-size: var(--font-medium);
-                    }
+            //         .rfto-streak-number {
+            //             color: #ea580c;
+            //             font-size: 2rem;
+            //         }
 
-                    .rfto-streak-data-container {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-top: 1rem;
-                        .rfto-streak-data-heading {
-                            color: #b45309;
-                            font-size: var(--font-medium);
-                        }
+            //         .rfto-streak-heading {
+            //             color: #b45309;
+            //             font-size: var(--font-medium);
+            //         }
 
-                        .rfto-streak-data {
-                            font-size: var(--font-small);
-                            font-weight: 600;
-                            padding: 2px 0.5rem;
-                            border-radius: .5rem;
-                        }
+            //         .rfto-streak-data-container {
+            //             display: flex;
+            //             justify-content: space-between;
+            //             align-items: center;
+            //             margin-top: 1rem;
 
-                        .rfto-streak-data-brown {
-                            background-color: #ffedd5;
-                            color: var(--color-primary);
-                        }
+            //             .rfto-streak-data-heading {
+            //                 color: #b45309;
+            //                 font-size: var(--font-medium);
+            //             }
 
-                        .rfto-streak-data-white{
-                            border: 1px solid #ccc;
-                        }
+            //             .rfto-streak-data {
+            //                 font-size: var(--font-small);
+            //                 font-weight: 600;
+            //                 padding: 2px 0.5rem;
+            //                 border-radius: .5rem;
+            //             }
 
-                        .rfto-streak-data-green{
-                            color: #166534;
-                            background-color: #dcfce7;
-                        }
-                    }
-                }
-            }
+            //             .rfto-streak-data-brown {
+            //                 background-color: #ffedd5;
+            //                 color: var(--color-primary);
+            //             }
 
-            .rfto-green-card{
+            //             .rfto-streak-data-white {
+            //                 border: 1px solid #ccc;
+            //             }
+
+            //             .rfto-streak-data-green {
+            //                 color: #166534;
+            //                 background-color: #dcfce7;
+            //             }
+            //         }
+            //     }
+            // }
+
+            // .rfto-green-card {
+            //     .rfto-card-body {
+            //         .rfto-streak-number {
+            //             color: #16a34a;
+            //         }
+            //     }
+            // }
+
+            .rfto-legend-card{
+                flex: .5;
                 .rfto-card-body{
-                    .rfto-streak-number{
-                        color: #16a34a;
-                    }
+                    display: grid;
+                    grid-template-columns:repeat(3, 1fr);
+                    gap: .312rem;
                 }
             }
         }
 
 
     }
-
-
-
 }

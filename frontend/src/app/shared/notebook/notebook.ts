@@ -6,22 +6,22 @@ import { NgxEditorComponent, NgxEditorMenuComponent, Editor } from 'ngx-editor';
 import { SmartHttpService } from '../../services/smart-http.service';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 import { format } from 'date-fns';
+import { Skeleton } from '../skeleton/skeleton';
 
 @Component({
   selector: 'app-notebook',
-  imports: [CommonModule, FormsModule, SavingLoading, NgxEditorComponent, NgxEditorMenuComponent],
+  imports: [CommonModule, FormsModule, SavingLoading, NgxEditorComponent, NgxEditorMenuComponent, Skeleton],
   templateUrl: './notebook.html',
   styleUrl: './notebook.scss',
   encapsulation: ViewEncapsulation.None
 })
 export class Notebook implements OnInit {
-  @ViewChild("journalTextarea", { static: false }) textareaRef!: ElementRef<HTMLTextAreaElement>
-
   journalContent = ""
   lineCount = 25
   textareaRows = 25
   editor!: Editor;
-  
+
+  loading = signal<boolean>(true);
   currentDate = signal<string>('');
   updatedAt = signal<string>('');
   isEditor = signal<boolean>(false);
@@ -49,8 +49,12 @@ export class Notebook implements OnInit {
     this.http.get("journal/get").subscribe({
       next: (res: any) => {
         if (res && res.status === 200) {
+          this.loading.set(false);
+        }
+        if (res && res.status === 200 && res.data) {
           this.journalText.set(res.data?.journal);
           this.journalData.set(res.data)
+
         }
       }
     })
@@ -67,14 +71,14 @@ export class Notebook implements OnInit {
       });
   }
 
-  private saveJournal = (value:string) => {
+  private saveJournal = (value: string) => {
     this.isSaving.set(true);
     this.http.post('journal/save', {
       journal_id: this.journalData()?.journal_id,
       journal: value
     }).subscribe({
-      next: (resp:any) => {
-        if(resp && resp.status === 200){
+      next: (resp: any) => {
+        if (resp && resp.status === 200) {
           this.journalData.set(resp.data);
           this.updatedAt.set(resp.data.updated_at);
         }
@@ -86,10 +90,11 @@ export class Notebook implements OnInit {
   }
 
 
-  onTextChange = (value: string) => {
-    if(value === this.journalText()) return;
-    this.journalText.set(value);
-    this.inputSubject.next(value);
+  onTextChange = (event: string) => {
+    console.log("sadasdasdasd", typeof (event));
+    if (event === this.journalText()) return;
+    this.journalText.set(event);
+    this.inputSubject.next(event);
   }
 
   getLineArray(): number[] {

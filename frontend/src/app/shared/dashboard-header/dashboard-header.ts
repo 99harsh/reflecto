@@ -1,5 +1,6 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -8,25 +9,44 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './dashboard-header.scss',
   standalone: true
 })
-export class DashboardHeader {
-isDropdownOpen = false;
-  username = 'Harsh Agrawal'; // Replace with actual username from your user service
-  userEmail = 'harsh@example.com'; // Replace with actual email from your user service
-  router = inject(Router)
+export class DashboardHeader implements OnInit {
+  router = inject(Router);
+  _cdr = inject(ChangeDetectorRef);
+  platformId = inject(PLATFORM_ID);
+
+  isDropdownOpen = signal<boolean>(false);
+  username = signal<string>(""); // Replace with actual username from your user service
+  userEmail = signal<string>(""); // Replace with actual email from your user service
+  profileData = signal({
+    name: "User",
+    email: "user@example.com"
+  });
+
+  ngOnInit(): void {
+    let user_profile: any = this.getItem("user_profile");
+    if (user_profile) {
+      user_profile = JSON.parse(user_profile);
+      console.log(user_profile)
+      this.profileData.update((prev: any) => ({
+        ...prev,
+        name: user_profile?.name || "User",
+        email: user_profile?.email || "user@example.com"
+      }));
+    }
+  }
+
   toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
+    this.isDropdownOpen.set(!this.isDropdownOpen());
   }
 
   navigateToProfile() {
     // Replace with your actual profile route
-    this.isDropdownOpen = false;
-    // If using Angular Router:
-    // this.router.navigate(['/profile-settings']);
+    this.toggleDropdown()
     this.router.navigate(['/profile']);
   }
 
   logout() {
-    this.isDropdownOpen = false;
+    this.isDropdownOpen.set(false);
     // Add your logout logic here
     // For example, clear tokens and redirect:
     // this.authService.logout();
@@ -37,7 +57,20 @@ isDropdownOpen = false;
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (!target.closest('.profile-wrapper')) {
-      this.isDropdownOpen = false;
+      this.isDropdownOpen.set(false);
     }
   }
+
+  private getItem(key: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem(key);
+    }
+    return null;
+  }
+
+  get firstChar() {
+    return this.profileData().name[0] || "U";
+  }
+
+
 }

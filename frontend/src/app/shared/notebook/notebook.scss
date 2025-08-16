@@ -1,18 +1,15 @@
 .rfto-notebook-container {
   min-height: 100vh;
-  padding: 2rem 1rem;
 
   .rfto-notebook-page {
-    max-width: 40rem;
-    margin: 0 auto;
+
     background: #ffffff;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     position: relative;
     padding: 2rem 2rem 0rem 5rem;
     border-radius: 12px;
     border: 2px solid #d1e7dd;
 
-    .rfto-loading{
+    .rfto-loading {
       height: 20px;
       display: flex;
       justify-content: flex-end;
@@ -72,17 +69,26 @@
         font-weight: 600;
       }
     }
-    .rfto-writing-area{
+
+    .rfto-writing-area {
       padding-bottom: 3rem;
-      .rfto-editor-menu-container{
+
+      .rfto-editor-menu-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
-      .NgxEditor__Content{
+
+      .NgxEditor__Content {
         min-height: 40rem;
+        max-height: 40rem;
+        overflow: scroll;
       }
     }
+  }
+
+  .rfto-loading-container {
+    margin-bottom: .612rem;
   }
 
   // Responsive styles
@@ -95,7 +101,7 @@
       .rfto-spiral-holes {
         left: 1rem;
         gap: 2rem;
-        
+
         .rfto-hole {
           width: 10px;
           height: 10px;
@@ -112,7 +118,7 @@
         .rfto-journal-title {
           font-size: 2.2rem;
         }
-        
+
         .rfto-date {
           font-size: 1rem;
         }
@@ -157,4 +163,6 @@
       }
     }
   }
+
+
 }

@@ -6,6 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './interceptor/http-interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideClientHydration(withEventReplay()),
     provideOAuthClient(),
-    provideHttpClient(withInterceptors([httpInterceptor]), withFetch())
+    provideHttpClient(withInterceptors([httpInterceptor]), withFetch()),
+    provideAnimations()
+    
   ]
 };

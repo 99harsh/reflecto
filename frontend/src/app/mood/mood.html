@@ -7,10 +7,74 @@
         <p>Track your emotional journey with mindful awareness</p>
     </div>
     <div class="rfto-mood">
+        @if(loading().isAllMoods){
         <div class="rfto-mood-section rfto-select-mood-container">
             <div class="rfto-card rfto-pink-card">
+
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-pink" height="1.5rem" width="10.5rem"></app-skeleton>
+                </div>
+
+                <div class="rfto-card-body">
+
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-mood-card">
+                        <app-skeleton color="rfto-yellow" height="4.5rem" width="100%"></app-skeleton>
+                    </div>
+
+                </div>
+                <div class="rfto-card-footer">
+                    <div class="rfto-intensity-container">
+                        <div class="rfto-intensity-heading">
+                            <app-skeleton color="rfto-pink" height="1.5rem" width="10rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-intensity-progressbar">
+                            <div class="rfto-high-low rfto-loading-container">
+                                <span><app-skeleton color="rfto-pink" height="1.5rem"
+                                        width="3rem"></app-skeleton></span>
+                                <span><app-skeleton color="rfto-pink" height="1.5rem"
+                                        width="5rem"></app-skeleton></span>
+                            </div>
+                            <app-skeleton color="rfto-pink" height="1.5rem" width="100%"></app-skeleton>
+                        </div>
+                        <div class="rfto-intensity">
+                            <span class="rfto-center-loading"><app-skeleton color="rfto-pink" height="1.5rem"
+                                    width="4rem"></app-skeleton></span>
+                        </div>
+                    </div>
+                    @if(userMood() === null){
+                    <div class="rfto-log-btn-container">
+                        <app-skeleton color="rfto-pink" height="3rem" width="10rem"></app-skeleton>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        } @else{
+        <div class="rfto-mood-section rfto-select-mood-container" @slideUpIn>
+            <div class="rfto-card rfto-pink-card">
                 @if(userMood() === null){
-                      <div class="rfto-card-header">
+                <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -30,7 +94,7 @@
                         <div class="rfto-mood-emoj">{{mood.mood_emoj}}</div>
                         <p class="rfto-mood-name">{{mood.mood}}</p>
                     </div>
-                }
+                    }
                 </div>
                 <div class="rfto-card-footer">
                     <div class="rfto-intensity-container">
@@ -42,16 +106,24 @@
                                 <span>Low</span>
                                 <span>High</span>
                             </div>
-                            <input [disabled]="userMood() !== null" (ngModelChange)="updateIntensityLevel($event)" [ngModel]="selectedIntensityLevel()" class="rfto-range" type="range" min="1" max="10" value="2" />
+                            <input [disabled]="userMood() !== null" (ngModelChange)="updateIntensityLevel($event)"
+                                [ngModel]="selectedIntensityLevel()" class="rfto-range" type="range" min="1" max="10"
+                                value="2" />
                         </div>
                         <div class="rfto-intensity">
                             <span>{{selectedIntensityLevel()}}/10</span>
                         </div>
                     </div>
                     @if(userMood() === null){
-                             <div class="rfto-log-btn-container">
+                    <div class="rfto-log-btn-container">
                         <button class="rfto-log-button" (click)="logMood()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-5 h-5 mr-2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-heart w-5 h-5 mr-2">
+                                <path
+                                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+                                </path>
+                            </svg>
                             Log My Mood
                         </button>
                     </div>
@@ -59,8 +131,26 @@
                 </div>
             </div>
         </div>
+        }
         <div class="rfto-mood-section rfto-summary-section">
+            @if(loading().userMood){
             <div class="rfto-card rfto-yellow-card rfto-today-summary">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-yellow" height="2rem" width="10.5rem"></app-skeleton>
+                </div>
+
+                <div class="rfto-card-body">
+                    <div class="rfto-center-loading">
+                        <app-skeleton color="rfto-yellow" height="2rem" width="4rem"></app-skeleton>
+                        <app-skeleton color="rfto-yellow" height="1.5rem" width="5rem"></app-skeleton>
+                        <app-skeleton color="rfto-yellow" height="1rem" width="8rem"></app-skeleton>
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
+                    </div>
+                </div>
+
+            </div>
+            } @else{
+            <div class="rfto-card rfto-yellow-card rfto-today-summary" @slideUpIn>
                 <div class="rfto-card-header">
                     <h1>
                         📊 Today's Summary
@@ -74,15 +164,44 @@
                     <p class="rfto-summary-logged">Logged {{loggedAt()}}</p>
                 </div>
                 } @else{
-                    <div class="rfto-card-body">
-                        <p class="rfto-summary-mood-name">Log your mood now!</p>
-                    </div>
+                <div class="rfto-card-body">
+                    <p class="rfto-log-mood-heading">Log your mood now!</p>
+                </div>
                 }
-            </div>
+            </div> }
+
+            @if(loading().moodStats){
+
             <div class="rfto-card rfto-blue-card rfto-week-summary">
                 <div class="rfto-card-header">
+                    <app-skeleton color="rfto-blue" height="1.5rem" width="6rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-week-data-container">
+                        <app-skeleton color="rfto-blue" height="1.3rem" width="5rem"></app-skeleton>
+                        <app-skeleton color="rfto-blue" height="1.3rem" width="3rem"></app-skeleton>
+                    </div>
+                    <div class="rfto-week-data-container">
+                        <app-skeleton color="rfto-blue" height="1.3rem" width="5rem"></app-skeleton>
+                        <app-skeleton color="rfto-blue" height="1.3rem" width="3rem"></app-skeleton>
+                    </div>
+                    <div class="rfto-week-data-container">
+                        <app-skeleton color="rfto-blue" height="1.3rem" width="5rem"></app-skeleton>
+                        <app-skeleton color="rfto-blue" height="1.3rem" width="3rem"></app-skeleton>
+                    </div>
+                </div>
+            </div>
+            }
+            @else{
+            <div class="rfto-card rfto-blue-card rfto-week-summary" @slideUpIn>
+                <div class="rfto-card-header">
                     <h1>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up w-5 h-5 mr-2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-trending-up w-5 h-5 mr-2">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                            <polyline points="16 7 22 7 22 13"></polyline>
+                        </svg>
                         This Week
                     </h1>
                 </div>
@@ -91,16 +210,17 @@
                         <span class="rfto-data-heading">Average Mood</span>
                         <span class="rfto-week-data">7.2/10</span>
                     </div>
-                       <div class="rfto-week-data-container">
+                    <div class="rfto-week-data-container">
                         <span class="rfto-data-heading">Most Common</span>
                         <span class="rfto-week-data">😊 Happy</span>
                     </div>
-                       <div class="rfto-week-data-container">
+                    <div class="rfto-week-data-container">
                         <span class="rfto-data-heading">Entries</span>
                         <span class="rfto-week-data">10</span>
                     </div>
                 </div>
             </div>
+            }
         </div>
     </div>
 </section>

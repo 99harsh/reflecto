@@ -8,6 +8,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './date-details.scss',
   encapsulation: ViewEncapsulation.None
 })
-export class DateDetails {
-
+export class DateDetails  {
+ 
 }

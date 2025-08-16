@@ -1,6 +1,73 @@
 <section class="rfto-journal-container">
-    <div class="">
-        
+    <div class="rfto-entry-btn-container">
+        <span class="rfto-btn-lg-blue">
+            📝 Today's Entry
+        </span>
     </div>
-    <app-notebook></app-notebook>
+    <div class="rfto-time-container">
+        <h1>{{currentDate()}}</h1>
+        <p>Take a moment to reflect on your day</p>
+    </div>
+    <div class="rfto-journal-notebook-container">
+        <div class="rfto-journal-notebook">
+            <app-notebook></app-notebook>
+        </div>
+        <div class="rfto-journal-stats">
+            @if(loading()){
+            <div class="rfto-card rfto-green-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-green" height="1.5rem" width="10rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-day-streak">
+                        <div class="rfto-center-loading">
+                            <app-skeleton color="rfto-green" height="1rem" width="2.5rem"></app-skeleton>
+                            <app-skeleton color="rfto-green" height="1rem" width="5.5rem"></app-skeleton>
+                        </div>
+                    </div>
+                    <div class="rfto-day-streak">
+                         <div class="rfto-center-loading">
+                            <app-skeleton color="rfto-green" height="1rem" width="2.5rem"></app-skeleton>
+                            <app-skeleton color="rfto-green" height="1rem" width="5.5rem"></app-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }@else {
+            <div class="rfto-card rfto-green-card" @slideUpIn>
+                <div class="rfto-card-header">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#78350f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-star w-5 h-5 mr-2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
+                        Writing Stats
+                    </h3>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-day-streak">
+                        <h1>{{ insightData().totalEntries }}</h1>
+                        <p>Entries</p>
+                    </div>
+                    <div class="rfto-day-streak">
+                        <h1>{{ insightData().totalWords }}</h1>
+                        <p>Words Written</p>
+                    </div>
+                </div>
+            </div>
+            }
+            <div class="rfto-card rfto-yellow-card">
+                <div class="rfto-card-header">
+                    <h3>💡 Writing Tips</h3>
+                </div>
+                <div class="rfto-card-body">
+                    <p class="rfto-writing-tip">"Don't worry about perfect grammar or spelling. Just let your thoughts
+                        flow naturally onto the page."</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

@@ -1,199 +1,289 @@
 .rfto-profile-section {
-    padding: 1.5rem 4rem;
-    background: var(--background-asset-1);
-    .rfto-profile-container {
-        width: 50%;
-        margin: auto;
 
-        .rfto-profile-header {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--color-border);
-            padding-bottom: 1rem;
-
-            .rfto-profile-svg {
-                background-color: #f0f9ff;
-                padding: .312rem;
-                border-radius: .312rem;
-            }
-
-            .rfto-profile-name-container {
-                padding-left: .5rem;
-
-                .rfto-profile-name {
-                    color: var(--color-text-primary);
-                }
-
-                .rfto-profile-username {
-                    color: var(--color-text-secondary);
-                }
-            }
-        }
-
-        .rfto-profile-body {
-
-            .rfto-xp-card-container {
-                margin-top: 1.5rem;
-            }
-
-            .rfto-leaderboard-container {
-                margin-top: 1.5rem;
-
-                // border: 1px solid var(--color-border);
-                // padding: .5rem;
-                .rfto-leaderboard-heading {
-                    margin-bottom: .625rem;
-                }
-
-                .rfto-leaderboard-card-container {
-                    .rfto-leaderboard-card {
-                        background-color: var(--color-white);
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        border: 1px solid var(--color-border);
-                        padding: .625rem;
-                        border-radius: .312rem;
-                        margin-bottom: 1rem;
-
-                        .rfto-leaderboard-level-left {
-                            display: flex;
-                            align-items: center;
-
-                            .rfto-level-svg {
-                                margin-right: .625rem;
-                                display: flex;
-
-                                .rfto-current-level {
-                                    font-size: var(--font-medium);
-                                    font-weight: 500;
-                                    color: var(--color-text-primary);
-                                }
-                            }
-
-                            .rfto-leaderboard-users {
-                                display: flex;
-                                align-items: center;
-
-                                .rfto-leaderboard-user-icon {
-                                    background-color: #f4f4f5;
-                                    padding: .312rem;
-                                    height: 1.872rem;
-                                    width: 1.872rem;
-                                    border-radius: 100%;
-                                }
-
-                                .rfto-leaderboard-user-name {
-                                    margin-left: .612rem;
-
-                                    h4 {
-                                        font-size: var(--font-medium);
-                                        color: var(--color-text-primary);
-                                    }
-
-                                    span {
-                                        font-size: var(--font-small);
-                                        color: var(--color-text-secondary);
-                                    }
-                                }
-                            }
-
-                        }
-
-                        .rfto-leaderboard-level-right {
-                            text-align: right;
-
-                            h4 {
-                                color: var(--color-text-primary);
-                                font-size: var(--font-medium);
-                            }
-
-                            span {
-                                font-size: var(--font-small);
-
-                            }
-                        }
-                    }
-
-                    .rfto-leaderboard-card-active{
-                        border-color: var(--color-primary);
-                    }
-                }
-            }
-
-            .rfto-journey-container {
-                margin-top: 1.5rem;
-
-                // border: 1px solid var(--color-border);
-                // padding: 0.5rem;
-                .rfto-journey-header {
-                    margin-bottom: .625rem;
-                }
-
-                .rfto-journey-data {
-                    display: flex;
-                    justify-content: space-between;
-                    border-bottom: 1px solid var(--color-border);
-                    margin-bottom: .625rem;
-                    padding-bottom: .5rem;
-
-                    .rfto-journey-heading {
-                        font-size: var(--font-medium);
-                        color: var(--color-text-secondary);
-                    }
-
-                    .rfto-journey-value {
-                        font-weight: 500;
-                        font-size: var(--font-medium);
-                    }
-                }
-            }
-
-            .rfto-reset-progress {
-                margin-top: 1.5rem;
-
-                .rfto-reset-heading {
-                    margin-bottom: .625rem;
-                }
-
-                .rfto-reset-card {
-                    border: 1px solid #fb1c1c;
-                    padding: .625rem;
-                    border-radius: .312rem;
-                    .rfto-reset-para {
-
-                        p {
-                            color: var(--color-text-secondary);
-                            font-size: var(--font-medium);
-                            font-weight: 500;
-                            margin-bottom: 0.5rem;
-                            line-height: 1.2; 
-                        }
-                    }
-
-                    .rfto-reset-button-container{
-                        text-align: center;
-                        .rfto-reset-button{
-                            color: var(--color-white);
-                            background-color:#fb1c1c;
-                            border-radius: .312rem;
-                            border: none;
-                            padding: .612rem 1rem;
-                            // width: 100%;
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-        }
-
+    .rfto-checkin-btn-container {
+        text-align: center;
+        margin-bottom: 1.5rem;
     }
 
-    .rfto-loading-container{
+    .rfto-feeling-heading {
+        text-align: center;
+
+        h1 {
+            font-size: var(--font-xl);
+            color: var(--color-primary);
+        }
+
+        p {
+            font-size: var(--font-medium);
+            color: var(--color-primary);
+            margin-top: .3rem;
+        }
+    }
+
+    .rfto-profile-card-container {
         display: flex;
-        width: 100%;
-        height: 70vh;
-        justify-content: center;
-        align-items: center;
+        width: 70%;
+        margin: auto;
+        margin-top: 2rem;
+        gap: 1rem;
+
+        .rfto-profile-leaderboard {
+            flex: 1;
+
+
+            .rfto-yellow-card {
+                .rfto-card-header {
+                    margin-bottom: 1rem;
+
+                    h3 {
+                        display: flex;
+                        align-items: center;
+                        gap: .312rem;
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-card-body {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .rfto-profile-container {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                    }
+
+                    .rfto-profile-xp-info{
+                        text-align: right;
+                        .rfto-profile-xp{
+                            font-weight: 600;
+                            color: #2563eb;
+                        }
+                        .rfto-level{
+                            color: var(--color-secondary);
+                            margin-top: .15rem;
+                            font-size: var(--font-medium);
+                        }
+                    }
+
+                    .rfto-profile-icon {
+                        width: 3.75rem;
+                        height: 3.75rem;
+                        background: #3b82f6;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 2rem;
+                        font-weight: 600;
+                    }
+
+                    .rfto-profile-info {
+                        .rfto-profile-name {
+                            font-size: var(--font-xl);
+                            color: var(--color-primary);
+                        }
+
+                        .rfto-profile-email {
+                            font-size: var(--font-large);
+                            color: var(--color-secondary);
+                            margin-top: .1rem;
+                        }
+
+                        .rfto-member-since {
+                            font-size: var(--font-medium);
+                            margin-top: .5rem;
+                            padding: .12rem .312rem;
+                            background-color: #dcfce7;
+                            color: #166534;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+
+            .rfto-purple-card {
+                margin-top: 1rem;
+
+                .rfto-card-header {
+                    h3 {
+                        display: flex;
+                        align-items: center;
+                        gap: .312rem;
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-card-body {
+                    margin-top: 1rem;
+
+                    .rfto-top-performer-heading {
+                        color: var(--color-primary);
+                        font-weight: 500;
+                    }
+
+                    .rfto-leaderboard-card {
+                        margin-top: 1rem;
+                        display: flex;
+                        padding: 1rem;
+                        justify-content: space-between;
+                        align-items: center;
+                        border: 1px solid #fde68a;
+                        border-radius: .312rem;
+                        background-image: linear-gradient(to right, #fffbeb, #faf5ff);
+
+                        .rfto-leaderboard-info {
+                            display: flex;
+                            align-items: center;
+                            gap: .625rem;
+
+                            .rfto-leaderboard-rank {
+                                font-weight: 600;
+                                color: var(--color-primary);
+                                font-size: var(--font-large);
+                            }
+
+                            .rfto-leaderboard-profile {
+                                width: 35px;
+                                height: 35px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background-color: #fef3c7;
+                                border: 2px solid #fcd34d;
+                                border-radius: 100%;
+                                color: var(--color-primary);
+                                font-weight: 500;
+                            }
+
+                            .rfto-leaderboard-name {
+                                .rfto-name {
+                                    color: var(--color-primary);
+                                    font-weight: 500;
+                                }
+
+                                .rfto-level {
+                                    font-size: var(--font-medium);
+                                    color: var(--color-secondary);
+                                }
+                            }
+                        }
+
+                        .rfto-leaderboard-xp {
+                            p {
+                                color: #9333ea;
+                                font-weight: 600;
+                                font-size: var(--font-large);
+                            }
+                        }
+                    }
+
+
+                    .rfto-your-position {
+                        .rfto-your-position-text {
+                            margin-top: 1rem;
+                            padding-top: 1rem;
+                            border-top: 1px solid #fde68a;
+                            color: var(--color-primary);
+                            font-weight: 500;
+                        }
+
+                        .rfto-self-leaderboard-card {
+                            border-style: dashed;
+                            border-width: 2px;
+                            background-image: linear-gradient(to right, #eff6ff, #f0fdf4);
+
+                            .rfto-leaderboard-xp {
+                                p {
+                                    color: #2563eb;
+                                    text-align: right;
+                                }
+
+                                .rfto-next-level {
+                                    color: var(--color-secondary);
+                                    font-size: var(--font-small);
+                                    margin-top: .15rem;
+                                    font-weight: 400;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .rfto-profile-settings {
+            flex: .5;
+
+            .rfto-purple-card {
+                .rfto-card-header {
+                    h3 {
+                        display: flex;
+                        align-items: center;
+                        gap: .312rem;
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-card-body {
+                    button {
+                        margin-top: 1rem;
+                        background-color: transparent;
+                        border: 1px solid var(--color-secondary);
+                        padding: .312rem .612rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        gap: .312rem;
+                        font-weight: 500;
+                        color: var(--color-primary);
+                    }
+                }
+            }
+
+            .rfto-red-card {
+                margin-top: 1rem;
+
+                .rfto-card-header {
+                    h3 {
+                        color: #b91c1c;
+                    }
+                }
+
+                .rfto-card-body {
+                    margin-top: 1rem;
+
+                    .rfto-reset-text {
+                        background-color: #fef2f2;
+                        border-left: 2px solid #f87171;
+                        padding: 1rem;
+                        color: #991b1b;
+                        font-size: var(--font-medium);
+                    }
+
+                    .rfto-reset-btn {
+                        background-color: #ef4444;
+                        padding: .5rem 1rem;
+                        border: none;
+                        color: white;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        margin-top: 1rem;
+                        gap: .5rem;
+                        cursor: pointer;
+                        transition: .1s linear all;
+
+                        &:hover {
+                            background-color: #ef4444f4;
+                        }
+                    }
+                }
+            }
+
+        }
     }
 }

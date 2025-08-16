@@ -9,7 +9,60 @@
 
     <div class="rfto-task-container">
         <div class="rfto-task-input-container">
+            @if(loading().userTasksLoading){
             <div class="rfto-card rfto-green-card rfto-input-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-green" height="1.5rem" width="6rem"></app-skeleton>
+                </div>
+                <div class="rfto-task-input">
+                    <app-skeleton color="rfto-green" height="2rem" width="15rem"></app-skeleton>
+                    <app-skeleton color="rfto-green" height="2rem" width="5rem"></app-skeleton>
+                </div>
+            </div>
+
+            <div class="rfto-card rfto-blue-card rfto-all-tasks">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-blue" height="1rem" width="15rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+
+                    <div class="rfto-task">
+                        <div class="rfto-task-checkbox-container">
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                        <div>
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                    </div>
+                    <div class="rfto-task">
+                        <div class="rfto-task-checkbox-container">
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                        <div>
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                    </div>
+                    <div class="rfto-task">
+                        <div class="rfto-task-checkbox-container">
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                        <div>
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                    </div>
+                    <div class="rfto-task">
+                        <div class="rfto-task-checkbox-container">
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                        <div>
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            } @else{
+            <div class="rfto-card rfto-green-card rfto-input-card" @slideUpIn>
                 <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -34,7 +87,8 @@
                         Add</button>
                 </div>
             </div>
-            <div class="rfto-card rfto-blue-card rfto-all-tasks">
+
+            <div class="rfto-card rfto-blue-card rfto-all-tasks" @slideUpIn>
                 <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -72,9 +126,40 @@
                     }
                 </div>
             </div>
+            }
+
         </div>
+
         <div class="rfto-task-summary-container">
+            @if(loading().userTasksLoading){
             <div class="rfto-card rfto-purple-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-purple" height="1.5rem" width="10rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-completion-container">
+                        <div class="rfto-center-loading">
+                            <app-skeleton color="rfto-purple" height="1.5rem" width="6rem"></app-skeleton>
+                            <app-skeleton color="rfto-purple" height="1.5rem" width="10rem"></app-skeleton>
+                        </div>
+                    </div>
+                    <div class="rfto-progress-container">
+                        <app-skeleton color="rfto-purple" height="1.5rem" width="100%"></app-skeleton>
+                    </div>
+                </div>
+                <div class="rfto-overall-progress-container">
+                    <div class="rfto-center-loading">
+                        <app-skeleton color="rfto-purple" height="1.5rem" width="2rem"></app-skeleton>
+                        <app-skeleton color="rfto-purple" height="1.5rem" width="6rem"></app-skeleton>
+                    </div>
+                    <div class="rfto-center-loading">
+                        <app-skeleton color="rfto-purple" height="1.5rem" width="2rem"></app-skeleton>
+                        <app-skeleton color="rfto-purple" height="1.5rem" width="6rem"></app-skeleton>
+                    </div>
+                </div>
+            </div>
+            }@else {
+            <div class="rfto-card rfto-purple-card" @slideUpIn>
                 <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -110,7 +195,37 @@
                     </div>
                 </div>
             </div>
+            }
+
+            @if(loading().statsLoading){
             <div class="rfto-card rfto-orange-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-orange" height="1.5rem" width="10rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <!-- <div class="rfto-streak-container">
+                        <h1>7</h1>
+                        <p>Day Streak</p>
+                    </div> -->
+                    <div class="rfto-streak-data-container">
+                        <div class="rfto-streak-data">
+                            <app-skeleton color="rfto-orange" height="1.2rem" width="6rem"></app-skeleton>
+                            <app-skeleton color="rfto-orange" height="1.2rem" width="3rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-streak-data">
+                            <app-skeleton color="rfto-orange" height="1.2rem" width="6rem"></app-skeleton>
+                            <app-skeleton color="rfto-orange" height="1.2rem" width="3rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-streak-data">
+                            <app-skeleton color="rfto-orange" height="1.2rem" width="6rem"></app-skeleton>
+                            <app-skeleton color="rfto-orange" height="1.2rem" width="3rem"></app-skeleton>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            } @else{
+            <div class="rfto-card rfto-orange-card" @slideUpIn>
                 <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -131,11 +246,13 @@
                     <div class="rfto-streak-data-container">
                         <div class="rfto-streak-data">
                             <p class="rfto-streak-heading">This Week</p>
-                            <p class="rfto-streak-number rfto-streak-solid">{{ progress().total_tasks }} {{ progress().total_tasks == 0 ? 'task' : 'tasks' }}</p>
+                            <p class="rfto-streak-number rfto-streak-solid">{{ progress().total_tasks }} {{
+                                progress().total_tasks == 0 ? 'task' : 'tasks' }}</p>
                         </div>
                         <div class="rfto-streak-data">
                             <p class="rfto-streak-heading">Completed</p>
-                            <p class="rfto-streak-number rfto-streak-ghost">{{ progress().completed_tasks }} {{ progress().completed_tasks == 0 ? 'task' : 'tasks' }}</p>
+                            <p class="rfto-streak-number rfto-streak-ghost">{{ progress().completed_tasks }} {{
+                                progress().completed_tasks == 0 ? 'task' : 'tasks' }}</p>
                         </div>
                         <div class="rfto-streak-data">
                             <p class="rfto-streak-heading">Success Rate</p>
@@ -145,6 +262,8 @@
                     </div>
                 </div>
             </div>
+            }
+
         </div>
     </div>
 </section>

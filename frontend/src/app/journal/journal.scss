@@ -1,3 +1,82 @@
-.rfto-journal-container{
-    background-image: var(--background-asset-1);
+.rfto-journal-container {
+
+    .rfto-entry-btn-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .rfto-time-container {
+        text-align: center;
+        margin-top: 1rem;
+
+        h1 {
+            font-size: var(--font-xl);
+            color: var(--color-primary);
+        }
+
+        p {
+            margin-top: .3rem;
+            font-size: var(--font-medium);
+            color: var(--color-secondary);
+        }
+    }
+
+    .rfto-journal-notebook-container {
+        display: flex;
+        gap: 1em;
+        margin-top: 3rem;
+        .rfto-journal-notebook{
+            flex: 1;
+        }
+        .rfto-journal-stats{
+            flex: .5;
+            .rfto-green-card{
+                .rfto-card-header{
+                    h3{
+                        display: flex;
+                        align-items: center;
+                        color: var(--color-primary);
+                        gap: .312rem;
+                    }
+                }
+
+                .rfto-card-body{
+                    display: flex;
+                    margin-top: 1rem;
+                    .rfto-day-streak {
+                        flex: 1;
+                        text-align: center;
+                        h1{
+                            color: var(--color-primary);
+                        }
+                        p{
+                            color: var(--color-secondary);
+                            font-size: var(--font-medium);
+                        }
+                    }
+                }
+            }
+
+            .rfto-yellow-card{
+                margin-top: 1rem;
+                .rfto-card-header{
+                    h3{
+                        color: var(--color-primary);
+                    }
+                }
+
+                .rfto-card-body{
+                    margin-top: 1rem;
+                    .rfto-writing-tip{
+                        width: 80%;
+                        padding: 1rem;
+                        background-color:#fefce8;
+                        border-left: 2px solid #facc15;
+                        color: var(--color-secondary);
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+    }
 }

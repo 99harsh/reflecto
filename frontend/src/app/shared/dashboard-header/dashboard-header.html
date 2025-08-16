@@ -1,5 +1,5 @@
 <header class="rfto-header-container">
-    <div class="rfto-header-section rfto-logo-container">
+    <div class="rfto-header-section rfto-logo-container" [routerLink]="'home'">
         <h1>Reflecto</h1>
     </div>
     <div class="rfto-header-section rfto-nav-container">
@@ -32,14 +32,14 @@
         <div class="rfto-user-logo">
             <img src="user-placeholder.png" alt="Profile" />
         </div>
-        <div class="rfto-dropdown-menu" [class.show]="isDropdownOpen">
+        <div class="rfto-dropdown-menu" [class.show]="isDropdownOpen()">
             <div class="rfto-dropdown-header">
                 <div class="rfto-dropdown-avatar">
-                    {{ username[0] }}
+                    {{ firstChar }}
                 </div>
                 <div class="rfto-dropdown-user-info">
-                    <div class="rfto-dropdown-username">{{ username }}</div>
-                    <div class="rfto-dropdown-email">{{ userEmail }}</div>
+                    <div class="rfto-dropdown-username">{{ profileData().name }}</div>
+                    <div class="rfto-dropdown-email">{{ profileData().email }}</div>
                 </div>
             </div>
             <div class="rfto-dropdown-divider"></div>

@@ -1,0 +1,36 @@
+.rfto-skeleton-loader {
+    height: 20px;
+    width: 50px;
+    align-self: center;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.rfto-purple{
+    background-color: #e3c9ff;
+}
+
+.rfto-pink {
+    background-color: #f9a8d480;
+}
+
+.rfto-blue{
+    background-color: #aacffc;
+}
+
+.rfto-green{
+    background-color: rgb(175, 224, 192);
+}
+
+.rfto-yellow{
+    background-color: #fff0b2;
+}
+
+.rfto-orange{
+    background-color: #ffd3af;
+}
+
+@keyframes pulse {
+    50% {
+        opacity: .5;
+    }
+}

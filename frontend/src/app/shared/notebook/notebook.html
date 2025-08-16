@@ -1,17 +1,16 @@
+@if(!loading()){
 <div class="rfto-notebook-container">
   <div class="rfto-notebook-page">
     <div class="rfto-loading">
       <app-saving-loading></app-saving-loading>
     </div>
-    <!-- Spiral binding holes -->
+
     <div class="rfto-spiral-holes">
       <div class="rfto-hole" *ngFor="let hole of getHoleArray(); trackBy: trackByIndex"></div>
     </div>
 
-    <!-- Red margin line -->
     <div class="rfto-margin-line"></div>
 
-    <!-- Page header -->
     <div class="rfto-page-header">
       <h1 class="rfto-journal-title">My Journal</h1>
       <div class="rfto-date">{{ currentDate() }}</div>
@@ -23,26 +22,86 @@
         <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
         <app-saving-loading [isLoading]="isSaving()" [isUpdated]="!isSaving()" [updatedAt]="updatedAt()"></app-saving-loading>
       </div>
-      <ngx-editor [editor]="editor" [ngModel]="journalText()" (ngModelChange)="onTextChange($event)" [disabled]="false"
-        [placeholder]="'Type here...'"></ngx-editor>
+      <ngx-editor [editor]="editor" [ngModel]="journalText()" (ngModelChange)="onTextChange($event)" [placeholder]="'Type here...'"></ngx-editor>
     </div>
     }
-
-    <!-- Writing area -->
-    <!-- <div class="rfto-writing-area">
-      <textarea 
-        #journalTextarea
-        class="rfto-journal-textarea"
-        [value]="journalContent"
-        (input)="onContentChange($event)"
-        (keydown)="onKeyPress($event)"
-        placeholder="Start writing your thoughts here..."
-        [rows]="textareaRows"
-        autocomplete="off"
-        spellcheck="true"></textarea>
-      <div class="rfto-ruled-lines">
-        <div class="rfto-line" *ngFor="let line of getLineArray(); trackBy: trackByIndex"></div>
-      </div>
-    </div> -->
   </div>
 </div>
+}
+@else{
+<div class="rfto-notebook-container">
+  <div class="rfto-notebook-page">
+    <div class="rfto-loading">
+      <app-saving-loading></app-saving-loading>
+    </div>
+
+    <div class="rfto-spiral-holes">
+      <div class="rfto-hole" *ngFor="let hole of getHoleArray(); trackBy: trackByIndex"></div>
+    </div>
+
+    <div class="rfto-margin-line"></div>
+
+    <div class="rfto-page-header">
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="2.5rem" width="10.12rem"></app-skeleton>
+      </div>
+      <div class="rfto-date">
+        <app-skeleton color="rfto-green" height="1.5rem" width="15.12rem"></app-skeleton>
+      </div>
+    </div>
+
+
+    <div class="rfto-writing-area">
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="80%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="40%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="60%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="30%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="50%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="40%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="70%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="30%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="80%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="40%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="60%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="30%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="50%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="40%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="70%"></app-skeleton>
+      </div>
+      <div class="rfto-loading-container">
+        <app-skeleton color="rfto-green" height="1.5rem" width="30%"></app-skeleton>
+      </div>
+    </div>
+
+  </div>
+</div>
+}

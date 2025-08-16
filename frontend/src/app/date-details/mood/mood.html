@@ -1,30 +1,40 @@
 <section class="rfto-mood-container">
     <div class="rfto-back-btn-container">
-        <button class="rfto-back-btn">
+        <button class="rfto-back-btn" (click)="goBack()">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-arrow-left w-4 h-4 mr-2">
                 <path d="m12 19-7-7 7-7"></path>
                 <path d="M19 12H5"></path>
             </svg>
-            Back to Calendar
+            Back
         </button>
     </div>
     <div class="rfto-heading-container">
         <div>
             <h1>Mood Analysis</h1>
-            <p>Wednesday, August 20, 2025</p>
+            <p>{{currentDate()}}</p>
         </div>
     </div>
 
+    @if(loading()){
+    <div class="rfto-card rfto-mood-card-container rfto-shadow-lg rfto-center-loading">
+         <app-skeleton color="rfto-pink" height="4rem" width="6rem"></app-skeleton>
+        <app-skeleton color="rfto-pink" height="2rem" width="4rem"></app-skeleton>
+        <app-skeleton color="rfto-pink" height="2rem" width="5rem"></app-skeleton>
+        <app-skeleton color="rfto-pink" height="2rem" width="10rem"></app-skeleton>
+        <app-skeleton color="rfto-pink" height="2rem" width="10rem"></app-skeleton>
+    </div>
+    } @else{
     <div class="rfto-card rfto-mood-card-container rfto-shadow-lg">
-        <h1 class="rfto-mood-emoj">😴</h1>
-        <h2 class="rfto-mood-name">Tired</h2>
-        <h2 class="rfto-intensity-heading">Intensity: 5/10</h2>
+        <h1 class="rfto-mood-emoj">{{insightData().mood_emoj}}</h1>
+        <h2 class="rfto-mood-name">{{insightData().mood_name}}</h2>
+        <h2 class="rfto-intensity-heading">Intensity: {{insightData().intensity}}/10</h2>
         <div class="rfto-intensity-progressbar">
-            <app-progressbar [progress]="20"></app-progressbar>
+            <app-progressbar [progress]="moodProgress"></app-progressbar>
         </div>
         <p class="rfto-mood-quote">"A bit tired but content with the day."</p>
-        <p class="rfto-mood-logged">Logged at 9:30AM</p>
+        <p class="rfto-mood-logged">Logged at {{loggedAt}}</p>
     </div>
+    }
 </section>

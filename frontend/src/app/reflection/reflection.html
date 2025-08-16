@@ -9,7 +9,49 @@
         <p>Take a moment to reflect on your day</p>
     </div>
     <div class="rfto-reflection">
+        @if(isLoading().isUserReflectionLoading){
         <div class="rfto-reflection-section rfto-reflection-input">
+            <div class="rfto-card rfto-blue-card">
+                <div class="rfto-header">
+                    <div class="rfto-header-content">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="6.12rem"></app-skeleton>
+                    </div>
+
+                    <div class="rfto-header-content">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="4.12rem"></app-skeleton>
+                    </div>
+                </div>
+                <div class="rfto-body">
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="80%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="40%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="60%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="30%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="50%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="40%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="70%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-blue" height="1.5rem" width="30%"></app-skeleton>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+        @else {
+        <div class="rfto-reflection-section rfto-reflection-input" @slideUpIn>
             <div class="rfto-card rfto-blue-card">
                 <div class="rfto-header">
                     <div class="rfto-header-content">
@@ -53,20 +95,40 @@
                             <app-saving-loading [isLoading]="isSaving()" [isUpdated]="!isSaving()"
                                 [updatedAt]="reflectionData()?.updated_at"></app-saving-loading>
                         </div>
-                        <ngx-editor [editor]="editor" [ngModel]="reflectionText()"
-                            (ngModelChange)="onTextChange($event)" [disabled]="false"
-                            [placeholder]="'Type here...'"></ngx-editor>
+                        <ngx-editor [editor]="editor" [ngModel]="reflectionText()" (ngModelChange)="onTextChange($event)" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
                     </div>
                     }
                 </div>
                 <div>
-                   
+
                 </div>
 
             </div>
         </div>
+        }
+
         <div class="rfto-reflection-section rfto-reflection-prompts">
+            @if(isLoading().isReflectionPromptLoading){
             <div class="rfto-card rfto-purple-card">
+                <div class="rfto-card-header rfto-loading-container">
+                    <app-skeleton color="rfto-purple" height="1.5rem" width="7.12rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-purple" height="2.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-purple" height="2.5rem" width="100%"></app-skeleton>
+                    </div>
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-purple" height="2.5rem" width="100%"></app-skeleton>
+                    </div>
+                </div>
+            </div>
+            }
+
+            @else {
+            <div class="rfto-card rfto-purple-card" @slideUpIn>
                 <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -83,13 +145,39 @@
                 </div>
                 <div class="rfto-card-body">
                     @for(prompt of prompts(); track prompt){
-                          <div class="rfto-prompts" (click)="addPromptToEditor(prompt.description)">
+                    <div class="rfto-prompts" (click)="addPromptToEditor(prompt.description)">
                         <p>{{prompt.description}}</p>
                     </div>
                     }
                 </div>
             </div>
+            }
+
+            @if(isLoading().isStatsLoading){
             <div class="rfto-card rfto-green-card rfto-writing-stats">
+                <div class="rfto-card-header">
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-green" height="1.5rem" width="7.12rem"></app-skeleton>
+                    </div>
+                </div>
+                <div class="rfto-card-body">
+                    <!-- <div class="rfto-day-streak">
+                        <h1>15</h1>
+                        <p>Day Streak</p>
+                    </div> -->
+                    <div class="rfto-day-streak rfto-center-loading">
+                        <app-skeleton color="rfto-green" height="1.5rem" width="3.12rem"></app-skeleton>
+                        <app-skeleton color="rfto-green" height="1.5rem" width="5.12rem"></app-skeleton>
+                    </div>
+                    <div class="rfto-day-streak rfto-center-loading">
+                        <app-skeleton color="rfto-green" height="1.5rem" width="3.12rem"></app-skeleton>
+                        <app-skeleton color="rfto-green" height="1.5rem" width="5.12rem"></app-skeleton>
+                    </div>
+                </div>
+            </div>
+            }
+            @else{
+            <div class="rfto-card rfto-green-card rfto-writing-stats" @slideUpIn>
                 <div class="rfto-card-header">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -117,6 +205,10 @@
                     </div>
                 </div>
             </div>
+            }
+
         </div>
+
+
     </div>
 </section>

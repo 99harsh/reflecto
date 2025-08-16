@@ -60,7 +60,7 @@ export const routes: Routes = [
                         loadComponent: () => import('./date-details/mood/mood').then(c => c.Mood)
                     },
                     {
-                        path: ":date/self-reflection",
+                        path: ":date/reflection",
                         loadComponent: () => import('./date-details/self-reflection/self-reflection').then(c => c.SelfReflection)
                     },
                     {

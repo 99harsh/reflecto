@@ -1,46 +1,110 @@
 <section class="rfto-section">
     <div class="rfto-back-btn-container">
-        <button class="rfto-back-btn">
+        <button class="rfto-back-btn" (click)="goBack()">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-arrow-left w-4 h-4 mr-2">
                 <path d="m12 19-7-7 7-7"></path>
                 <path d="M19 12H5"></path>
             </svg>
-            Back to Calendar
+            Back
         </button>
     </div>
     <div class="rfto-heading-container">
         <div>
             <h1>Tasks</h1>
-            <p>Wednesday, August 20, 2025</p>
+            <p>{{ currentDate() }}</p>
         </div>
     </div>
 
+    @if(loading()){
+    <div class="rfto-card rfto-task-card">
+        <div class="rfto-task-insights">
+            <div class="rfto-svg-container rfto-center-loading">
+                <app-skeleton color="rfto-green" height="3rem" width="8rem"></app-skeleton>
+                <app-skeleton color="rfto-green" height="1.5rem" width="4rem"></app-skeleton>
+                <app-skeleton color="rfto-green" height="1.5rem" width="10rem"></app-skeleton>
+            </div>
+        </div>
+        <div class="rfto-task-list-container">
+            <div class="rfto-task-list">
+                <div class="rfto-task-heading">
+                    <app-skeleton color="rfto-green" height="1.5rem" width="8rem"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-green" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-green" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-green" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-green" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+            </div>
+            <div class="rfto-task-list">
+                <div class="rfto-task-heading">
+                    <app-skeleton color="rfto-yellow" height="1.5rem" width="8rem"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-yellow" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-yellow" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-yellow" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+                <div class="rfto-loading">
+                    <app-skeleton color="rfto-yellow" height="2.5rem" width="100%"></app-skeleton>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    } @else{
     <div class="rfto-card rfto-task-card">
         <div class="rfto-task-insights">
             <div class="rfto-svg-container">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award w-16 h-16 mx-auto mb-4 text-green-600"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path><circle cx="12" cy="8" r="6"></circle></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
+                    stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-award w-16 h-16 mx-auto mb-4 text-green-600">
+                    <path
+                        d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526">
+                    </path>
+                    <circle cx="12" cy="8" r="6"></circle>
+                </svg>
             </div>
-            <h2>5/10</h2>
+            <h2>{{ completedTasks() }}/{{totalTasks()}}</h2>
             <h3>Completed</h3>
         </div>
         <div class="rfto-task-list-container">
             <div class="rfto-task-list">
                 <p class="rfto-task-heading">
-                  ✅ Completed 
+                    ✅ Completed
                 </p>
+                @for (task of insightData(); track task) {
+                @if(task.completed){
                 <div class="rfto-task rfto-task-completed">
-                    <p>Eat Breakfast</p>
+                    <p>{{task.task}}</p>
                 </div>
+                }
+                }
             </div>
             <div class="rfto-task-list">
                 <p class="rfto-task-heading">⌛️ Incomplete</p>
+                @for(task of insightData(); track task){
+                @if(!task.completed){
                 <div class="rfto-task rfto-task-incomplete">
-                    <p>Eat Lunch</p>
+                   <p>{{task.task}}</p>
                 </div>
+                }
+                }
             </div>
         </div>
     </div>
-  
+
+    }
 </section>

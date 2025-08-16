@@ -1,115 +1,66 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Spinner } from '../spinner/spinner';
 import { Router } from '@angular/router';
+import { SmartHttpService } from '../../services/smart-http.service';
+import { format } from 'date-fns';
+import { Skeleton } from '../skeleton/skeleton';
+import { trigger, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, FormsModule, Spinner],
+  imports: [CommonModule, FormsModule, Skeleton],
   templateUrl: './calendar.html',
-  styleUrl: './calendar.scss'
+  styleUrl: './calendar.scss',
+   animations: [
+      // Content slide in
+    trigger('slideUpIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(10px', opacity: 0 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class Calendar implements OnInit {
   currentMonth = new Date().getMonth();
   currentYear = new Date().getFullYear();
   weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  loading = signal<boolean>(true);
   monthList = Array.from({ length: 12 }, (_, i) =>
     new Date(0, i).toLocaleString('default', { month: 'long' })
   );
   yearList: number[] = [];
-  calendarDays: any[] = [];
+  calendarDays = signal<any>([]);
   entries: any[] = [];
-
+  private http = inject(SmartHttpService);
   router = inject(Router);
 
   ngOnInit(): void {
     const baseYear = new Date().getFullYear();
     this.yearList = Array.from({ length: 21 }, (_, i) => baseYear - 10 + i);
+    this.fetchCalendarData();
+  }
 
-    this.entries = [
-      { date: new Date(this.currentYear, this.currentMonth, 3), mood: '😊' },
-      { date: new Date(this.currentYear, this.currentMonth, 8), mood: '😞' },
-      { date: new Date(this.currentYear, this.currentMonth, 15), mood: '😎' }
-    ];
-
-    this.generateCalendar();
+  fetchCalendarData = () => {
+    this.http.get("stats/calendar").subscribe({
+      next: (resp:any) => {
+        if(resp && resp.status === 200){
+          this.calendarDays.set(resp.data);
+          this.loading.set(false);
+        }
+      }
+    })
   }
 
   generateCalendar(): void {
-    const firstDay = new Date(this.currentYear, this.currentMonth, 1);
-    const startDate = new Date(firstDay);
-    startDate.setDate(startDate.getDate() - firstDay.getDay());
 
-    this.calendarDays = [];
-    const today = new Date();
+  }
 
-    for (let i = 0; i < 42; i++) {
-      const date = new Date(startDate);
-      date.setDate(startDate.getDate() + i);
-
-      const isCurrentMonth = date.getMonth() === this.currentMonth;
-      const isToday = date.toDateString() === today.toDateString();
-      const hasEntry = this.hasEntryForDate(date);
-
-      this.calendarDays.push({
-        date: date.getDate(),
-        fullDate: date,
-        isCurrentMonth,
-        isToday,
-        hasEntry,
-        mood: hasEntry ? this.getMoodForDate(date) : null,
-        streak: this.hasStreakForDate(date)
-      });
+  redirect = (day: any) => {
+    if(day.daily_login){
+      this.router.navigate(["/date-details/", format(new Date(day.fullDate), "MM-dd-yyyy")])
     }
-  }
-
-  hasEntryForDate(date: Date): boolean {
-    return this.entries.some(entry =>
-      entry.date.toDateString() === date.toDateString()
-    );
-  }
-
-  getMoodForDate(date: Date): string | null {
-    const entry = this.entries.find(entry =>
-      entry.date.toDateString() === date.toDateString()
-    );
-    return entry?.mood || null;
-  }
-
-  hasStreakForDate(date: Date): boolean {
-    return Math.random() > 0.7;
-  }
-
-  getMonthName(): string {
-    return new Date(this.currentYear, this.currentMonth).toLocaleString('default', { month: 'long' });
-  }
-
-  previousMonth(): void {
-    if (this.currentMonth === 0) {
-      this.currentMonth = 11;
-      this.currentYear--;
-    } else {
-      this.currentMonth--;
-    }
-    this.generateCalendar();
-  }
-
-  nextMonth(): void {
-    if (this.currentMonth === 11) {
-      this.currentMonth = 0;
-      this.currentYear++;
-    } else {
-      this.currentMonth++;
-    }
-    this.generateCalendar();
-  }
-
-  redirect = (data:any) => {
-    console.log(data);
-
-    this.router.navigate(["/date-details/10-08-2025"])
-
   }
 }

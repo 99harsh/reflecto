@@ -1,29 +1,52 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { SavingLoading } from '../shared/saving-loading/saving-loading';
-import { Spinner } from '../shared/spinner/spinner';
 import { SmartHttpService } from '../services/smart-http.service';
 import { FormsModule } from '@angular/forms';
 import { getRelativeTime } from '../shared/helper';
+import { Skeleton } from '../shared/skeleton/skeleton';
+import { trigger, style, transition, animate } from '@angular/animations';
+
+interface MoodLoading{
+  isAllMoods:boolean,
+  userMood: boolean,
+  moodStats: boolean
+}
 
 @Component({
   selector: 'app-mood',
-  imports: [CommonModule, SavingLoading, Spinner, FormsModule],
+  imports: [CommonModule, SavingLoading, FormsModule, Skeleton],
   templateUrl: './mood.html',
   styleUrl: './mood.scss',
+  animations: [
+      // Content slide in
+    trigger('slideUpIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(10px', opacity: 0 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class Mood implements OnInit {
 
+  
   allMoods = signal<any>([]);
   userMood = signal<any | null>(null);
   selectedMoodID = signal<number>(-1);
   selectedIntensityLevel = signal<number>(1);
   loggedAt = signal<string>('')
-
+  loading = signal<MoodLoading>({
+    isAllMoods: true,
+    userMood: true,
+    moodStats: true
+  });
+  statsData = signal<any>({});
   http = inject(SmartHttpService);
 
   ngOnInit(): void {
     this.getAllMoods();
+    this.getMoodStats();
   }
 
   getAllMoods = () => {
@@ -42,14 +65,21 @@ export class Mood implements OnInit {
   getUserMood = () => {
     this.http.get('mood/get').subscribe({
       next: (resp:any) => {
+        if(resp && resp.status){
+           this.loading.update((prev:MoodLoading) => ({
+            ...prev,
+            isAllMoods: false
+          }))
+        }
         if(resp && resp.status === 200 && resp.data !== null){
           const moodData = this.getMoodInfoFromID(resp.data.mood_id);
+   
           this.userMood.set({...resp.data, mood: moodData[0]?.mood, mood_emoj: moodData[0]?.mood_emoj});
-          console.log(this.userMood())
           this.selectedIntensityLevel.set(resp.data.intensity);
           this.selectedMoodID.set(resp.data.mood_id);
           this.loggedAt.set(getRelativeTime(resp.data.updated_at));
-          console.log(this.loggedAt())
+          this.loading.update((prev:MoodLoading) => ({...prev, userMood: false}))
+         
         }
       }
     });
@@ -75,10 +105,10 @@ export class Mood implements OnInit {
       }).subscribe({
         next: (resp:any) => {
           if(resp && resp.status === 200){
-            const moodData = this.getMoodInfoFromID(resp.data.mood_id);
+            const moodData = this.getMoodInfoFromID(this.selectedMoodID());
             this.userMood.set({
-              mood: moodData.mood,
-              mood_emoj: moodData.mood_emoj,
+              mood: moodData[0].mood,
+              mood_emoj: moodData[0].mood_emoj,
               mood_id: this.selectedMoodID(),
               intensity: this.selectedIntensityLevel(),
               updated_at: resp.data.updated_at
@@ -89,6 +119,20 @@ export class Mood implements OnInit {
         
       })
     }
+  }
+
+  getMoodStats = () => {
+    this.http.get("stats/mood").subscribe({
+      next: (resp:any) => {
+        if(resp && resp.status === 200){
+          this.statsData.set(resp.data);
+          this.loading.update((prev:MoodLoading) => ({
+            ...prev,
+            moodStats: false
+          }))
+        }
+      }
+    })
   }
 
   getMoodInfoFromID = (mood_id: number) => {

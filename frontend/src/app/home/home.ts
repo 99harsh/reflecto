@@ -1,42 +1,53 @@
 import { Component, Inject, inject, OnInit, PLATFORM_ID, signal, ViewEncapsulation } from '@angular/core';
 import { Progressbar } from '../shared/progressbar/progressbar';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { QuotesCarousel } from '../shared/quotes-carousel/quotes-carousel';
-import { Spinner } from '../shared/spinner/spinner';
-import { AuthGoogleService } from '../services/auth-google.service';
 import { SmartHttpService } from '../services/smart-http.service';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { trigger, style, transition, animate } from '@angular/animations';
+import { Skeleton } from '../shared/skeleton/skeleton';
+
+interface HomeLoading{ isDashboardCards: boolean, isLevelXPStats: boolean }
 
 @Component({
   selector: 'app-home',
-  imports: [Progressbar, QuotesCarousel, Spinner, RouterLink],
+  imports: [CommonModule, Progressbar, QuotesCarousel, RouterLink, Skeleton],
   templateUrl: './home.html',
   styleUrl: './home.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    // Content slide in
+    trigger('slideLeftIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%', opacity: 0 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('400ms ease-in', style({ transform: 'translateX(-100%)', opacity: 0 })) // Exit off-screen to the left
+      ])
+    ]),
+    trigger('slideUpIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(10px', opacity: 0 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class Home implements OnInit {
 
-  router = inject(Router);
   private http = inject(SmartHttpService);
-  authService = inject(AuthGoogleService);
+  private platformId = inject(PLATFORM_ID)
+
   dashboardStats = signal<any>({});
   profileProgress = signal<any>({});
+  loading = signal<boolean>(true);
+  isLoading = signal<HomeLoading>({
+    isDashboardCards: false,
+    isLevelXPStats: false
+  })
 
-  date = new Date().toLocaleDateString('en-GB', {
-    weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
-  });
 
-  quote = "Push yourself, because no one else is going to do it for you.";
-
-  constructor(@Inject(PLATFORM_ID) private platformId: object) { }
-
-  redirectToReflection = () => {
-    this.router.navigate(['reflection'])
-  }
-
-  redirectToMood = () => {
-    this.router.navigate(['mood'])
-  }
   ngOnInit(): void {
     this.getDasboardData();
     this.getProfileProgress();
@@ -47,6 +58,7 @@ export class Home implements OnInit {
       next: (resp: any) => {
         if (resp && resp.status === 200) {
           this.dashboardStats.set(resp.data);
+          this.isLoading.update((prev:HomeLoading) =>( {...prev, isDashboardCards: true}))
         }
       }
     })
@@ -57,12 +69,17 @@ export class Home implements OnInit {
       next: (resp: any) => {
         if (resp && resp.status === 200) {
           this.profileProgress.set(resp.data);
-          const data = resp.data
-          const currentXP = data.xp;
-          
+           this.isLoading.update((prev:HomeLoading) =>( {...prev, isLevelXPStats: true}))
         }
       }
     })
+  }
+
+  private getItem(key: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem(key);
+    }
+    return null;
   }
 
   get getGreetingTime() {
@@ -87,10 +104,5 @@ export class Home implements OnInit {
     return "User"
   }
 
-  private getItem(key: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem(key);
-    }
-    return null;
-  }
+
 }

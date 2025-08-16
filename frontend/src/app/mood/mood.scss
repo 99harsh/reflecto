@@ -171,6 +171,10 @@
                     font-size: var(--font-small);
                     color: var(--color-secondary);
                 }
+                .rfto-log-mood-heading{
+                    color: var(--color-primary);
+                    margin-top: 1rem;
+                }
             }
 
             .rfto-week-summary{
@@ -194,5 +198,9 @@
                 }
             }
         }
+    }
+
+    .rfto-loading-container{
+        margin-bottom: .612rem;
     }
 }

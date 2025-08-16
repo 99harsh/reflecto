@@ -6,14 +6,17 @@
             <p class="rfto-ready-reflect-heading">Ready to reflect and grow today?</p>
         </div>
         <div class="rfto-streak-section">
-            <div class="rfto-streak rfto-rotate-2deg rfto-shadow-lg">
+            @if(isLoading().isLevelXPStats){
+            <div class="rfto-streak rfto-rotate-2deg rfto-shadow-lg" @slideLeftIn>
                 <p class="rfto-streak-number">🔥 {{profileProgress().current_streak}} {{
                     profileProgress().current_streak > 1 ? 'days' : 'day' }} streak!</p>
                 <p class="rfto-streak-going">Keep it going!</p>
             </div>
+            }
         </div>
     </div>
-    <div class="rfto-section-card">
+    @if(isLoading().isDashboardCards){
+    <div class="rfto-section-card" @slideUpIn>
         <div class="rfto-card rfto-purple-card rfto-reflection">
             <div class="rfto-card-svg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
@@ -80,97 +83,123 @@
                 <p>Total tasks</p>
             </div>
         </div>
-
     </div>
+    } @else{
+    <div class="rfto-section-card">
+        <div class="rfto-card rfto-purple-card rfto-reflection rfto-center-loading">
+            <app-skeleton color="rfto-purple" height="1.5rem" width="4.12rem"></app-skeleton>
+            <app-skeleton color="rfto-purple" height="1.5rem" width="3.12rem"></app-skeleton>
+            <app-skeleton color="rfto-purple" height="1rem" width="6.12rem"></app-skeleton>
+        </div>
+        <div class="rfto-card rfto-blue-card rfto-journal rfto-center-loading">
+            <app-skeleton color="rfto-blue" height="1.5rem" width="4.12rem"></app-skeleton>
+            <app-skeleton color="rfto-blue" height="1.5rem" width="3.12rem"></app-skeleton>
+            <app-skeleton color="rfto-blue" height="1rem" width="6.12rem"></app-skeleton>
+        </div>
+        <div class="rfto-card rfto-pink-card rfto-mood rfto-center-loading">
+            <app-skeleton color="rfto-pink" height="1.5rem" width="4.12rem"></app-skeleton>
+            <app-skeleton color="rfto-pink" height="1.5rem" width="3.12rem"></app-skeleton>
+            <app-skeleton color="rfto-pink" height="1rem" width="6.12rem"></app-skeleton>
+        </div>
+        <div class="rfto-card rfto-green-card rfto-goal rfto-center-loading">
+            <app-skeleton color="rfto-green" height="1.5rem" width="4.12rem"></app-skeleton>
+            <app-skeleton color="rfto-green" height="1.5rem" width="3.12rem"></app-skeleton>
+            <app-skeleton color="rfto-green" height="1rem" width="6.12rem"></app-skeleton>
+        </div>
+    </div>
+    }
 
     <div class="rfto-section-card">
-        <div class="rfto-xp-card-container">
-            <div class="rfto-card-header">
-                <h3 class="rfto-card-heading">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-crown w-6 h-6 mr-2 text-purple-600">
-                        <path
-                            d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z">
-                        </path>
-                        <path d="M5 21h14"></path>
-                    </svg>
-                    Level {{ profileProgress().current_level }}
-                </h3>
-            </div>
-            <div class="rfto-card-body">
-                <div class="rfto-xp-container">
-                    <div class="rfto-xp-info">
-                        <h4>{{profileProgress().xp}} XP</h4>
-                        <p>{{profileProgress().xp_next_level - profileProgress().xp}} XP to Level
-                            {{profileProgress().current_level + 1}}</p>
-                    </div>
-                    <div class="rfto-progress-container">
-                        <app-progressbar [progress]="profileProgress().progress"></app-progressbar>
-                    </div>
-                    <div class="rfto-xplevel-info-container">
-                        <p class="rfto-xp-level">Level {{profileProgress().current_level}}</p>
-                        <p class="rfto-xp-level">{{profileProgress().progress}}% Completed</p>
-                        <p class="rfto-xp-level">Level {{profileProgress().current_level + 1}}</p>
-                    </div>
+        @if(isLoading().isDashboardCards){
+        <div class="rfto-xp-card-container" @slideUpIn>
+            <ng-container>
+                <div class="rfto-card-header">
+                    <h3 class="rfto-card-heading">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-crown w-6 h-6 mr-2 text-purple-600">
+                            <path
+                                d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z">
+                            </path>
+                            <path d="M5 21h14"></path>
+                        </svg>
+                        Level {{ profileProgress().current_level }}
+                    </h3>
                 </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-xp-container">
+                        <div class="rfto-xp-info">
+                            <h4>{{profileProgress().xp}} XP</h4>
+                            <p>{{profileProgress().xp_next_level - profileProgress().xp}} XP to Level
+                                {{profileProgress().current_level + 1}}</p>
+                        </div>
+                        <div class="rfto-progress-container">
+                            <app-progressbar [progress]="profileProgress().progress"></app-progressbar>
+                        </div>
+                        <div class="rfto-xplevel-info-container">
+                            <p class="rfto-xp-level">Level {{profileProgress().current_level}}</p>
+                            <p class="rfto-xp-level">{{profileProgress().progress}}% Completed</p>
+                            <p class="rfto-xp-level">Level {{profileProgress().current_level + 1}}</p>
+                        </div>
+                    </div>
 
-                <div class="rfto-xp-activity-container">
-                    <div class="rfto-xp-activity-section">
-                        <h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-trophy w-4 h-4 mr-2 text-yellow-500">
-                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                                <path d="M4 22h16"></path>
-                                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                            </svg>
-                            Today's Activites
-                        </h3>
-                        <div class="rfto-card-container">
-                            @for (activity of profileProgress()?.all_activites; track activity){
-                            @if(activity.is_completed){
-                            <div class="rfto-xp-earned-claim rfto-xp-earned-card">
-                                <div class="rfto-xp-earned-heading">
-                                    <h4>
-                                        {{activity.key}}
-                                    </h4>
+                    <div class="rfto-xp-activity-container">
+                        <div class="rfto-xp-activity-section">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-trophy w-4 h-4 mr-2 text-yellow-500">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                    <path d="M4 22h16"></path>
+                                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                </svg>
+                                Today's Activites
+                            </h3>
+                            <div class="rfto-card-container">
+                                @for (activity of profileProgress()?.all_activites; track activity){
+                                @if(activity.is_completed){
+                                <div class="rfto-xp-earned-claim rfto-xp-earned-card">
+                                    <div class="rfto-xp-earned-heading">
+                                        <h4>
+                                            {{activity.key}}
+                                        </h4>
 
-                                </div>
-                                <div class="rfto-xp-number-completed">
-                                    <div class="rfto-xp-earned">
-                                        <p class="rfto-xp">+{{activity.value}} XP</p>
-                                        <p class="rfto-tick">✓</p>
+                                    </div>
+                                    <div class="rfto-xp-number-completed">
+                                        <div class="rfto-xp-earned">
+                                            <p class="rfto-xp">+{{activity.value}} XP</p>
+                                            <p class="rfto-tick">✓</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            }
-                            @else {
-                            <div class="rfto-xp-earned-claim rfto-xp-claim-card">
-                                <div class="rfto-xp-earned-heading">
-                                    <h4>
-                                        {{activity.key}}
-                                    </h4>
+                                }
+                                @else {
+                                <div class="rfto-xp-earned-claim rfto-xp-claim-card">
+                                    <div class="rfto-xp-earned-heading">
+                                        <h4>
+                                            {{activity.key}}
+                                        </h4>
 
-                                </div>
-                                <div class="rfto-xp-number-completed">
-                                    <div class="rfto-xp-earned">
-                                        <p>+{{activity.value}} XP</p>
+                                    </div>
+                                    <div class="rfto-xp-number-completed">
+                                        <div class="rfto-xp-earned">
+                                            <p>+{{activity.value}} XP</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            }
-                            }
+                                }
+                                }
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </div>
-        <div class="rfto-right-card-container">
+        <div class="rfto-right-card-container" @slideUpIn>
             <!-- <div class="rfto-card rfto-blue-card rfto-total-xp-container">
                 <div class="rfto-card-header">
                     <h3> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -193,7 +222,6 @@
                     </div>
                 </div>
             </div> -->
-
             <div class="rfto-card rfto-pink-card rfto-streak-container">
                 <div class="rfto-card-header">
                     <h3>
@@ -214,7 +242,7 @@
                     <div class="rfto-best-overall">
                         <p class="rfto-trophy-icon">🏆</p>
                         <p class="rfto-best-overall-text">Best Overall: {{profileProgress().highest_streak}} {{
-                            profileProgress().highest_streak > 1 ? 'days': 'day' }}</p>
+                            profileProgress().highest_streak > 1 ? 'days': 'day' }}</p> <!-- Corrected line -->
                     </div>
                     <div class="rfto-streak-info-container">
                         <p class="rfto-streak-info-heading">Current Streak</p>
@@ -228,8 +256,76 @@
                 </div>
             </div>
         </div>
+        } @else{
+        <div class="rfto-xp-card-container rfto-xp-card-loading">
+            <ng-container>
+                <div class="rfto-card-header">
+                    <h3 class="rfto-card-heading">
+                        <app-skeleton color="rfto-purple" height="1.5rem" width="4.12rem"></app-skeleton>
+                    </h3>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-xp-container">
+                        <div class="rfto-xp-info">
+                            <app-skeleton color="rfto-purple" height="1.3rem" width="4.12rem"></app-skeleton>
+                            <app-skeleton color="rfto-purple" height="1.3rem" width="6.12rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-progress-container">
+                            <app-skeleton color="rfto-purple" height="1rem" width="100%"></app-skeleton>
+                        </div>
+                        <div class="rfto-xplevel-info-container">
+                            <app-skeleton color="rfto-purple" height="1.3rem" width="4.12rem"></app-skeleton>
+                            <app-skeleton color="rfto-purple" height="1.3rem" width="7.12rem"></app-skeleton>
+                            <app-skeleton color="rfto-purple" height="1.3rem" width="4.12rem"></app-skeleton>
+                        </div>
+                    </div>
 
+                    <div class="rfto-xp-activity-container">
+                        <div class="rfto-xp-activity-section">
+                            <h3>
+                                <app-skeleton color="rfto-purple" height="1.3rem" width="7.12rem"></app-skeleton>
+                            </h3>
+                            <div class="rfto-card-container">
+                                <app-skeleton color="rfto-green" height="2.3rem" width="100%"></app-skeleton>
+                                <app-skeleton color="rfto-yellow" height="2.3rem" width="100%"></app-skeleton>
+                                <app-skeleton color="rfto-yellow" height="2.3rem" width="100%"></app-skeleton>
+                                <app-skeleton color="rfto-green" height="2.3rem" width="100%"></app-skeleton>
+                                <app-skeleton color="rfto-green" height="2.3rem" width="100%"></app-skeleton>
+                                <app-skeleton color="rfto-yellow" height="2.3rem" width="100%"></app-skeleton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
 
+        <div class="rfto-right-card-container">
+            <div class="rfto-card rfto-pink-card rfto-streak-container">
+                <div class="rfto-card-header">
+                    <h3>
+                        <app-skeleton color="rfto-pink" height="1.3rem" width="10.12rem"></app-skeleton>
+                    </h3>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-best-overall">
+                        <div class="rfto-trophy-icon rfto-center-loading">
+                            <app-skeleton color="rfto-pink" height="1rem" width="4.12rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-best-overall-text rfto-center-loading">
+                            <app-skeleton color="rfto-pink" height="1.3rem" width="10.12rem"></app-skeleton>
+                        </div>
+                    </div>
+                    <div class="rfto-streak-info-container">
+                        <div class="rfto-streak-info-heading">
+                            <app-skeleton color="rfto-pink" height="1rem" width="6.12rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-streak-info-heading">
+                            <app-skeleton color="rfto-pink" height="1rem" width="6.12rem"></app-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
     </div>
-
 </section>

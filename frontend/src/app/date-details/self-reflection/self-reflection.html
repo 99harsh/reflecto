@@ -1,19 +1,19 @@
 <section class="rfto-section">
     <div class="rfto-back-btn-container">
-        <button class="rfto-back-btn">
+        <button class="rfto-back-btn" (click)="goBack()">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="lucide lucide-arrow-left w-4 h-4 mr-2">
                 <path d="m12 19-7-7 7-7"></path>
                 <path d="M19 12H5"></path>
             </svg>
-            Back to Calendar
+            Back
         </button>
     </div>
     <div class="rfto-heading-container">
         <div>
             <h1>Self Reflection</h1>
-            <p>Wednesday, August 20, 2025</p>
+            <p>{{currentDate()}}</p>
         </div>
         <div class="rfto-export-button-container">
             <button class="rfto-export-button">
@@ -29,9 +29,34 @@
         </div>
     </div>
     <div class="rfto-content-container">
-        @if(isEditor()){
+        @if(isEditor() && !loading()){
         <ngx-editor [editor]="editor" [placeholder]="'Type here...'" [ngModel]="editorText()"
             [disabled]="true"></ngx-editor>
+        } @else{
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="50%"></app-skeleton>
+        </div>
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="30%"></app-skeleton>
+        </div>
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="40%"></app-skeleton>
+        </div>
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="60%"></app-skeleton>
+        </div>
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="20%"></app-skeleton>
+        </div>
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="40%"></app-skeleton>
+        </div>
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="60%"></app-skeleton>
+        </div>
+        <div class="rfto-loading-container">
+            <app-skeleton color="rfto-yellow" height="2rem" width="50%"></app-skeleton>
+        </div>
         }
     </div>
 </section>

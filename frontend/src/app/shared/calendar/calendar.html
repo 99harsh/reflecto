@@ -7,9 +7,55 @@
     <div class="rfto-journey-header">
         <h1>Calendar & Streaks</h1>
         <p>Track your consistency and celebrate your progress</p>
-    </div>
-
+    </div> 
+    @if(loading()){
     <div class="rfto-calendar-card-container">
+        <div class="rfto-card rfto-blue-card rfto-calendar-content">
+            <div class="calendar-controls">
+              <app-skeleton color="rfto-blue" height="2.2rem" width="10rem"></app-skeleton>
+            <app-skeleton color="rfto-blue" height="2.2rem" width="5rem"></app-skeleton>    
+            </div>
+
+            <div class="calendar-header-days">
+                <div *ngFor="let day of weekDays" class="day-header">{{ day }}</div>
+            </div>
+
+            <div class="calendar-days">
+                @for(day of [].constructor(42); track $index){
+                    <div class="calendar-day">
+                        <app-skeleton color="rfto-blue" height="4.2rem" width="100%"></app-skeleton>
+                    </div>
+                }
+            </div>
+            <div class="rfto-card rfto-orange-card rfto-legend-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-yellow" height="1.5rem" width="10rem"></app-skeleton>  
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-card-legend-container">
+                         <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>    
+                    </div>
+                    <div class="rfto-card-legend-container">
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                    </div>
+                    <div class="rfto-card-legend-container">
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                    </div>
+                    <div class="rfto-card-legend-container">
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                    </div>
+                    <div class="rfto-card-legend-container">
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                    </div>
+                    <div class="rfto-card-legend-container">
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    } @else{
+    <div class="rfto-calendar-card-container" @slideUpIn>
         <div class="rfto-card rfto-blue-card rfto-calendar-content">
             <div class="calendar-controls">
                 <select [(ngModel)]="currentMonth" (change)="generateCalendar()">
@@ -26,13 +72,29 @@
             </div>
 
             <div class="calendar-days">
-                <div *ngFor="let day of calendarDays" class="calendar-day" [class.other-month]="!day.isCurrentMonth"
-                    (click)="redirect(day)"
-                    [class.today]="day.isToday" [class.has-entry]="day.hasEntry">
+                <div *ngFor="let day of calendarDays()" class="calendar-day" [class.other-month]="!day.isCurrentMonth"
+                    (click)="redirect(day)" [class.today]="day.isToday">
                     <div class="day-number">{{ day.date }}</div>
                     <div class="day-content">
-                        <span *ngIf="day.mood" class="day-mood">{{ day.mood }}</span>
-                        <span *ngIf="day.streak" class="day-streak">🔥</span>
+                        @if(day.daily_login && day.self_reflection && day.mood && day.journal && day.tasks){
+                        <span>🌟</span>
+                        }@else{
+                        @if(day.daily_login){
+                        <span>🔥</span>
+                        }
+                        @if(day.journal){
+                        <span>📝</span>
+                        }
+                        @if(day.self_reflection){
+                        <span>🤔</span>
+                        }
+                        @if(day.tasks){
+                        <span>🎯</span>
+                        }
+                        @if(day.mood){
+                        <span>😊</span>
+                        }
+                        }
                     </div>
                 </div>
             </div>
@@ -45,83 +107,25 @@
                         <span>🌟 Complete Day</span>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <span>
-                            📝
-                            Journal + Mood</span>
+                        <span>🔥 Daily Login</span>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <span>
-                            💝
-                            Mood + Goals</span>
+                        <span>📝 Journal</span>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <span>📖
-                            Journal Only</span>
+                        <span>🤔 Reflection</span>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <span>
-                            😊
-                            Mood Only</span>
+                        <span>😊 Mood</span>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <span>
-                            🎯
-                            Goals Only</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="rfto-calendar-analytics">
-            <div class="rfto-card rfto-orange-card">
-                <div class="rfto-card-header">
-                    <h1>
-                        🔥
-                        Streak Stats
-                    </h1>
-                </div>
-                <div class="rfto-card-body">
-                    <h1 class="rfto-streak-number">15</h1>
-                    <p class="rfto-streak-heading">Current Streak</p>
-                    <div class="rfto-streak-data-container">
-                        <p class="rfto-streak-data-heading">Longest Streak</p>
-                        <p class="rfto-streak-data rfto-streak-data-brown">23 days</p>
-                    </div>
-                    <div class="rfto-streak-data-container">
-                        <p class="rfto-streak-data-heading">Total Days</p>
-                        <p class="rfto-streak-data rfto-streak-data-white">123</p>
-                    </div>
-                    <div class="rfto-streak-data-container">
-                        <p class="rfto-streak-data-heading">This Month</p>
-                        <p class="rfto-streak-data rfto-streak-data-green">28/31</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rfto-card rfto-green-card">
-                <div class="rfto-card-header">
-                    <h1>
-                        🔥
-                        This Month
-                    </h1>
-                </div>
-                <div class="rfto-card-body">
-                    <h1 class="rfto-streak-number">89%</h1>
-                    <p class="rfto-streak-heading">Consistency Score</p>
-                    <div class="rfto-streak-data-container">
-                        <p class="rfto-streak-data-heading">Longest Streak</p>
-                        <p class="rfto-streak-data rfto-streak-data-brown">23 days</p>
-                    </div>
-                    <div class="rfto-streak-data-container">
-                        <p class="rfto-streak-data-heading">Total Days</p>
-                        <p class="rfto-streak-data rfto-streak-data-white">123</p>
-                    </div>
-                    <div class="rfto-streak-data-container">
-                        <p class="rfto-streak-data-heading">This Month</p>
-                        <p class="rfto-streak-data rfto-streak-data-green">28/31</p>
+                        <span>🎯 Task</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    }
+
 
 </section>

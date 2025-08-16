@@ -1,14 +1,30 @@
-import { Component, Inject, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { Progressbar } from '../shared/progressbar/progressbar';
 import { SmartHttpService } from '../services/smart-http.service';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Skeleton } from '../shared/skeleton/skeleton';
+import { trigger, style, transition, animate } from '@angular/animations';
+
+interface TaskLoading{
+  userTasksLoading:boolean,
+  statsLoading:boolean
+};
 
 @Component({
   selector: 'app-goals',
-  imports: [Progressbar, CommonModule, FormsModule],
+  imports: [Progressbar, CommonModule, FormsModule, Skeleton],
   templateUrl: './goals.html',
-  styleUrl: './goals.scss'
+  styleUrl: './goals.scss',
+  animations: [
+      // Content slide in
+    trigger('slideUpIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(10px', opacity: 0 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class Goals implements OnInit {
 
@@ -19,7 +35,10 @@ export class Goals implements OnInit {
   totalTasks = signal<number>(0);
   completedTasks = signal<number>(0);
   progress = signal<any>({});
-
+  loading = signal<TaskLoading>({
+    userTasksLoading: true,
+    statsLoading: true
+  })
 
 
   ngOnInit(): void {
@@ -32,10 +51,13 @@ export class Goals implements OnInit {
       next: (resp: any) => {
         console.log(resp);
         if (resp && resp.status === 200) {
-          console.log(resp.data);
           this.allTasks.set(resp.data);
           this.totalTasks.set(resp.data?.length || 0);
-          this.completedTasks.set((resp.data?.filter((obj: any) => obj.completed)?.length || 0))
+          this.completedTasks.set((resp.data?.filter((obj: any) => obj.completed)?.length || 0));
+          this.loading.update((prev:TaskLoading) => ({
+            ...prev,
+            userTasksLoading: false
+          }))
         }
       }
     })
@@ -46,6 +68,10 @@ export class Goals implements OnInit {
       next: (resp: any) => {
         if (resp && resp.status === 200) {
           this.progress.set(resp.data);
+             this.loading.update((prev:TaskLoading) => ({
+            ...prev,
+            statsLoading: false
+          }))
         }
       }
     })
