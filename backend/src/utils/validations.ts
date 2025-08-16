@@ -60,3 +60,7 @@ export const deleteUserPromptSchema = zod.object({
 export const getDashboardCardDetailsSchema = zod.object({
     user_id: zod.number()
 })
+
+export const getDateInsightsSchema = zod.object({
+    date: zod.string()
+})

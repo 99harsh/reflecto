@@ -7,6 +7,14 @@ export const xpInfo = {
     baseXP: 50
 }
 
+export const streak_activity_ids = {
+    daily_login: 1,
+    self_reflection: 2,
+    mood: 3,
+    journal: 4,
+    tasks: 5
+}
+
 export const all_activites = [{
     key: "🔒 Daily Login",
     value: xpInfo.dailyLogin,

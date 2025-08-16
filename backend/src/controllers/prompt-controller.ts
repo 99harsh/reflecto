@@ -1,7 +1,6 @@
 import prisma from '../utils/db';
 import { Response } from "express";
-import { BADREQ, ISE, SUCCESS } from "../utils/responses";
-import { addUserPromptSchema, deleteUserPromptSchema } from '../utils/validations';
+import {  ISE, SUCCESS } from "../utils/responses";
 
 export const allPrompts = async(req:any, res: Response) => {
     try{

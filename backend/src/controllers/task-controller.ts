@@ -3,7 +3,7 @@ import { BADREQ, ISE, SUCCESS } from "../utils/responses";
 import { addTaskSchema, deleteTaskSchema, updateTaskSchema } from "../utils/validations";
 import prisma from '../utils/db';
 import { dateFilter } from '../utils/date-helper';
-import { xpInfo } from '../utils/stats-helper';
+import { streak_activity_ids, xpInfo } from '../utils/stats-helper';
 
 export const getTasks = async (req: any, res: Response) => {
     try {
@@ -53,7 +53,12 @@ export const addTask = async (req: any, res: Response) => {
                     xp: updatedXP
                 }
             })
-
+            await prisma.users_streak.create({
+                data: {
+                    user_id: req.payload.user_id,
+                    streak_id: streak_activity_ids.tasks
+                }
+            })
         }
 
         const task = await prisma.task.create({

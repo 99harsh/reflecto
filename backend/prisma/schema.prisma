@@ -23,6 +23,18 @@ model users{
     user_mood user_mood[]
     journals journals[]
     self_reflection self_reflection[]
+    users_streak users_streak[]
+}
+
+model users_streak{
+  user_streak_id Int @id @default(autoincrement())
+  
+  users users @relation(fields: [user_id], references: [user_id])
+  user_id Int
+
+  streak_id Int
+
+  logged_at DateTime @default(now())
 }
 
 model task{

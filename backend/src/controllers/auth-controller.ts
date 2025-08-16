@@ -57,7 +57,6 @@ export const authenticate = async(req: Request, res: Response) => {
 export const profile = async(req: any, res:any) => {
     try{
         const user_id = req.payload.user_id;
-        console.log("Profile")
         const data = await prisma.users.findFirst({
             where: {
                 user_id: user_id

@@ -3,7 +3,7 @@ import { BADREQ, ISE, SUCCESS } from "../utils/responses";
 import { logMoodSchema } from "../utils/validations";
 import prisma from '../utils/db';
 import { dateFilter } from "../utils/date-helper";
-import { xpInfo } from "../utils/stats-helper";
+import { streak_activity_ids, xpInfo } from "../utils/stats-helper";
 
 export const allMoods = async (req: Request, res: Response) => {
     try {
@@ -62,9 +62,15 @@ export const logMood = async (req: any, res: Response) => {
             data: {
                 ...v_data.data,
                 user_id: req.payload.user_id,
-
             }
         });
+
+        await prisma.users_streak.create({
+            data: {
+                user_id: req.payload.user_id,
+                streak_id: streak_activity_ids.mood
+            }
+        })
 
         res.json(SUCCESS({ updated_at: logged.updated_at }));
     } catch (error) {

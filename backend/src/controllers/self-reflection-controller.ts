@@ -3,7 +3,7 @@ import prisma from '../utils/db';
 import { BADREQ, ISE, SUCCESS } from '../utils/responses';
 import { dateFilter } from '../utils/date-helper';
 import { saveSelfReflectionSchema } from '../utils/validations';
-import { xpInfo } from '../utils/stats-helper';
+import { streak_activity_ids, xpInfo } from '../utils/stats-helper';
 
 export const getSelfReflection = async (req: any, res: Response) => {
     try {
@@ -73,6 +73,13 @@ export const saveSelfReflection = async(req:any, res:any) => {
             data: {
                 self_reflection: v_data.data.self_reflection,
                 user_id: req.payload.user_id
+            }
+        })
+
+        await prisma.users_streak.create({
+            data: {
+                user_id: req.payload.user_id,
+                streak_id: streak_activity_ids.self_reflection
             }
         })
 
