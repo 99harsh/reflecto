@@ -1,3 +1,3 @@
 <div class="rfto-spinner-overlay">
-  <div class="rfto-spinner"></div>
+  <div class="rfto-spinner" [ngClass]="{'rfto-spinner-sm': size() === 'small', 'rfto-spinner-md': size() === 'medium'}"></div>
 </div>

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { SavingLoading } from '../shared/saving-loading/saving-loading';
 import { SmartHttpService } from '../services/smart-http.service';
 import { FormsModule } from '@angular/forms';
 import { getRelativeTime } from '../shared/helper';
@@ -15,7 +14,7 @@ interface MoodLoading{
 
 @Component({
   selector: 'app-mood',
-  imports: [CommonModule, SavingLoading, FormsModule, Skeleton],
+  imports: [CommonModule,  FormsModule, Skeleton],
   templateUrl: './mood.html',
   styleUrl: './mood.scss',
   animations: [
@@ -71,15 +70,15 @@ export class Mood implements OnInit {
             isAllMoods: false
           }))
         }
+        if(resp && resp.status === 200){
+           this.loading.update((prev:MoodLoading) => ({...prev, userMood: false}))
+        }
         if(resp && resp.status === 200 && resp.data !== null){
           const moodData = this.getMoodInfoFromID(resp.data.mood_id);
-   
           this.userMood.set({...resp.data, mood: moodData[0]?.mood, mood_emoj: moodData[0]?.mood_emoj});
           this.selectedIntensityLevel.set(resp.data.intensity);
           this.selectedMoodID.set(resp.data.mood_id);
           this.loggedAt.set(getRelativeTime(resp.data.updated_at));
-          this.loading.update((prev:MoodLoading) => ({...prev, userMood: false}))
-         
         }
       }
     });

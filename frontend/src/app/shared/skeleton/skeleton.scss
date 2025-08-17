@@ -5,6 +5,10 @@
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.rfto-skeleton-circle{
+    border-radius: 100%;
+}
+
 .rfto-purple{
     background-color: #e3c9ff;
 }
@@ -27,6 +31,10 @@
 
 .rfto-orange{
     background-color: #ffd3af;
+}
+
+.rfto-red{
+    background-color: #fca9a9;
 }
 
 @keyframes pulse {

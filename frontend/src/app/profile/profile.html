@@ -8,7 +8,136 @@
     </div>
     <div class="rfto-profile-card-container">
         <div class="rfto-profile-leaderboard">
+            @if(loading()){
             <div class="rfto-card rfto-yellow-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-yellow" height="1.5rem" width="7.5rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-profile-container">
+                        <app-skeleton color="rfto-yellow rfto-skeleton-circle" height="4rem"
+                            width="4rem"></app-skeleton>
+                        <div class="rfto-profile-info">
+                            <div class="rfto-loading-container">
+                                <app-skeleton color="rfto-yellow" height="1rem" width="7.5rem"></app-skeleton>
+                            </div>
+                            <div class="rfto-loading-container">
+                                <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
+                            </div>
+                            <div class="rfto-loading-container">
+                                <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rfto-profile-xp-info">
+                        <div class="rfto-loading-container">
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-loading-container">
+                            <app-skeleton color="rfto-yellow" height="1rem" width="4rem"></app-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rfto-card rfto-purple-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-purple" height="1.5rem" width="10rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-top-performer">
+                        <app-skeleton color="rfto-purple" height="1rem" width="6rem"></app-skeleton>
+
+                        <div class="rfto-leaderboard-card">
+                            <div class="rfto-leaderboard-info">
+                                <div class="rfto-leaderboard-svg">
+                                    <app-skeleton color="rfto-purple" height="1rem" width="2rem"></app-skeleton>
+                                </div>
+                                <app-skeleton color="rfto-purple" height="1rem" width="2rem"></app-skeleton>
+                                <app-skeleton color="rfto-purple rfto-skeleton-circle" height="2.5rem"
+                                    width="2.5rem"></app-skeleton>
+                                <div class="rfto-leaderboard-name">
+                                    <div class="rfto-loading-container">
+                                        <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                    </div>
+                                    <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                </div>
+                            </div>
+                            <div class="rfto-leaderboard-xp">
+                                <app-skeleton color="rfto-purple" height="1rem" width="4rem"></app-skeleton>
+                            </div>
+                        </div>
+                        <div class="rfto-leaderboard-card">
+                            <div class="rfto-leaderboard-info">
+                                <div class="rfto-leaderboard-svg">
+                                    <app-skeleton color="rfto-purple" height="1rem" width="2rem"></app-skeleton>
+                                </div>
+                                <app-skeleton color="rfto-purple" height="1rem" width="2rem"></app-skeleton>
+                                <app-skeleton color="rfto-purple rfto-skeleton-circle" height="2.5rem"
+                                    width="2.5rem"></app-skeleton>
+                                <div class="rfto-leaderboard-name">
+                                    <div class="rfto-loading-container">
+                                        <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                    </div>
+                                    <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                </div>
+                            </div>
+                            <div class="rfto-leaderboard-xp">
+                                <app-skeleton color="rfto-purple" height="1rem" width="4rem"></app-skeleton>
+                            </div>
+                        </div>
+                        <div class="rfto-leaderboard-card">
+                            <div class="rfto-leaderboard-info">
+                                <div class="rfto-leaderboard-svg">
+                                    <app-skeleton color="rfto-purple" height="1rem" width="2rem"></app-skeleton>
+                                </div>
+                                <app-skeleton color="rfto-purple" height="1rem" width="2rem"></app-skeleton>
+                                <app-skeleton color="rfto-purple rfto-skeleton-circle" height="2.5rem"
+                                    width="2.5rem"></app-skeleton>
+                                <div class="rfto-leaderboard-name">
+                                    <div class="rfto-loading-container">
+                                        <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                    </div>
+                                    <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                </div>
+                            </div>
+                            <div class="rfto-leaderboard-xp">
+                                <app-skeleton color="rfto-purple" height="1rem" width="4rem"></app-skeleton>
+                            </div>
+                        </div>
+
+                    </div>
+                    @if(!profileDetails().isCurrentUserInTop){
+                    <div class="rfto-your-position">
+                        <div class="rfto-your-position-text">
+                            <app-skeleton color="rfto-purple" height="1rem" width="7rem"></app-skeleton>
+                        </div>
+                        <div class="rfto-leaderboard-card rfto-self-leaderboard-card">
+                            <div class="rfto-leaderboard-info">
+
+                                <app-skeleton color="rfto-purple" height="1rem" width="2rem"></app-skeleton>
+                                <app-skeleton color="rfto-purple rfto-skeleton-circle" height="2.5rem"
+                                    width="2.5rem"></app-skeleton>
+                                <div class="rfto-leaderboard-name">
+                                    <div class="rfto-loading-container">
+                                        <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                    </div>
+                                    <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                </div>
+                            </div>
+                            <div class="rfto-leaderboard-xp">
+                                <div class="rfto-loading-container">
+                                    <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                                </div>
+                                <app-skeleton color="rfto-purple" height=".4rem" width="4rem"></app-skeleton>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+            @else{
+            <div class="rfto-card rfto-yellow-card" @slideUpIn>
                 <div class="rfto-card-header">
                     <h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -19,23 +148,23 @@
                         Profile Information</h3>
                 </div>
                 <div class="rfto-card-body">
-                   <div class="rfto-profile-container">
-                     <div class="rfto-profile-icon">
-                        <p>H</p>
+                    <div class="rfto-profile-container">
+                        <div class="rfto-profile-icon">
+                            <p>{{ profileDetails()?.currentUser?.name[0] | uppercase }}</p>
+                        </div>
+                        <div class="rfto-profile-info">
+                            <h1 class="rfto-profile-name">{{ profileDetails()?.currentUser?.name }}</h1>
+                            <p class="rfto-profile-email">{{ profileDetails()?.currentUser?.email }}</p>
+                            <p class="rfto-member-since">Member since {{memberSince}}</p>
+                        </div>
                     </div>
-                    <div class="rfto-profile-info">
-                        <h1 class="rfto-profile-name">Harsh Agrawal</h1>
-                        <p class="rfto-profile-email">hagrawal121gmail.com</p>
-                        <p class="rfto-member-since">Member since Jan 2025</p>
+                    <div class="rfto-profile-xp-info">
+                        <p class="rfto-profile-xp">{{profileDetails()?.currentUser?.xp | number}} XP</p>
+                        <p class="rfto-level">Level {{ profileDetails()?.currentUser?.currentLevel }}</p>
                     </div>
-                   </div>
-                   <div class="rfto-profile-xp-info">
-                        <p class="rfto-profile-xp">24,500 XP</p>
-                        <p class="rfto-level">Level 12</p>
-                   </div>
                 </div>
             </div>
-            <div class="rfto-card rfto-purple-card">
+            <div class="rfto-card rfto-purple-card" @slideUpIn>
                 <div class="rfto-card-header">
                     <h3>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -54,9 +183,12 @@
                 <div class="rfto-card-body">
                     <div class="rfto-top-performer">
                         <p class="rfto-top-performer-heading">🏆 Top Performers</p>
+                        @for(user of profileDetails()?.topUsers; track user; let i = $index){
+
                         <div class="rfto-leaderboard-card">
                             <div class="rfto-leaderboard-info">
                                 <div class="rfto-leaderboard-svg">
+                                    @if(i === 0){
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                         fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="lucide lucide-crown w-5 h-5 text-yellow-500">
@@ -65,65 +197,51 @@
                                         </path>
                                         <path d="M5 21h14"></path>
                                     </svg>
-                                </div>
-                                <p class="rfto-leaderboard-rank">#1</p>
-                                <p class="rfto-leaderboard-profile">HA</p>
-                                <div class="rfto-leaderboard-name">
-                                    <p class="rfto-name">Harsh Agrawal</p>
-                                    <p class="rfto-level">Level 47</p>
-                                </div>
-                            </div>
-                            <div class="rfto-leaderboard-xp">
-                                <p>23,450 XP</p>
-                            </div>
-                        </div>
-                        <div class="rfto-leaderboard-card">
-                            <div class="rfto-leaderboard-info">
-                                <div class="rfto-leaderboard-svg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-crown w-5 h-5 text-yellow-500">
+                                    } @else if(i === 1){
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-medal w-5 h-5 text-gray-400">
                                         <path
-                                            d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z">
+                                            d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15">
                                         </path>
-                                        <path d="M5 21h14"></path>
+                                        <path d="M11 12 5.12 2.2"></path>
+                                        <path d="m13 12 5.88-9.8"></path>
+                                        <path d="M8 7h8"></path>
+                                        <circle cx="12" cy="17" r="5"></circle>
+                                        <path d="M12 18v-2h-.5"></path>
                                     </svg>
-                                </div>
-                                <p class="rfto-leaderboard-rank">#1</p>
-                                <p class="rfto-leaderboard-profile">HA</p>
-                                <div class="rfto-leaderboard-name">
-                                    <p class="rfto-name">Harsh Agrawal</p>
-                                    <p class="rfto-level">Level 47</p>
-                                </div>
-                            </div>
-                            <div class="rfto-leaderboard-xp">
-                                <p>23,450 XP</p>
-                            </div>
-                        </div>
-                        <div class="rfto-leaderboard-card">
-                            <div class="rfto-leaderboard-info">
-                                <div class="rfto-leaderboard-svg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-crown w-5 h-5 text-yellow-500">
+                                    } @else {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-medal w-5 h-5 text-gray-400">
                                         <path
-                                            d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z">
+                                            d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15">
                                         </path>
-                                        <path d="M5 21h14"></path>
+                                        <path d="M11 12 5.12 2.2"></path>
+                                        <path d="m13 12 5.88-9.8"></path>
+                                        <path d="M8 7h8"></path>
+                                        <circle cx="12" cy="17" r="5"></circle>
+                                        <path d="M12 18v-2h-.5"></path>
                                     </svg>
+                                    }
                                 </div>
-                                <p class="rfto-leaderboard-rank">#1</p>
-                                <p class="rfto-leaderboard-profile">HA</p>
+                                <p class="rfto-leaderboard-rank">#{{i+1}}</p>
+                                <p class="rfto-leaderboard-profile">{{user.name[0] | uppercase}}{{user.name[1] |
+                                    uppercase}}</p>
                                 <div class="rfto-leaderboard-name">
-                                    <p class="rfto-name">Harsh Agrawal</p>
-                                    <p class="rfto-level">Level 47</p>
+                                    <p class="rfto-name">{{ user.name }}
+                                        {{user.isCurrentUser ? '(You)' : ""}}
+                                    </p>
+                                    <p class="rfto-level">Level {{ user.currentLevel }}</p>
                                 </div>
                             </div>
                             <div class="rfto-leaderboard-xp">
-                                <p>23,450 XP</p>
+                                <p>{{ user.xp | number }} XP</p>
                             </div>
                         </div>
+                        }
                     </div>
+                    @if(!profileDetails().isCurrentUserInTop){
                     <div class="rfto-your-position">
                         <p class="rfto-your-position-text">📍 Your Position</p>
                         <div class="rfto-leaderboard-card rfto-self-leaderboard-card">
@@ -137,24 +255,48 @@
                                         </polygon>
                                     </svg>
                                 </div>
-                                <p class="rfto-leaderboard-rank">#1</p>
-                                <p class="rfto-leaderboard-profile">HA</p>
+
+                                <p class="rfto-leaderboard-profile">{{ profileDetails()?.currentUser?.name[0] |
+                                    uppercase }}{{ profileDetails()?.currentUser?.name[1] | uppercase }} </p>
                                 <div class="rfto-leaderboard-name">
-                                    <p class="rfto-name">Harsh Agrawal</p>
-                                    <p class="rfto-level">Level 47</p>
+                                    <p class="rfto-name">{{ profileDetails()?.currentUser?.name }}</p>
+                                    <p class="rfto-level">Level {{ profileDetails()?.currentUser?.currentLevel }}</p>
                                 </div>
                             </div>
                             <div class="rfto-leaderboard-xp">
-                                <p>23,450 XP</p>
-                                <p class="rfto-next-level">1250 XP to next level</p>
+                                <p>{{ profileDetails()?.currentUser?.xp | number }} XP</p>
+                                <p class="rfto-next-level">{{nextLevelXP | number }} XP to next level</p>
                             </div>
                         </div>
                     </div>
+                    }
                 </div>
             </div>
+            }
         </div>
         <div class="rfto-profile-settings">
+            @if(loading()){
             <div class="rfto-card rfto-purple-card">
+                <div class="rfto-card-header rfto-loading-container">
+                    <app-skeleton color="rfto-purple" height="1.5rem" width="7.5rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <app-skeleton color="rfto-purple" height="2rem" width="100%"></app-skeleton>
+                </div>
+            </div>
+            <div class="rfto-card rfto-red-card">
+                <div class="rfto-card-header">
+                    <app-skeleton color="rfto-red" height="1.5rem" width="7.5rem"></app-skeleton>
+                </div>
+                <div class="rfto-card-body">
+                    <div class="rfto-loading-container">
+                        <app-skeleton color="rfto-red" height="5rem" width="100%"></app-skeleton>
+                    </div>
+                    <app-skeleton color="rfto-red" height="2rem" width="100%"></app-skeleton>
+                </div>
+            </div>
+            } @else{
+            <div class="rfto-card rfto-purple-card" @slideUpIn>
                 <div class="rfto-card-header">
                     <h3>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -181,18 +323,78 @@
                     </button>
                 </div>
             </div>
-            <div class="rfto-card rfto-red-card">
-                 <div class="rfto-card-header">
-                     <h3>⚠️ Danger Zone</h3>
-                 </div>
-                 <div class="rfto-card-body">
-                    <p class="rfto-reset-text">This will permanently delete all your data including goals, mood, journals and achievements. This action cannot be undone.</p>
-                    <button class="rfto-reset-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 w-4 h-4 mr-2"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg>
+            <div class="rfto-card rfto-red-card" @slideUpIn>
+                <div class="rfto-card-header">
+                    <h3>⚠️ Danger Zone</h3>
+                </div>
+                <div class="rfto-card-body">
+                    <p class="rfto-reset-text">This will permanently delete all your data including goals, mood,
+                        journals and achievements. This action cannot be undone.</p>
+                    <button class="rfto-reset-btn" (click)="toggleDeletePopup()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-trash2 w-4 h-4 mr-2">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                            <line x1="10" x2="10" y1="11" y2="17"></line>
+                            <line x1="14" x2="14" y1="11" y2="17"></line>
+                        </svg>
                         Reset Account
                     </button>
                 </div>
             </div>
+            }
         </div>
     </div>
 </section>
+
+<div class="rfto-delete-popup">
+    <app-popup width="25rem" [isOpen]="isDeletePopup()" (closed)="toggleDeletePopup()">
+        <div class="rfto-popup-header">
+            <h3>🚨 Reset Account Confirmation</h3>
+            <p>This action will permanently delete your account data including:</p>
+        </div>
+        <div class="rfto-popup-body">
+            <div class="rfto-delete-list">
+                <ul>
+                    <li>All journal entries and reflections</li>
+                    <li>Mood tracking history</li>
+                    <li>Task and achievements</li>
+                    <li>XP points and level progress</li>
+                </ul>
+            </div>
+            <div class="rfto-delete-input">
+                <p class="rfto-confirm-heading">To confirm deletion, type: <span class="rfto-user-confirm-input">delete
+                        my
+                        profile data</span></p>
+                <div>
+                    <input [ngModel]="resetInputText()" (ngModelChange)="resetInputTextChange($event)" class="rfto-confirm-input-box" type="text" placeholder="Type the confirmation text" />
+                </div>
+            </div>
+        </div>
+        <div class="rfto-popup-footer">
+            <div class="rfto-button-container">
+                <button class="rfto-cancel-btn" (click)="toggleDeletePopup()"> Cancel </button>
+                <button class="rfto-delete-btn" [disabled]="isResetBtnDisabled()" (click)="resetAccountData()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-trash2 w-4 h-4 mr-2">
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                        <line x1="10" x2="10" y1="11" y2="17"></line>
+                        <line x1="14" x2="14" y1="11" y2="17"></line>
+                    </svg>
+                    Reset Account
+                </button>
+            </div>
+        </div>
+        @if(isDataResetting()){
+            <div class="rfto-loading-container">
+                <app-spinner size="medium"></app-spinner>
+                <p>Resetting data...</p>
+            </div>
+        }
+    </app-popup>
+</div>

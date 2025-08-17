@@ -1,8 +1,5 @@
-import { Component, Inject, inject, OnInit, PLATFORM_ID, signal, ViewEncapsulation } from '@angular/core';
-import { Progressbar } from '../shared/progressbar/progressbar';
-import { RouterLink } from '@angular/router';
-import { QuotesCarousel } from '../shared/quotes-carousel/quotes-carousel';
-import { SmartHttpService } from '../services/smart-http.service';
+import { Component,  inject, OnInit, PLATFORM_ID, signal, ViewEncapsulation } from '@angular/core';
+import { Progressbar } from '../shared/progressbar/progressbar';import { SmartHttpService } from '../services/smart-http.service';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { Skeleton } from '../shared/skeleton/skeleton';
@@ -11,7 +8,7 @@ interface HomeLoading{ isDashboardCards: boolean, isLevelXPStats: boolean }
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, Progressbar, QuotesCarousel, RouterLink, Skeleton],
+  imports: [CommonModule, Progressbar, Skeleton],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   encapsulation: ViewEncapsulation.None,

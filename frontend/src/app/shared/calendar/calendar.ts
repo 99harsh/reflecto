@@ -13,8 +13,8 @@ import { trigger, style, transition, animate } from '@angular/animations';
   imports: [CommonModule, FormsModule, Skeleton],
   templateUrl: './calendar.html',
   styleUrl: './calendar.scss',
-   animations: [
-      // Content slide in
+  animations: [
+    // Content slide in
     trigger('slideUpIn', [
       transition(':enter', [
         style({ transform: 'translateX(10px', opacity: 0 }),
@@ -28,12 +28,14 @@ export class Calendar implements OnInit {
   currentYear = new Date().getFullYear();
   weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   loading = signal<boolean>(true);
+  isCalendarGenerating = signal<boolean>(false);
   monthList = Array.from({ length: 12 }, (_, i) =>
     new Date(0, i).toLocaleString('default', { month: 'long' })
   );
   yearList: number[] = [];
   calendarDays = signal<any>([]);
   entries: any[] = [];
+
   private http = inject(SmartHttpService);
   router = inject(Router);
 
@@ -44,9 +46,9 @@ export class Calendar implements OnInit {
   }
 
   fetchCalendarData = () => {
-    this.http.get("stats/calendar").subscribe({
-      next: (resp:any) => {
-        if(resp && resp.status === 200){
+    this.http.post("stats/calendar", {}).subscribe({
+      next: (resp: any) => {
+        if (resp && resp.status === 200) {
           this.calendarDays.set(resp.data);
           this.loading.set(false);
         }
@@ -55,11 +57,19 @@ export class Calendar implements OnInit {
   }
 
   generateCalendar(): void {
-
+    this.isCalendarGenerating.set(true);
+    this.http.post("stats/calendar", { year: this.currentYear, month: this.currentMonth }).subscribe({
+      next: (resp: any) => {
+        if (resp && resp.status === 200) {
+          this.calendarDays.set(resp.data);
+          this.isCalendarGenerating.set(false);
+        }
+      }
+    })
   }
 
   redirect = (day: any) => {
-    if(day.daily_login){
+    if (day.daily_login) {
       this.router.navigate(["/date-details/", format(new Date(day.fullDate), "MM-dd-yyyy")])
     }
   }

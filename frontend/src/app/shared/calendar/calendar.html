@@ -7,13 +7,13 @@
     <div class="rfto-journey-header">
         <h1>Calendar & Streaks</h1>
         <p>Track your consistency and celebrate your progress</p>
-    </div> 
+    </div>
     @if(loading()){
     <div class="rfto-calendar-card-container">
         <div class="rfto-card rfto-blue-card rfto-calendar-content">
             <div class="calendar-controls">
-              <app-skeleton color="rfto-blue" height="2.2rem" width="10rem"></app-skeleton>
-            <app-skeleton color="rfto-blue" height="2.2rem" width="5rem"></app-skeleton>    
+                <app-skeleton color="rfto-blue" height="2.2rem" width="10rem"></app-skeleton>
+                <app-skeleton color="rfto-blue" height="2.2rem" width="5rem"></app-skeleton>
             </div>
 
             <div class="calendar-header-days">
@@ -22,33 +22,33 @@
 
             <div class="calendar-days">
                 @for(day of [].constructor(42); track $index){
-                    <div class="calendar-day">
-                        <app-skeleton color="rfto-blue" height="4.2rem" width="100%"></app-skeleton>
-                    </div>
+                <div class="calendar-day">
+                    <app-skeleton color="rfto-blue" height="4.2rem" width="100%"></app-skeleton>
+                </div>
                 }
             </div>
             <div class="rfto-card rfto-orange-card rfto-legend-card">
                 <div class="rfto-card-header">
-                    <app-skeleton color="rfto-yellow" height="1.5rem" width="10rem"></app-skeleton>  
+                    <app-skeleton color="rfto-yellow" height="1.5rem" width="10rem"></app-skeleton>
                 </div>
                 <div class="rfto-card-body">
                     <div class="rfto-card-legend-container">
-                         <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>    
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
                     </div>
                     <div class="rfto-card-legend-container">
-                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>  
+                        <app-skeleton color="rfto-yellow" height="1rem" width="10rem"></app-skeleton>
                     </div>
                 </div>
             </div>

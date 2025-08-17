@@ -41,7 +41,6 @@ export class DashboardHeader implements OnInit {
 
   navigateToProfile() {
     // Replace with your actual profile route
-    this.toggleDropdown()
     this.router.navigate(['/profile']);
   }
 

@@ -7,6 +7,7 @@ import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './interceptor/http-interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +17,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideOAuthClient(),
     provideHttpClient(withInterceptors([httpInterceptor]), withFetch()),
-    provideAnimations()
+    provideAnimations(),
+    provideToastr()
     
   ]
 };

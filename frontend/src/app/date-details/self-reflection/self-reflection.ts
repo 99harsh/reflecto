@@ -2,14 +2,14 @@ import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Editor, NgxEditorComponent, NgxEditorMenuComponent } from 'ngx-editor';
+import { Editor, NgxEditorComponent } from 'ngx-editor';
 import { format } from 'date-fns';
 import { SmartHttpService } from '../../services/smart-http.service';
 import { Skeleton } from '../../shared/skeleton/skeleton';
 
 @Component({
   selector: 'app-self-reflection',
-  imports: [CommonModule, NgxEditorComponent, NgxEditorMenuComponent, FormsModule, Skeleton],
+  imports: [CommonModule, NgxEditorComponent, FormsModule, Skeleton],
   templateUrl: './self-reflection.html',
   styleUrl: './self-reflection.scss'
 })
