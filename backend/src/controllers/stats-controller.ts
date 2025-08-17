@@ -289,9 +289,11 @@ export const getMoodProgress = async (req: any, res: Response) => {
                 mostCommonMood = item.mood_id;
             }
         }
-        const moodNameEmoj = await prisma.all_moods.findUnique({where: {
-            mood_id: mostCommonMood
-        }})
+        const moodNameEmoj = await prisma.all_moods.findUnique({
+            where: {
+                mood_id: mostCommonMood
+            }
+        })
         res.json(SUCCESS({
             avg_intensity: avgIntensity.toFixed(),
             most_common: `${moodNameEmoj?.mood_emoj} ${moodNameEmoj?.mood}`,
@@ -305,14 +307,19 @@ export const getMoodProgress = async (req: any, res: Response) => {
 
 export const getCalendarData = async (req: any, res: Response) => {
     try {
-        const currentMonth = new Date().getMonth();
-        const currentYear = new Date().getFullYear();
+        // Step 0: Get year/month from body or fallback to current
+        const now = new Date();
+        const currentYear = req.body?.year ?? now.getFullYear();
+        const currentMonth = req.body?.month ?? now.getMonth(); // already 0 = Jan
 
         // Step 1: Calculate start & end date for the 42-day calendar grid
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+
+        // Go back to the Sunday of that week
         const startDate = new Date(firstDayOfMonth);
         startDate.setDate(startDate.getDate() - startDate.getDay());
 
+        // Move forward 41 days → total 42 days (6 weeks)
         const endDate = new Date(startDate);
         endDate.setDate(startDate.getDate() + 41);
 
@@ -322,9 +329,9 @@ export const getCalendarData = async (req: any, res: Response) => {
                 user_id: req.payload.user_id,
                 logged_at: {
                     gte: startDate,
-                    lte: endDate
-                }
-            }
+                    lte: endDate,
+                },
+            },
         });
 
         // Step 3: Build calendar array with flags

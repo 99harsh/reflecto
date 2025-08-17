@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import session from "express-session";
 import cors from 'cors';
 import cookieParse from 'cookie-parser';
 import authRoute from './routers/auth-router';
@@ -10,6 +9,7 @@ import moodRouter from './routers/mood-router';
 import promptRouter from './routers/prompt-router';
 import statsRouter from './routers/stat-route';
 import selfReflectionRouter from './routers/self-reflection-router';
+import profileRouter from './routers/profile-router';
 
 dotenv.config();
 const app = express();
@@ -21,12 +21,6 @@ app.use(cors({
 
 app.use(cookieParse());
 app.use(express.json());
-// app.use(session({
-//     secret: process.env.AUTH_SECRET || "KEREzaman@123",
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: false, httpOnly: true } // Set secure to true in production (with HTTPS)
-// }));
 
 
 app.get("/health", (req, res) => {
@@ -40,6 +34,7 @@ app.use("/api/v1/mood", moodRouter);
 app.use("/api/v1/prompt", promptRouter);
 app.use("/api/v1/self-reflection", selfReflectionRouter);
 app.use("/api/v1/stats", statsRouter);
+app.use("/api/v1/profile", profileRouter);
 
 
 app.listen(process.env.PORT, () => {

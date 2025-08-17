@@ -9,9 +9,9 @@ router.get("/progress", verifyUserAuthToken, getXPStreakDetails);
 router.get("/self-reflection", verifyUserAuthToken, getReflectionProgress);
 router.get("/journal", verifyUserAuthToken, getJournalProgress)
 router.get("/tasks", verifyUserAuthToken, getTasksProgress);
-router.get("/calendar", verifyUserAuthToken, getCalendarData);
 router.get("/mood", verifyUserAuthToken, getMoodProgress);
 
+router.post("/calendar", verifyUserAuthToken, getCalendarData);
 router.post("/date-insights", verifyUserAuthToken, getDateInsights);
 router.post("/mood-insights", verifyUserAuthToken, getMoodInsights);
 router.post("/journal-insights", verifyUserAuthToken, getJournalInsights);
