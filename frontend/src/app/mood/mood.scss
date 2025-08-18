@@ -20,12 +20,12 @@
     }
 
     .rfto-mood {
-        display: flex;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
         margin-top: 2rem;
         gap: 2rem;
 
         .rfto-mood-section {
-            flex: 1;
 
             .rfto-card-header {
                 h1 {
@@ -67,6 +67,10 @@
                 .rfto-mood-card-active {
                     border-color: #db2777;
                     background-color: #fce7f3;
+                }
+
+                @media (max-width: 500px){
+                    grid-template-columns: 1fr 1fr;
                 }
             }
 
@@ -138,9 +142,7 @@
             }
         }
 
-        .rfto-select-mood-container{
-            flex: 2;
-        }
+      
 
         .rfto-summary-section{
             .rfto-card-header{
@@ -197,6 +199,10 @@
                     }
                 }
             }
+        }
+
+        @media (max-width: 500px){
+            grid-template-columns: 1fr;
         }
     }
 

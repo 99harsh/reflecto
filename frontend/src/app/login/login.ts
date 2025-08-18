@@ -2,7 +2,6 @@ import { PLATFORM_ID, Inject, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthGoogleService } from '../services/auth-google.service';
 
-declare const google: any;
 @Component({
   selector: 'app-login',
   imports: [CommonModule],

@@ -1,0 +1,35 @@
+@use "sass:math";
+
+@function strip-unit($value) {
+    @if type-of($value) == 'number' and not unitless($value) {
+        @return math.div($value, $value * 0 + 1);
+    }
+    @return $value;
+}
+
+@mixin fluid-type($min-vw, $mid-vw, $max-vw, $min-font-size, $mid-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($mid-vw);
+  $u3: unit($max-vw);
+  $u4: unit($min-font-size);
+  $u5: unit($mid-font-size);
+  $u6: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 and $u1 == $u5 and $u1 == $u6 {
+    & {
+      font-size: $min-font-size;
+
+      @media screen and (min-width: $min-vw) and (max-width: $mid-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($mid-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($mid-vw - $min-vw)})) !important;
+      }
+
+      @media screen and (min-width: $mid-vw) and (max-width: $max-vw) {
+        font-size: calc(#{$mid-font-size} + #{strip-unit($max-font-size - $mid-font-size)} * ((100vw - #{$mid-vw}) / #{strip-unit($max-vw - $mid-vw)})) !important;
+      }
+
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}

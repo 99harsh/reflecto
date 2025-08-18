@@ -1,5 +1,5 @@
 .rfto-date-details-container {
-    max-width: 80%;
+
     margin: auto;
 }
 
@@ -12,10 +12,11 @@
     background-color: transparent;
     border: none;
     font-size: var(--font-large);
+    padding: 0px;
 }
 
 .rfto-heading-container {
-    margin: 2rem 0rem;
+    margin: 1.5rem 0rem;
     display: flex;
     justify-content: space-between;
 

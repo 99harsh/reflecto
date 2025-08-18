@@ -1,9 +1,40 @@
 <header class="rfto-header-container">
-    <div class="rfto-header-section rfto-logo-container" [routerLink]="'home'">
-        <h1>Reflecto</h1>
+    <div class="rfto-header-section rfto-logo-container">
+
+        <div class="rfto-header-section rfto-hamburger" (click)="toggleMobileNav()">
+            @if(isMobileNavOpen()){
+            <div class="rfto-header-svg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-x w-5 h-5">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </div>
+            } @else{
+            <div class="rfto-header-svg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-menu w-5 h-5">
+                    <line x1="4" x2="20" y1="12" y2="12"></line>
+                    <line x1="4" x2="20" y1="6" y2="6"></line>
+                    <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
+            </div>
+
+            }
+
+        </div>
+        <h1 [routerLink]="'home'">
+            <img src="./h.png" class="rfto-logo-h" />
+            HabitUp
+        </h1>
+    </div>
+    <div class="rfto-header-section rfto-hamburger">
+
     </div>
     <div class="rfto-header-section rfto-nav-container">
-        <a [routerLink]="'home'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'" >
+        <a [routerLink]="'home'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
             <span class="rfto-nav-logo">🏠</span>
             <span>Dashboard</span>
         </a>
@@ -28,7 +59,7 @@
             <span>Calendar</span>
         </a>
     </div>
-   <div class="profile-wrapper" (click)="toggleDropdown()">
+    <div class="profile-wrapper" (click)="toggleDropdown()">
         <div class="rfto-user-logo">
             <img src="user-placeholder.png" alt="Profile" />
         </div>
@@ -49,4 +80,31 @@
             </div>
         </div>
     </div>
+    @if(isMobileNavOpen()){
+    <div @slideUpIn class="rfto-header-section rfto-nav-container rfto-mobile-nav-container" [class.show]="true">
+        <a [routerLink]="'home'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">🏠</span>
+            <span>Dashboard</span>
+        </a>
+        <a [routerLink]="'reflection'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">📝</span>
+            <span>Reflection</span>
+        </a>
+        <a [routerLink]="'journal'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">📝</span>
+            <span>Journal</span>
+        </a>
+        <a [routerLink]="'mood'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">💝</span>
+            <span>Mood</span>
+        </a>
+        <a [routerLink]="'tasks'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">🎯</span>
+            <span>Tasks</span>
+        </a>
+        <a [routerLink]="'calendar'" class="rfto-header-nav" [routerLinkActive]="'rfto-header-nav-active'">
+            <span class="rfto-nav-logo">📅</span>
+            <span>Calendar</span>
+        </a>
+    </div>}
 </header>

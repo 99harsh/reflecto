@@ -286,6 +286,18 @@
             }
 
         }
+    
+        @media (max-width: 1024px) {
+            width: 85%;
+        }
+
+        @media (max-width: 786px) {
+            width: 100%;
+        }
+
+        @media (max-width: 500px) {
+            flex-direction: column;
+        }
     }
 
     .rfto-loading-container{

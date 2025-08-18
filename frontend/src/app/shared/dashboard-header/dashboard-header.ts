@@ -1,18 +1,30 @@
 import { ChangeDetectorRef, Component, HostListener, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { SmartHttpService } from '../../services/smart-http.service';
+import { trigger, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-dashboard-header',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './dashboard-header.html',
   styleUrl: './dashboard-header.scss',
-  standalone: true
+  standalone: true,
+  animations: [
+    // Content slide in
+    trigger('slideUpIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(10px', opacity: 0 }),
+        animate('400ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class DashboardHeader implements OnInit {
   router = inject(Router);
   _cdr = inject(ChangeDetectorRef);
   platformId = inject(PLATFORM_ID);
+  http = inject(SmartHttpService);
 
   isDropdownOpen = signal<boolean>(false);
   username = signal<string>(""); // Replace with actual username from your user service
@@ -21,6 +33,11 @@ export class DashboardHeader implements OnInit {
     name: "User",
     email: "user@example.com"
   });
+  isMobileNavOpen = signal<boolean>(false);
+
+  toggleMobileNav() {
+    this.isMobileNavOpen.set(!this.isMobileNavOpen());
+  }
 
   ngOnInit(): void {
     let user_profile: any = this.getItem("user_profile");
@@ -45,10 +62,14 @@ export class DashboardHeader implements OnInit {
   }
 
   logout() {
-    this.isDropdownOpen.set(false);
-    // Add your logout logic here
-    // For example, clear tokens and redirect:
-    // this.authService.logout();
+    this.http.get("auth/logout").subscribe({
+      next: (resp: any) => {
+        if (resp && resp.status === 200) {
+          this.router.navigate(["/login"]);
+          localStorage.clear();
+        }
+      }
+    })
   }
 
   // Optional: Close dropdown when clicking outside

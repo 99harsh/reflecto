@@ -9,7 +9,7 @@
         text-align: center;
         margin-top: 1rem;
 
-        h1 {
+        h1 { 
             font-size: var(--font-xl);
             color: var(--color-primary);
         }
@@ -22,7 +22,8 @@
     }
 
     .rfto-journal-notebook-container {
-        display: flex;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
         gap: 1em;
         margin-top: 3rem;
         .rfto-journal-notebook{
@@ -77,6 +78,11 @@
                     }
                 }
             }
+        }
+
+        @media (max-width: 500px) {
+            grid-template-columns: 1fr;
+            margin-top: 1rem;
         }
     }
 }

@@ -1,17 +1,4 @@
 .rfto-date-details-container {
-    // .rfto-back-btn-container {
-    //     button {
-    //         display: flex;
-    //         align-items: center;
-    //         gap: .612rem;
-    //         cursor: pointer;
-    //         color: var(--color-secondary);
-    //         background-color: transparent;
-    //         border: none;
-    //         font-size: var(--font-large);
-    //     }
-    // }
-
     .rfto-date-container {
         background-color: var(--color-white);
         padding: 1.5rem;
@@ -36,11 +23,11 @@
     }
 
     .rfto-card-container {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
 
         .rfto-card {
-            flex: 1;
             text-align: center;
 
             .rfto-card-emoj {
@@ -114,6 +101,10 @@
                color: #7e22ce;
                border: 1px solid #d8b4fe; 
             }
+        }
+
+        @media (max-width: 500px) {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 }

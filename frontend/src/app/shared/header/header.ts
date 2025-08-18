@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import {  RouterLink } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +8,14 @@ import {  RouterLink } from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
-export class Header { 
+export class Header {
+
+
+  scrollToSection(sectionId: string, event: Event) {
+    event.preventDefault(); // prevent default anchor behavior
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

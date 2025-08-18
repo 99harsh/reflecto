@@ -1,20 +1,22 @@
 <header class="rfto-header-container">
     <div class="rfto-appname-container">
-        <h1 class="rfto-app-name">Reflecto</h1>
+        <h1 class="rfto-app-name">
+            <img src="./h.png" class="rfto-logo-h" />
+            HabitUp
+        </h1>
         <div class="rfto-app-line"></div>
     </div>
     <div class="rfto-nav-item-container">
         <div class="rfto-nav-item">
-            <a href="#">Features</a>
+            <a (click)="scrollToSection('features', $event)">Features</a>
         </div>
         <div class="rfto-nav-item">
-            <a href="#">How It Works</a>
-        </div>
-        <div class="rfto-nav-item">
-            <a href="#">Stories</a>
+            <a (click)="scrollToSection('how-it-works', $event)">How It Works</a>
         </div>
         <div class="rfto-nav-item">
             <a [routerLink]="['login']" class="rfto-signin-button">Sign In</a>
         </div>
     </div>
+
+    
 </header>

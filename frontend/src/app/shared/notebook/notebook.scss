@@ -74,9 +74,16 @@
       padding-bottom: 3rem;
 
       .rfto-editor-menu-container {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr auto;
         align-items: center;
+
+        @media (max-width: 500px) {
+            grid-template-columns: 1fr;
+            .rfto-spinner-overlay{
+              margin-bottom: .312rem;
+            }
+        } 
       }
 
       .NgxEditor__Content {
@@ -93,7 +100,6 @@
 
   // Responsive styles
   @media (max-width: 768px) {
-    padding: 1.5rem 0.8rem;
 
     .rfto-notebook-page {
       padding: 2.5rem 2rem 2rem 6rem;
@@ -132,7 +138,7 @@
   }
 
   @media (max-width: 480px) {
-    padding: 1rem 0.5rem;
+    padding: 0;
 
     .rfto-notebook-page {
       padding: 2rem 1.5rem 1.5rem 4.5rem;
@@ -145,12 +151,12 @@
 
       .rfto-writing-area {
         .rfto-journal-textarea {
-          font-size: 16px;
-          line-height: 28px;
+          font-size: 1rem;
+          line-height: 1.75rem;
         }
 
         .rfto-ruled-lines .rfto-line {
-          height: 28px;
+          height: 1.75rem;
         }
       }
 

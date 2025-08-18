@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { catchError, map, of, take } from 'rxjs';
+import {  map } from 'rxjs';
 import { AuthGoogleService } from '../services/auth-google.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
@@ -11,6 +11,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (isAuthenticated) {
         return true;
       } else {
+        localStorage.removeItem("user_profile");
         router.navigate(['/login']);
         return false;
       }

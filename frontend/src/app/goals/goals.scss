@@ -21,7 +21,8 @@
 
     .rfto-task-container {
         margin-top: 2rem;
-        display: flex;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
         gap: 1.5rem;
 
         .rfto-task-input-container {
@@ -262,6 +263,10 @@
                     }
                 }
             }
+        }
+
+        @media (max-width: 500px) {
+            grid-template-columns: 1fr;
         }
     }
 }

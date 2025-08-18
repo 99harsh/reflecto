@@ -1,18 +1,22 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
+import { guestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./landing/landing').then(c => c.Landing)
+        loadComponent: () => import('./landing/landing').then(c => c.Landing),
+        canActivate: [guestGuard]
     },
     {
         path: 'login',
-        loadComponent: () => import('./login/login').then(c => c.Login)
+        loadComponent: () => import('./login/login').then(c => c.Login),
+        canActivate: [guestGuard]
     },
     {
         path: 'callback',
-        loadComponent: () => import('./callback/callback').then(c => c.Callback)
+        loadComponent: () => import('./callback/callback').then(c => c.Callback),
+        canActivate: [guestGuard]
     },
     {
         path: '',

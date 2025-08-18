@@ -21,13 +21,12 @@
     }
 
     .rfto-reflection {
-        display: flex;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
         margin-top: 3rem;
         gap: 2rem;
 
         .rfto-reflection-section {
-            flex: 1;
-
             .rfto-card {
                 .rfto-header {
                     display: flex;
@@ -43,7 +42,7 @@
         }
 
         .rfto-reflection-input {
-            flex: 2;
+   
 
             .rfto-header {
                 .rfto-header-content {
@@ -74,9 +73,16 @@
                 background-color: transparent;
 
                 .rfto-editor-menu-container{
-                    display: flex;
+                    display: grid;
+                    grid-template-columns: 2fr auto;
                     align-items: center;
-                    justify-content: space-between;
+
+                    @media (max-width: 500px) {
+                        grid-template-columns: 1fr;
+                        .rfto-spinner-overlay{
+                            margin-bottom: .312rem;
+                        }
+                    }
                 }
 
                 .rfto-lines-container {
@@ -155,6 +161,11 @@
         }
    .rfto-loading-container{
                 margin-bottom:.612rem;
+            }
+
+            @media (max-width: 500px) {
+                grid-template-columns: 1fr;
+                margin-top: 2rem;
             }
 
     }
