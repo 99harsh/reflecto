@@ -62,6 +62,7 @@ export const getProfileData = async (req: any, res: Response) => {
 export const resetProfileData = async (req: any, res: Response) => {
     try {
         const userId = req.payload?.user_id;
+
         if (!userId) {
             res.status(400).json({ message: "Invalid user_id" })
             return;
@@ -86,6 +87,6 @@ export const resetProfileData = async (req: any, res: Response) => {
         res.json(SUCCESS());
     } catch (error) {
         console.error(`RESET PROFILE FAILED:`, error);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }

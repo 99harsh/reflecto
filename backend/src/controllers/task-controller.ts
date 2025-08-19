@@ -17,7 +17,7 @@ export const getTasks = async (req: any, res: Response) => {
         res.json(SUCCESS(tasks));
     } catch (error) {
         console.log(`GET TASK FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -25,7 +25,7 @@ export const addTask = async (req: any, res: Response) => {
     try {
         const v_data = addTaskSchema.safeParse(req.body);
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -73,7 +73,7 @@ export const addTask = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`ADD TASK FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -81,7 +81,7 @@ export const deleteTask = async (req: any, res: Response) => {
     try {
         const v_data = deleteTaskSchema.safeParse(req.body);
         if (!v_data.success) {
-            res.json(BADREQ())
+            res.status(400).json(BADREQ())
             return;
         }
 
@@ -95,7 +95,7 @@ export const deleteTask = async (req: any, res: Response) => {
         res.json(SUCCESS());
     } catch (error) {
         console.log(`DELETE TASK FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -104,7 +104,7 @@ export const updateTask = async (req: any, res: Response) => {
         const v_data = updateTaskSchema.safeParse(req.body);
 
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -122,6 +122,6 @@ export const updateTask = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`UPDATE TASK FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }

@@ -16,7 +16,7 @@ export const getJournal = async(req:any, res: Response) => {
         res.json(SUCCESS(journal));
     }catch(error){
         console.log(`GET JOURNAL FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -25,7 +25,7 @@ export const saveJournal = async(req:any, res:Response) => {
         const v_data = saveJournalSchema.safeParse(req.body);
 
         if(!v_data.success){
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -80,6 +80,6 @@ export const saveJournal = async(req:any, res:Response) => {
         
     }catch(error){
         console.log(`SAVE JOURNAL ERROR ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }

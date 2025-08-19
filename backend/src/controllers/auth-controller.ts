@@ -8,13 +8,13 @@ import { createUserAuthToken } from '../middlewares/auth-middleware';
 const client = new OAuth2Client(process.env.CLIENT_ID)
 
 
-export const authenticate = async(req: Request, res: Response) => {
-    try{    
+export const authenticate = async (req: Request, res: Response) => {
+    try {
         const validated_token = authSchema.safeParse(req.body);
 
-        if(!validated_token.success){
-             res.json(BADREQ());
-             return;
+        if (!validated_token.success) {
+            res.status(400).json(BADREQ());
+            return;
         }
 
         const ticket = await client.verifyIdToken({
@@ -23,7 +23,7 @@ export const authenticate = async(req: Request, res: Response) => {
         });
 
         const user_payload = ticket.getPayload();
-        if(typeof user_payload == "object" && user_payload && user_payload.name && user_payload.email && user_payload.picture){
+        if (typeof user_payload == "object" && user_payload && user_payload.name && user_payload.email && user_payload.picture) {
             const user_data = await prisma.users.upsert({
                 where: {
                     email: user_payload.email
@@ -39,23 +39,23 @@ export const authenticate = async(req: Request, res: Response) => {
                 }
             })
 
-            const token = await createUserAuthToken({name: user_data.name, email: user_data.email, user_id: user_data.user_id });
+            const token = await createUserAuthToken({ name: user_data.name, email: user_data.email, user_id: user_data.user_id });
 
-            res.cookie('token', token, {httpOnly: true, secure: false, sameSite: 'none'});
-            res.json(SUCCESS({name: user_data.name, email: user_data.email, profile_photo: user_data.profile_photo, xp: user_data.xp}));
+            res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', domain: '.inspex.dev',  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), maxAge: 90 * 24 * 60 * 60 * 1000  });
+            res.json(SUCCESS({ name: user_data.name, email: user_data.email, profile_photo: user_data.profile_photo, xp: user_data.xp }));
 
-        }else{  
-            res.json(UNAUTHACCESS());
+        } else {
+            res.status(401).json(UNAUTHACCESS());
         }
 
-    }catch(error){
+    } catch (error) {
         console.log(`AUTHENTICATION FAILED ${error}`);
         res.json(ISE())
     }
 }
 
-export const profile = async(req: any, res:any) => {
-    try{
+export const profile = async (req: any, res: any) => {
+    try {
         const user_id = req.payload.user_id;
         const data = await prisma.users.findFirst({
             where: {
@@ -70,8 +70,18 @@ export const profile = async(req: any, res:any) => {
         });
 
         res.json(SUCCESS(data));
-    }catch(error){
+    } catch (error) {
         console.log(`PROFILE ERROR ${error}`)
-        res.json(ISE())
+        res.status(500).json(ISE())
+    }
+}
+
+export const logout = async (req: any, res: any) => {
+    try {
+        res.clearCookie("token", { httpOnly: true, secure: true, domain: '.inspex.dev', sameSite: 'none' });
+        res.json(SUCCESS())
+    } catch (error) {
+        console.log(`LOGOUT FAILED ${error}`);
+        res.status(500).json(ISE());
     }
 }

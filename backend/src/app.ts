@@ -15,14 +15,26 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:4000', 'http://localhost', "http://localhost:3000", "http://localhost:4200", 'http://192.168.0.227:4200', 'http://192.168.0.214:4200', 'http://localhost:4400'], // Replace with your Angular app's URL
+    origin: ["http://localhost:3000",
+        "https://habitup.inspex.dev",
+        "https://api-habitup.inspex.dev",
+        "http://localhost:4200",
+        "http://localhost:4400",
+        "http://localhost:4000",
+        "http://192.168.0.227:4200",
+        "http://192.168.0.147:4200",
+        "http://192.168.0.147:4000",
+        "http://192.168.0.214:4200",
+        "http://192.168.0.195:4000",
+        "http://192.168.0.195:3000",
+        "http://192.168.0.195"], // Replace with your Angular app's URL
     credentials: true
 }));
 
 app.use(cookieParse());
 app.use(express.json());
 
-
+app.set('trust proxy', 1);
 app.get("/health", (req, res) => {
     res.json({ status: 200 })
 })

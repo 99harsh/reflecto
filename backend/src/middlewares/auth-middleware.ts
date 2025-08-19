@@ -34,10 +34,10 @@ export const verifyUserAuthToken = (req: any, res: Response, next:NextFunction) 
             req.payload = payload;
             return next();
         }else{
-            res.json(UNAUTHACCESS());
+            res.status(401).json(UNAUTHACCESS());
         }
     }catch(error){  
         console.log(`VERIFY AUTH TOKEN FAILED ${error}`)
-        res.json(UNAUTHACCESS());
+        res.status(401).json(UNAUTHACCESS());
     }
 }

@@ -8,6 +8,6 @@ export const allPrompts = async(req:any, res: Response) => {
         res.json(SUCCESS(prompts));
     }catch(error){
         console.log(`GET ALL PROMPTS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }

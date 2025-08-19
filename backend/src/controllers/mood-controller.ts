@@ -11,7 +11,7 @@ export const allMoods = async (req: Request, res: Response) => {
         res.json(SUCCESS(allMoods));
     } catch (error) {
         console.log(`GET ALL MOODS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -27,7 +27,7 @@ export const getMood = async (req: any, res: Response) => {
         res.json(SUCCESS(mood))
     } catch (error) {
         console.log(`GET MOOD FAILED ${error}`);
-        res.json(ISE())
+        res.status(500).json(ISE())
     }
 }
 
@@ -37,7 +37,7 @@ export const logMood = async (req: any, res: Response) => {
         const v_data = logMoodSchema.safeParse(req.body);
 
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -75,6 +75,6 @@ export const logMood = async (req: any, res: Response) => {
         res.json(SUCCESS({ updated_at: logged.updated_at }));
     } catch (error) {
         console.log(`LOG MOOD FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }

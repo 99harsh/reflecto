@@ -10,7 +10,7 @@ import { getDateInsightsSchema } from "../utils/validations";
 export const getDashboardCardDetails = async (req: any, res: Response) => {
     try {
         if (!req.payload.user_id) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
         const totalReflectionWords = await prisma.$queryRawUnsafe<{ totalWords: number }[]>(`
@@ -49,7 +49,7 @@ export const getDashboardCardDetails = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`GET DASHBOARD CARD DETAILS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -147,7 +147,7 @@ export const getXPStreakDetails = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`GET XP STREAK DETAILS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -178,7 +178,7 @@ export const getReflectionProgress = async (req: any, res: Response) => {
         }));
     } catch (error) {
         console.log(`REFLECTION PROGRESS STATS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -209,7 +209,7 @@ export const getJournalProgress = async (req: any, res: Response) => {
         }));
     } catch (error) {
         console.log(`JOURNAL INSIGHTS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -247,7 +247,7 @@ export const getTasksProgress = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`TASK PROGRESS STATS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -301,7 +301,7 @@ export const getMoodProgress = async (req: any, res: Response) => {
         }));
     } catch (error) {
         console.log(`MOOD PROGRESS STATS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -373,7 +373,7 @@ export const getCalendarData = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`GET CALENDAR FAILED ${error}`);
-        res.json(ISE())
+        res.status(500).json(ISE())
     }
 }
 
@@ -382,7 +382,7 @@ export const getDateInsights = async (req: any, res: Response) => {
         const v_data = getDateInsightsSchema.safeParse(req.body);
 
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
         const mood_data = await prisma.user_mood.findFirst({
@@ -443,7 +443,7 @@ export const getDateInsights = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`GET DATE INSIGHT FAILED ${error}`, error);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -451,7 +451,7 @@ export const getMoodInsights = async (req: any, res: Response) => {
     try {
         const v_data = getDateInsightsSchema.safeParse(req.body);
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -477,7 +477,7 @@ export const getMoodInsights = async (req: any, res: Response) => {
         res.json(SUCCESS(response));
     } catch (error) {
         console.log(`GET MOOD INSIGHTS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -485,7 +485,7 @@ export const getJournalInsights = async (req: any, res: Response) => {
     try {
         const v_data = getDateInsightsSchema.safeParse(req.body);
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -504,7 +504,7 @@ export const getJournalInsights = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`GET JOURNAL FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -512,7 +512,7 @@ export const getSelfReflectionInsights = async (req: any, res: Response) => {
     try {
         const v_data = getDateInsightsSchema.safeParse(req.body);
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -526,7 +526,7 @@ export const getSelfReflectionInsights = async (req: any, res: Response) => {
         res.json(SUCCESS(self_reflection_insight));
     } catch (error) {
         console.log(`SELF REFLECTION INSIGHTS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -534,7 +534,7 @@ export const getTasksInsights = async (req: any, res: Response) => {
     try {
         const v_data = getDateInsightsSchema.safeParse(req.body);
         if (!v_data.success) {
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
         const task_insights = await prisma.task.findMany({
@@ -551,7 +551,7 @@ export const getTasksInsights = async (req: any, res: Response) => {
         res.json(SUCCESS(task_insights));
     } catch (error) {
         console.log(`TASKS INSIGHTS FAILED ${error}`);
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 

@@ -25,7 +25,7 @@ export const getSelfReflection = async (req: any, res: Response) => {
 
     } catch (error) {
         console.log(`GET SELF REFLECTION FAIELD ${error}`)
-        res.json(ISE());
+        res.status(500).json(ISE());
     }
 }
 
@@ -33,7 +33,7 @@ export const saveSelfReflection = async(req:any, res:any) => {
     try{
         const v_data = saveSelfReflectionSchema.safeParse(req.body);
         if(!v_data.success){
-            res.json(BADREQ());
+            res.status(400).json(BADREQ());
             return;
         }
 
@@ -89,6 +89,6 @@ export const saveSelfReflection = async(req:any, res:any) => {
         }))
     }catch(error){
         console.log(`SAVE SELF REFLECTION FAILED ${error}`);
-        res.json(ISE())
+        res.status(500).json(ISE())
     }
 }
