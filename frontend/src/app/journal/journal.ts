@@ -4,14 +4,15 @@ import { format } from 'date-fns';
 import { SmartHttpService } from '../services/smart-http.service';
 import { Skeleton } from '../shared/skeleton/skeleton';
 import { trigger, style, transition, animate } from '@angular/animations';
+import { EncryptionService } from '../services/encryption.service';
 
 @Component({
   selector: 'app-journal',
   imports: [Notebook, Skeleton],
   templateUrl: './journal.html',
   styleUrl: './journal.scss',
-   animations: [
-      // Content slide in
+  animations: [
+    // Content slide in
     trigger('slideUpIn', [
       transition(':enter', [
         style({ transform: 'translateX(10px', opacity: 0 }),
@@ -27,7 +28,10 @@ export class Journal implements OnInit {
     totalWords: 0
   });
   loading = signal<boolean>(true);
+  passphrase = 'Testing123';
 
+
+  encryptionService = inject(EncryptionService);
   http = inject(SmartHttpService);
 
   ngOnInit(): void {
@@ -37,14 +41,12 @@ export class Journal implements OnInit {
 
   getInsightsData = () => {
     this.http.get("stats/journal").subscribe({
-      next: (resp:any) => {
-        if(resp && resp.status === 200){
+      next: (resp: any) => {
+        if (resp && resp.status === 200) {
           this.insightData.set(resp.data);
           this.loading.set(false);
         }
       }
     })
   }
-
-  
 }

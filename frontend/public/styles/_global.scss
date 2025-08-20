@@ -126,3 +126,52 @@
     align-items: center;
     gap: .612rem
 }
+
+.rfto-passphrase-container{
+    max-width: 30rem;
+    margin: auto;
+    border: 1px solid #e9e9e7;
+    overflow: hidden;
+    padding: 1rem;
+    .rfto-passphrase-headings{
+        h3{
+            color: var(--color-primary);
+        }
+        p{
+            color: var(--color-secondary);
+            font-size: var(--font-medium);
+        }
+    }
+
+    .rfto-passphrase-input-container{
+        margin: .612rem 0px;
+        display: flex;
+        .rfto-passphrase-input{
+            padding: .312rem;
+            outline: none;
+            flex: 1;
+        }
+    }
+
+    .rfto-passphrase-button{
+        margin-bottom: .612rem;
+        button{
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            padding: .5rem 1rem;
+            border-radius: .312rem;
+            cursor: pointer;
+        }
+    }
+
+    .rfto-passphrase-note{
+        background-color: #ffebeb;
+        padding: .312rem;
+        border-radius: .312rem;
+        p{
+            color: var(--color-primary-danger);
+            font-size: small;
+        }
+    }
+}

@@ -7,6 +7,9 @@ import { SmartHttpService } from '../../services/smart-http.service';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 import { format } from 'date-fns';
 import { Skeleton } from '../skeleton/skeleton';
+import { EncryptionService } from '../../services/encryption.service';
+import { StorageService } from '../../services/storage.service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-notebook',
@@ -21,6 +24,7 @@ export class Notebook implements OnInit {
   textareaRows = 25
   editor!: Editor;
 
+  cipherData = signal<{ ciphertext: string, iv: string }>({ ciphertext: '', iv: '' });
   loading = signal<boolean>(true);
   currentDate = signal<string>('');
   updatedAt = signal<string>('');
@@ -29,11 +33,21 @@ export class Notebook implements OnInit {
   journalText = signal<string>('');
   journalData = signal<any>({});
 
+  isEncrypted = signal<boolean>(true);
+  isNewEntry = signal<boolean>(false);
+  passphraseText = signal<string>("");
+
   private platformId = inject(PLATFORM_ID);
   private http = inject(SmartHttpService);
+  private encryptionService = inject(EncryptionService);
+  private storage = inject(StorageService);
+  private toastr = inject(ToastrService);
 
   private inputSubject = new Subject<string>();
-  private destroy$ = new Subject<void>()
+  private destroy$ = new Subject<void>();
+  private key!: CryptoKey;
+  private salt!: Uint8Array;
+
 
   ngOnInit(): void {
     this.currentDate.set(format(new Date(), "EEEE, MMMM d, yyyy"));
@@ -41,8 +55,13 @@ export class Notebook implements OnInit {
       this.editor = new Editor();
       this.isEditor.set(true);
     }
+    this.checkPassphrase();
     this.fetchJournalData();
     this.registerSaveJournalListner();
+  }
+
+  checkPassphrase = () => {
+  
   }
 
   fetchJournalData = () => {
@@ -51,13 +70,39 @@ export class Notebook implements OnInit {
         if (res && res.status === 200) {
           this.loading.set(false);
         }
-        if (res && res.status === 200 && res.data) {
+        if (res && res.status === 200 && res.data && res?.data?.ciphertext !== '') {
           this.journalText.set(res.data?.journal);
           this.journalData.set(res.data)
-
+          this.cipherData.set({ ciphertext: res.data?.ciphertext, iv: res.data?.iv })
+          this.isNewEntry.set(false);
+        } else {
+          this.isNewEntry.set(true);
         }
       }
     })
+  }
+
+  onPassphraseInput = (value: string) => {
+    this.passphraseText.set(value);
+  }
+
+  lockUnlockContent = async () => {
+    try {
+      const user_profile: any = JSON.parse(this.storage.getItem("user_profile") || "");
+      this.salt = new Uint8Array(Object.values(user_profile.salt));
+      this.key = await this.encryptionService.deriveKey(this.passphraseText(), this.salt);
+      if (this.cipherData()?.ciphertext && this.cipherData()?.iv) {
+        const decrypt = await this.encryptionService.decrypt(
+          this.cipherData().ciphertext,
+          this.cipherData().iv,
+          this.key
+        );
+        this.journalText.set(decrypt);
+      }
+      this.isEncrypted.set(false);
+    } catch (error: any) {
+      this.toastr.error("Invalid Passphrase!", "Error!");
+    }
   }
 
   private registerSaveJournalListner() {
@@ -66,16 +111,17 @@ export class Notebook implements OnInit {
       distinctUntilChanged(),
       takeUntil(this.destroy$)
     )
-      .subscribe((val) => {
-        this.saveJournal(val);
+      .subscribe(async (val) => {
+        const encrypted = await this.encryptionService.encrypt(val, this.key);
+        this.saveJournal(encrypted);
       });
   }
 
-  private saveJournal = (value: string) => {
+  private saveJournal = (value: any) => {
     this.isSaving.set(true);
     this.http.post('journal/save', {
       journal_id: this.journalData()?.journal_id,
-      journal: value
+      ...value
     }).subscribe({
       next: (resp: any) => {
         if (resp && resp.status === 200) {
@@ -91,7 +137,6 @@ export class Notebook implements OnInit {
 
 
   onTextChange = (event: string) => {
-    console.log("sadasdasdasd", typeof (event));
     if (event === this.journalText()) return;
     this.journalText.set(event);
     this.inputSubject.next(event);

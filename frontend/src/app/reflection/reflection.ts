@@ -15,9 +15,12 @@ import { NgxEditorComponent, NgxEditorMenuComponent, Editor } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { Skeleton } from '../shared/skeleton/skeleton';
 import { trigger, style, transition, animate } from '@angular/animations';
+import { EncryptionService } from '../services/encryption.service';
+import { StorageService } from '../services/storage.service';
+import { ToastrService } from 'ngx-toastr';
 
-interface ReflectionLoading{
-  isUserReflectionLoading:boolean,
+interface ReflectionLoading {
+  isUserReflectionLoading: boolean,
   isStatsLoading: boolean,
   isReflectionPromptLoading: boolean
 }
@@ -30,7 +33,7 @@ interface ReflectionLoading{
   styleUrl: './reflection.scss',
   encapsulation: ViewEncapsulation.None,
   animations: [
-      // Content slide in
+    // Content slide in
     trigger('slideUpIn', [
       transition(':enter', [
         style({ transform: 'translateX(10px', opacity: 0 }),
@@ -43,6 +46,7 @@ export class Reflection implements OnInit {
   // Signals
   reflectionData = signal<any>({});
   reflectionText = signal<string>('');
+  cipherData = signal<{ ciphertext: string, iv: string }>({ ciphertext: '', iv: '' });
   prompts = signal<any[]>([]);
   isSaving = signal<boolean>(false);
   editor!: Editor;
@@ -54,12 +58,21 @@ export class Reflection implements OnInit {
     isStatsLoading: true,
     isReflectionPromptLoading: true
   })
+  isEncrypted = signal<boolean>(true);
+  isNewEntry = signal<boolean>(false);
+  passphraseText = signal<string>("");
+
   private platformId = inject(PLATFORM_ID);
   //Service
   private http = inject(SmartHttpService);
-  // RxJS Subjects
+  private encryptionService = inject(EncryptionService);
+  private storage = inject(StorageService);
+  private toastr = inject(ToastrService);
+
   private inputSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
+  private key!: CryptoKey;
+  private salt!: Uint8Array;
 
   ngOnInit(): void {
     this.currentDate.set(format(new Date(), "EEEE, MMMM d, yyyy"));
@@ -67,36 +80,65 @@ export class Reflection implements OnInit {
       this.editor = new Editor();
       this.isEditor.set(true);
     }
+
     this.fetchPrompts();
     this.fetchReflection();
     this.registerSaveReflectionListener();
     this.fetchProgress();
   }
 
+
+  onPassphraseInput = (value: string) => {
+    this.passphraseText.set(value);
+  }
+
+  lockUnlockContent = async () => {
+    try {
+      const user_profile: any = JSON.parse(this.storage.getItem("user_profile") || "");
+      this.salt = new Uint8Array(Object.values(user_profile.salt));
+      this.key = await this.encryptionService.deriveKey(this.passphraseText(), this.salt);
+      if (this.cipherData()?.ciphertext && this.cipherData()?.iv) {
+        const decrypt = await this.encryptionService.decrypt(
+          this.cipherData().ciphertext,
+          this.cipherData().iv,
+          this.key
+        );
+        this.reflectionText.set(decrypt);
+      }
+
+      this.isEncrypted.set(false);
+
+    } catch (error: any) {
+      this.toastr.error("Invalid Passphrase!", "Error!");
+    }
+  }
+
+
   /**
    * Listen for debounced input changes and auto-save
    */
   private registerSaveReflectionListener() {
     this.inputSubject.pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((val) => {
-        console.log(val);
-        this.saveReflection(val);
+      debounceTime(500),
+      distinctUntilChanged(),
+      takeUntil(this.destroy$)
+    )
+      .subscribe(async (val) => {
+        const encrypted = await this.encryptionService.encrypt(val, this.key);
+
+        this.saveReflection(encrypted);
       });
   }
 
   /**
    * Save reflection data to server
    */
-  private saveReflection(text: string) {
+  private saveReflection(text: any) {
     this.isSaving.set(true);
 
     this.http
       .post('self-reflection/save', {
-        self_reflection: text,
+        ...text,
         self_reflection_id: this.reflectionData()?.self_reflection_id,
       })
       .subscribe({
@@ -115,12 +157,12 @@ export class Reflection implements OnInit {
       });
   }
 
-  private fetchProgress(){
+  private fetchProgress() {
     this.http.get('stats/self-reflection').subscribe({
-      next: (resp:any) => {
-        if(resp && resp.status === 200){
+      next: (resp: any) => {
+        if (resp && resp.status === 200) {
           this.progress.set(resp.data);
-          this.isLoading.update((prev:ReflectionLoading) => ({
+          this.isLoading.update((prev: ReflectionLoading) => ({
             ...prev,
             isStatsLoading: false
           }))
@@ -137,7 +179,7 @@ export class Reflection implements OnInit {
       next: (resp: any) => {
         if (resp?.status === 200 && resp.data) {
           this.prompts.set(resp.data);
-          this.isLoading.update((prev:ReflectionLoading) => ({
+          this.isLoading.update((prev: ReflectionLoading) => ({
             ...prev,
             isReflectionPromptLoading: false
           }))
@@ -153,8 +195,8 @@ export class Reflection implements OnInit {
   private fetchReflection() {
     this.http.get('self-reflection/get').pipe(takeUntil(this.destroy$)).subscribe({
       next: (resp: any) => {
-        if(resp && resp.status === 200){
-             this.isLoading.update((prev:ReflectionLoading) => ({
+        if (resp && resp.status === 200) {
+          this.isLoading.update((prev: ReflectionLoading) => ({
             ...prev,
             isUserReflectionLoading: false
           }))
@@ -165,8 +207,10 @@ export class Reflection implements OnInit {
             updated_at: format(new Date(resp.data?.updated_at), 'dd-MMM hh:mm a'),
           });
 
-          this.reflectionText.set(resp.data.self_reflection);
-       
+          this.cipherData.set({ ciphertext: resp.data?.ciphertext, iv: resp.data?.iv })
+          this.isNewEntry.set(false);
+        } else {
+          this.isNewEntry.set(true);
         }
       },
       error: (err) => console.error('Error fetching reflection:', err),
@@ -177,7 +221,7 @@ export class Reflection implements OnInit {
    * Triggered on textarea input
    */
   onTextChange(event: string) {
-    if(event === this.reflectionText()) return;
+    if (event === this.reflectionText()) return;
     this.inputSubject.next(event);
     this.reflectionText.set(event);
   }
@@ -186,16 +230,16 @@ export class Reflection implements OnInit {
    * Cleanup
    */
   ngOnDestroy(): void {
-    if(this.isEditor()){
-       this.editor.destroy();
+    if (this.isEditor()) {
+      this.editor.destroy();
     }
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  addPromptToEditor = (prompt:string) => {
-    if(this.reflectionText().trim().length <= 7){
-      this.reflectionText.set( `<h3 style='color:#78350f; background-color: yellow; padding: .312rem'>${prompt}</h3><br />`);
+  addPromptToEditor = (prompt: string) => {
+    if (this.reflectionText().trim().length <= 7) {
+      this.reflectionText.set(`<h3 style='color:#78350f; background-color: yellow; padding: .312rem'>${prompt}</h3><br />`);
       return;
     }
     this.reflectionText.set(`${this.reflectionText()}<h3 style='color:#78350f; background-color: yellow; padding: .312rem'>${prompt}</h3>`);

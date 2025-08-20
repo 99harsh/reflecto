@@ -88,14 +88,52 @@
                 </div>
                 <div class="rfto-body">
 
-                    @if(isEditor()){
+                    @if(isEditor() && !isEncrypted()){
                     <div class="rfto-input-container">
                         <div class="rfto-editor-menu-container">
                             <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
                             <app-saving-loading [isLoading]="isSaving()" [isUpdated]="!isSaving()"
                                 [updatedAt]="reflectionData()?.updated_at"></app-saving-loading>
                         </div>
-                        <ngx-editor [editor]="editor" [ngModel]="reflectionText()" (ngModelChange)="onTextChange($event)" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+                        <ngx-editor [editor]="editor" [ngModel]="reflectionText()"
+                            (ngModelChange)="onTextChange($event)" [disabled]="false"
+                            [placeholder]="'Type here...'"></ngx-editor>
+                    </div>
+                    } @else if(isEncrypted() && isNewEntry()){
+                    <div class="rfto-passphrase-container">
+                        <div class="rfto-passphrase-headings">
+                            <h3>Set a passphrase to secure this entry.</h3>
+                            <p>Only you will know this passphrase. Use it again to unlock or edit your entry</p>
+                        </div>
+                        <div class="rfto-passphrase-input-container">
+                            <input placeholder="Enter passphrase" [ngModel]="passphraseText()"
+                                (ngModelChange)="onPassphraseInput($event)" type="text" class="rfto-passphrase-input" />
+                        </div>
+                        <div class="rfto-passphrase-button">
+                            <button (click)="lockUnlockContent()">Lock</button>
+                        </div>
+                        <div class="rfto-passphrase-note">
+                            <p>"For your privacy, your passphrase is never stored with us. This means only you can
+                                unlock your entry. If you forget it, not one (including us) can recover it."</p>
+                        </div>
+                    </div>
+                    } @else if(isEncrypted() && !isNewEntry()) {
+                    <div class="rfto-passphrase-container">
+                        <div class="rfto-passphrase-headings">
+                            <h3>Enter your passphrase to unlock this entry.</h3>
+                            <p>This is the same passphrase you set when creating it.</p>
+                        </div>
+                        <div class="rfto-passphrase-input-container">
+                            <input placeholder="Enter passphrase" [ngModel]="passphraseText()"
+                                (ngModelChange)="onPassphraseInput($event)" type="text" class="rfto-passphrase-input" />
+                        </div>
+                        <div class="rfto-passphrase-button">
+                            <button (click)="lockUnlockContent()">Unlock</button>
+                        </div>
+                        <div class="rfto-passphrase-note">
+                            <p>"For your privacy, your passphrase is never stored with us. This means only you can
+                                unlock your entry. If you forget it, not one (including us) can recover it."</p>
+                        </div>
                     </div>
                     }
                 </div>
@@ -200,8 +238,8 @@
                         <p>Total Entries</p>
                     </div>
                     <div class="rfto-day-streak">
-                        <h1>{{ progress().totalWords }}</h1>
-                        <p>Words Written</p>
+                        <h1>{{ progress().totalThisWeek }}</h1>
+                        <p>This Week</p>
                     </div>
                 </div>
             </div>

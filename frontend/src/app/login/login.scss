@@ -114,6 +114,11 @@
             font-size: var(--font-small);
             color: var(--color-secondary);
             padding: 0rem 1rem;
+            .rfto-tnc-pp{
+                color: var(--color-primary);
+                font-weight: 500;
+                cursor: pointer;
+            }
         }
 
         .rfto-guest-card-container {
