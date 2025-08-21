@@ -1,5 +1,5 @@
 <header class="rfto-header-container">
-    <div class="rfto-appname-container">
+    <div class="rfto-appname-container" [routerLink]="['/']">
         <h1 class="rfto-app-name">
             <img src="./h.png" class="rfto-logo-h" />
             HabitUp
@@ -7,14 +7,16 @@
         <div class="rfto-app-line"></div>
     </div>
     <div class="rfto-nav-item-container">
+        @if(isHome()){
+            <div class="rfto-nav-item">
+                <a (click)="scrollToSection('features', $event)">Features</a>
+            </div>
+            <div class="rfto-nav-item">
+                <a (click)="scrollToSection('how-it-works', $event)">How It Works</a>
+            </div>
+        }
         <div class="rfto-nav-item">
-            <a (click)="scrollToSection('features', $event)">Features</a>
-        </div>
-        <div class="rfto-nav-item">
-            <a (click)="scrollToSection('how-it-works', $event)">How It Works</a>
-        </div>
-        <div class="rfto-nav-item">
-            <a [routerLink]="['login']" class="rfto-signin-button">Sign In</a>
+            <a [routerLink]="['/login']" class="rfto-signin-button">Sign In</a>
         </div>
     </div>
 

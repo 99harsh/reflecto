@@ -76,7 +76,15 @@ export const routes: Routes = [
                         loadComponent: () => import('./date-details/tasks/tasks').then(c => c.Tasks)
                     }
                 ]
-            },
+            }
         ]
+    },
+    {
+        path: 'privacy-policy',
+        loadComponent: () => import('./privacy-policy/privacy-policy').then(c => c.PrivacyPolicy)
+    },
+    {
+        path: 'terms-and-conditions',
+        loadComponent: () => import('./tnc/tnc').then(c => c.Tnc)
     }
 ];

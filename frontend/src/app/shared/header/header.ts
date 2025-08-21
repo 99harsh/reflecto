@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,7 +10,8 @@ import { RouterLink } from '@angular/router';
 })
 export class Header {
 
-
+  isHome = input<boolean>(true);
+  
   scrollToSection(sectionId: string, event: Event) {
     event.preventDefault(); // prevent default anchor behavior
     const element = document.getElementById(sectionId);

@@ -37,7 +37,7 @@
     .rfto-appname-container {
         display: flex;
         align-items: center;
-
+        cursor: pointer;
         .rfto-app-name {
             font-weight: 600;
             color: var(--c-text-primary);

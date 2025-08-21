@@ -1,18 +1,30 @@
-  .rfto-footer-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #78350f;
-        padding: 2.5rem;
-        p{
-            color: #fde68a;
-            padding: .625rem 2rem;
-            background-color: #92400e;
-            border: 2px dotted var(--c-border-1);
-        }
+  .rfto-footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #78350f;
+    flex-direction: column;
+    padding: 2.5rem;
+
+    p {
+      color: #fde68a;
+      padding: .625rem 2rem;
+      background-color: #92400e;
+      border: 2px dotted var(--c-border-1);
     }
 
-      .rfto-rotate-1 {
-        --tw-rotate: -1deg;
-        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+    .rfto-footer-link-container {
+      margin-top: 1rem;
+      display: flex;
+      gap: 2rem;
+
+      a {
+        color: #fde68a;
+      }
     }
+  }
+
+  .rfto-rotate-1 {
+    --tw-rotate: -1deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+  }
