@@ -4,6 +4,8 @@ import { BADREQ, ISE, SUCCESS, UNAUTHACCESS } from '../utils/responses';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 import prisma from '../utils/db';
 import { createUserAuthToken } from '../middlewares/auth-middleware';
+import { env } from 'process';
+import { base64ToUint8Array, uint8ArrayToBase64 } from '../utils/encryption-helper';
 
 const client = new OAuth2Client(process.env.CLIENT_ID)
 
@@ -24,7 +26,9 @@ export const authenticate = async (req: Request, res: Response) => {
 
         const user_payload = ticket.getPayload();
         if (typeof user_payload == "object" && user_payload && user_payload.name && user_payload.email && user_payload.picture) {
-            const user_data = await prisma.users.upsert({
+            let salt:any = crypto.getRandomValues(new Uint8Array(16));
+            console.log(salt);
+            const user_data:any = await prisma.users.upsert({
                 where: {
                     email: user_payload.email
                 },
@@ -35,20 +39,20 @@ export const authenticate = async (req: Request, res: Response) => {
                     name: user_payload.name,
                     email: user_payload.email,
                     profile_photo: user_payload.picture,
-                    xp: 0
+                    xp: 0,
+                    salt: salt
                 }
             })
 
             const token = await createUserAuthToken({ name: user_data.name, email: user_data.email, user_id: user_data.user_id });
-
-            res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', domain: '.inspex.dev',  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), maxAge: 90 * 24 * 60 * 60 * 1000  });
-            res.json(SUCCESS({ name: user_data.name, email: user_data.email, profile_photo: user_data.profile_photo, xp: user_data.xp }));
+            res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'lax',  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), maxAge: 90 * 24 * 60 * 60 * 1000  });
+            res.json(SUCCESS({ name: user_data.name, email: user_data.email, profile_photo: user_data.profile_photo, xp: user_data.xp, salt: user_data?.salt }));
 
         } else {
             res.status(401).json(UNAUTHACCESS());
         }
 
-    } catch (error) {
+    } catch (error: any) {
         console.log(`AUTHENTICATION FAILED ${error}`);
         res.json(ISE())
     }
@@ -57,7 +61,7 @@ export const authenticate = async (req: Request, res: Response) => {
 export const profile = async (req: any, res: any) => {
     try {
         const user_id = req.payload.user_id;
-        const data = await prisma.users.findFirst({
+        const data:any = await prisma.users.findFirst({
             where: {
                 user_id: user_id
             },
@@ -65,11 +69,11 @@ export const profile = async (req: any, res: any) => {
                 name: true,
                 email: true,
                 profile_photo: true,
-                xp: true
+                xp: true,
+                salt: true
             }
         });
-
-        res.json(SUCCESS(data));
+        res.json(SUCCESS({...data}));
     } catch (error) {
         console.log(`PROFILE ERROR ${error}`)
         res.status(500).json(ISE())
@@ -78,7 +82,7 @@ export const profile = async (req: any, res: any) => {
 
 export const logout = async (req: any, res: any) => {
     try {
-        res.clearCookie("token", { httpOnly: true, secure: true, domain: '.inspex.dev', sameSite: 'none' });
+        res.clearCookie("token", { httpOnly: true, secure: true, sameSite: 'lax' });
         res.json(SUCCESS())
     } catch (error) {
         console.log(`LOGOUT FAILED ${error}`);

@@ -20,17 +20,11 @@ export const updateTaskSchema = zod.object({
 })
 
 //Journal
-export const createJournalSchema = zod.object({
-    journal: zod.string()
-})
-export const updateJournalSchema = zod.object({
-    journal_id: zod.number(),
-    journal: zod.string()
-})
 
 export const saveJournalSchema = zod.object({
     journal_id: zod.number().optional(),
-    journal: zod.string()
+    ciphertext: zod.string(),
+    iv: zod.string()
 })
 
 //Mood
@@ -42,7 +36,8 @@ export const logMoodSchema = zod.object({
 //Self Reflection
 export const saveSelfReflectionSchema = zod.object({
      self_reflection_id: zod.number().optional(),
-     self_reflection: zod.string()
+    ciphertext: zod.string(),
+    iv: zod.string()
 })
 
 //Prompts

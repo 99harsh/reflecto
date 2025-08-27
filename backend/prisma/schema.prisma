@@ -16,7 +16,7 @@ model users{
     current_streak Int @default(0)
     highest_streak Int @default(0)
     last_login DateTime @updatedAt
-    
+    salt Bytes @db.MediumBlob @default("")
     created_at DateTime @default(now())
 
     task task[]
@@ -78,7 +78,8 @@ model journals{
   users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
-  journal String @db.LongText
+    ciphertext Bytes @db.LongBlob
+  iv Bytes
 
   updated_at DateTime @updatedAt
 }
@@ -99,7 +100,8 @@ model self_reflection{
   users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
-  self_reflection String @db.LongText
+  ciphertext Bytes @db.LongBlob
+  iv Bytes
 
   updated_at DateTime @updatedAt @unique
 }

@@ -1,38 +1,40 @@
 import { Response } from "express";
 import { BADREQ, ISE, SUCCESS } from "../utils/responses";
-import {  saveJournalSchema } from "../utils/validations";
+import { saveJournalSchema } from "../utils/validations";
 import prisma from '../utils/db';
 import { dateFilter } from "../utils/date-helper";
 import { streak_activity_ids, xpInfo } from "../utils/stats-helper";
+import { base64ToBytes, bytesToBase64 } from "../utils/encryption-helper";
 
-export const getJournal = async(req:any, res: Response) => {
-    try{
-        const journal = await prisma.journals.findFirst({
+export const getJournal = async (req: any, res: Response) => {
+    try {
+        const journal:any = await prisma.journals.findFirst({
             where: {
                 user_id: req.payload.user_id,
                 updated_at: dateFilter(req.body?.date)
             }
         });
-        res.json(SUCCESS(journal));
-    }catch(error){
+        res.json(SUCCESS({...journal, ciphertext: bytesToBase64(journal?.ciphertext), iv: bytesToBase64(journal?.iv)}));
+    } catch (error) {
         console.log(`GET JOURNAL FAILED ${error}`);
         res.status(500).json(ISE());
     }
 }
 
-export const saveJournal = async(req:any, res:Response) => {
-    try{    
+export const saveJournal = async (req: any, res: Response) => {
+    try {
         const v_data = saveJournalSchema.safeParse(req.body);
 
-        if(!v_data.success){
+        if (!v_data.success) {
             res.status(400).json(BADREQ());
             return;
         }
 
-        if(v_data.data?.journal_id){
+        if (v_data.data?.journal_id) {
             const updated = await prisma.journals.update({
                 data: {
-                    journal: v_data.data.journal,
+                    ciphertext: base64ToBytes(v_data.data.ciphertext),
+                    iv: base64ToBytes(v_data.data.iv),
                     updated_at: new Date()
                 },
                 where: {
@@ -41,12 +43,12 @@ export const saveJournal = async(req:any, res:Response) => {
                 }
             });
 
-            res.json(SUCCESS({updated_at: updated.updated_at, journal_id: updated.journal_id}));
+            res.json(SUCCESS({ updated_at: updated.updated_at, journal_id: updated.journal_id }));
             return;
         }
 
-        const currentXP:any = await prisma.users.findUnique({
-            where:{
+        const currentXP: any = await prisma.users.findUnique({
+            where: {
                 user_id: req.payload.user_id
             }
         });
@@ -55,20 +57,21 @@ export const saveJournal = async(req:any, res:Response) => {
 
         const updatedUserXP = await prisma.users.update({
             where: {
-                user_id :req.payload.user_id
+                user_id: req.payload.user_id
             },
             data: {
                 xp: updatedXP
             }
-        }) 
+        })
 
         const created = await prisma.journals.create({
             data: {
                 user_id: req.payload.user_id,
-                journal: v_data.data.journal
+                ciphertext: base64ToBytes(v_data.data.ciphertext),
+                iv: base64ToBytes(v_data.data.iv),
             }
         });
-        
+
         await prisma.users_streak.create({
             data: {
                 user_id: req.payload.user_id,
@@ -76,9 +79,9 @@ export const saveJournal = async(req:any, res:Response) => {
             }
         })
 
-        res.json(SUCCESS({journal_id: created.journal_id, updated_at: created.updated_at}));
-        
-    }catch(error){
+        res.json(SUCCESS({ journal_id: created.journal_id, updated_at: created.updated_at }));
+
+    } catch (error) {
         console.log(`SAVE JOURNAL ERROR ${error}`);
         res.status(500).json(ISE());
     }
