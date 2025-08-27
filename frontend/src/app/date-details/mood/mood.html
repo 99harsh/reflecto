@@ -29,7 +29,7 @@
     <div class="rfto-card rfto-mood-card-container rfto-shadow-lg">
         <h1 class="rfto-mood-emoj">{{insightData().mood_emoj}}</h1>
         <h2 class="rfto-mood-name">{{insightData().mood_name}}</h2>
-        <h2 class="rfto-intensity-heading">Intensity: {{insightData().intensity}}/10</h2>
+        <h2 class="rfto-intensity-heading">Intensity: {{insightData()?.intensity || 0}}/10</h2>
         <div class="rfto-intensity-progressbar">
             <app-progressbar [progress]="moodProgress"></app-progressbar>
         </div>

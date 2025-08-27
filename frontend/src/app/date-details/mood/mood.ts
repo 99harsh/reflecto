@@ -46,7 +46,7 @@ export class Mood implements OnInit {
   }
 
   get moodProgress() {
-    return (this.insightData().intensity / 10) * 100
+    return (this.insightData().intensity / 10) * 100 || 0;
   }
 
   get loggedAt() {

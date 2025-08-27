@@ -1,19 +1,20 @@
 @use "sass:math";
+@use "sass:meta";
 
 @function strip-unit($value) {
-    @if type-of($value) == 'number' and not unitless($value) {
-        @return math.div($value, $value * 0 + 1);
-    }
-    @return $value;
+  @if meta.type-of($value) == 'number' and not math.is-unitless($value) {
+    @return math.div($value, $value * 0 + 1);
+  }
+  @return $value;
 }
 
 @mixin fluid-type($min-vw, $mid-vw, $max-vw, $min-font-size, $mid-font-size, $max-font-size) {
-  $u1: unit($min-vw);
-  $u2: unit($mid-vw);
-  $u3: unit($max-vw);
-  $u4: unit($min-font-size);
-  $u5: unit($mid-font-size);
-  $u6: unit($max-font-size);
+  $u1: math.unit($min-vw);
+  $u2: math.unit($mid-vw);
+  $u3: math.unit($max-vw);
+  $u4: math.unit($min-font-size);
+  $u5: math.unit($mid-font-size);
+  $u6: math.unit($max-font-size);
 
   @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 and $u1 == $u5 and $u1 == $u6 {
     & {
