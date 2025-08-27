@@ -16,7 +16,7 @@
             <p>{{currentDate()}}</p>
         </div>
         <div class="rfto-export-button-container">
-            <button class="rfto-export-button">
+            <button class="rfto-export-button" [disabled]="isEncrypted()" (click)="exportData()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-download w-4 h-4 mr-2">
@@ -29,9 +29,27 @@
         </div>
     </div>
     <div class="rfto-content-container">
-        @if(isEditor() && !loading()){
+        @if(isEditor() && !loading() && !isEncrypted()){
         <ngx-editor [editor]="editor" [placeholder]="'Type here...'" [ngModel]="editorText()"
             [disabled]="true"></ngx-editor>
+        } @else if(!loading() && isEncrypted()){
+        <div class="rfto-passphrase-container">
+            <div class="rfto-passphrase-headings">
+                <h3>Enter your passphrase to unlock this entry.</h3>
+                <p>This is the same passphrase you set when creating it.</p>
+            </div>
+            <div class="rfto-passphrase-input-container">
+                <input placeholder="Enter passphrase" [ngModel]="passphraseText()"
+                    (ngModelChange)="onPassphraseInput($event)" type="text" class="rfto-passphrase-input" />
+            </div>
+            <div class="rfto-passphrase-button">
+                <button (click)="lockUnlockContent()">Unlock</button>
+            </div>
+            <div class="rfto-passphrase-note">
+                <p>"For your privacy, your passphrase is never stored with us. This means only you can
+                    unlock your entry. If you forget it, not one (including us) can recover it."</p>
+            </div>
+        </div>
         } @else{
         <div class="rfto-loading-container">
             <app-skeleton color="rfto-yellow" height="2rem" width="50%"></app-skeleton>

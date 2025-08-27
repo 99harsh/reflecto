@@ -5,8 +5,8 @@ export const authConfig: AuthConfig = {
 
     issuer: 'https://accounts.google.com',
 
-    // redirectUri: 'http://localhost:4200/callback',
-    redirectUri: 'https://habitup.inspex.dev/callback',
+    redirectUri: 'http://localhost:4200/callback',
+    // redirectUri: 'https://habitup.inspex.dev/callback',
     clientId: env.GOOGLE_CLIENT_ID,
 
     scope: 'openid profile email',
@@ -14,4 +14,3 @@ export const authConfig: AuthConfig = {
     strictDiscoveryDocumentValidation: false,
 
 };
-

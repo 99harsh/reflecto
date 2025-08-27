@@ -201,7 +201,7 @@ export class Reflection implements OnInit {
             isUserReflectionLoading: false
           }))
         }
-        if (resp && resp.status === 200 && resp.data) {
+        if (resp && resp.status === 200 && resp.data && resp.data?.ciphertext && resp.data?.iv) {
           this.reflectionData.set({
             ...resp.data,
             updated_at: format(new Date(resp.data?.updated_at), 'dd-MMM hh:mm a'),

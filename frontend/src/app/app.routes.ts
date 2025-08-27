@@ -1,79 +1,96 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
 import { guestGuard } from './guards/guest-guard';
+import { Landing } from './landing/landing';
+import { Landing as DLanding } from './date-details/landing/landing';
+import { Login } from './login/login';
+import { Callback } from './callback/callback';
+import { DashboardLanding } from './dashboard-landing/dashboard-landing';
+import { Home } from './home/home';
+import { Journal } from './journal/journal';
+import { Journal as DJournal } from './date-details/journal/journal';
+import { Reflection } from './reflection/reflection';
+import { Mood } from './mood/mood';
+import { Mood as DMood } from './date-details/mood/mood';
+import { SelfReflection } from './date-details/self-reflection/self-reflection'; 
+import { Tasks } from './date-details/tasks/tasks';
+import { Calendar } from './shared/calendar/calendar';
+import { Profile } from './profile/profile';
+import { Goals } from './goals/goals';
+import { DateDetails } from './date-details/date-details';
 
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./landing/landing').then(c => c.Landing),
+        component: Landing,
         canActivate: [guestGuard]
     },
     {
         path: 'login',
-        loadComponent: () => import('./login/login').then(c => c.Login),
+        component: Login,
         canActivate: [guestGuard]
     },
     {
         path: 'callback',
-        loadComponent: () => import('./callback/callback').then(c => c.Callback),
+        component: Callback,
         canActivate: [guestGuard]
     },
     {
         path: '',
-        loadComponent: () => import('./dashboard-landing/dashboard-landing').then(c => c.DashboardLanding),
+        component: DashboardLanding,
         canActivate: [authGuard],
         children: [
             {
                 path: 'home',
-                loadComponent: () => import('./home/home').then(c => c.Home)
+                component: Home
             },
             {
                 path: 'journal',
-                loadComponent: () => import('./journal/journal').then(c => c.Journal)
+                component: Journal
             },
             {
                 path: 'reflection',
-                loadComponent: () => import('./reflection/reflection').then(c => c.Reflection)
+                component: Reflection
             },
             {
                 path: 'mood',
-                loadComponent: () => import('./mood/mood').then(c => c.Mood)
+                component: Mood
             },
             {
                 path: 'tasks',
-                loadComponent: () => import('./goals/goals').then(c => c.Goals)
+                component: Goals
             },
             {
                 path: 'calendar',
-                loadComponent: () => import('./calendar-page/calendar-page').then(c => c.CalendarPage)
+                component: Calendar
             },
             {
                 path: 'profile',
-                loadComponent: () => import('./profile/profile').then(c => c.Profile)
+                component: Profile
             },
             {
                 path: 'date-details',
-                loadComponent: () => import('./date-details/date-details').then(c => c.DateDetails),
+                component: DateDetails,
                 children: [
                     {
                         path: ':date',
-                        loadComponent: () => import('./date-details/landing/landing').then(c => c.Landing)
+                       component: DLanding
                     },
                     {
                         path: ":date/mood",
-                        loadComponent: () => import('./date-details/mood/mood').then(c => c.Mood)
+                        component: DMood
                     },
                     {
                         path: ":date/reflection",
-                        loadComponent: () => import('./date-details/self-reflection/self-reflection').then(c => c.SelfReflection)
+                        component: SelfReflection
                     },
                     {
                         path: ":date/journal",
-                        loadComponent: () => import('./date-details/journal/journal').then(c => c.Journal)
+                        component: DJournal
                     },
                     {
                         path: ":date/tasks",
-                        loadComponent: () => import('./date-details/tasks/tasks').then(c => c.Tasks)
+                        component: Tasks
                     }
                 ]
             }

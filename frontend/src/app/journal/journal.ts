@@ -28,8 +28,6 @@ export class Journal implements OnInit {
     totalWords: 0
   });
   loading = signal<boolean>(true);
-  passphrase = 'Testing123';
-
 
   encryptionService = inject(EncryptionService);
   http = inject(SmartHttpService);
@@ -38,7 +36,7 @@ export class Journal implements OnInit {
     this.currentDate.set(format(new Date(), "EEEE, MMMM d, yyyy"))
     this.getInsightsData();
   }
-
+  
   getInsightsData = () => {
     this.http.get("stats/journal").subscribe({
       next: (resp: any) => {
