@@ -6,27 +6,24 @@ export const guestGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const platformId = inject(PLATFORM_ID);
 
-  try {
-    const userProfile = getItem("user_profile");
-
-    if (userProfile) {
-      // ✅ Already logged in → directly redirect (no flicker)
-      return router.parseUrl("/home");
-    }
-
-    // ✅ No profile in localStorage → allow access
-    return true;
-
-  } catch (err) {
-    // ✅ If localStorage fails, allow guest access
-    console.error("LocalStorage access error:", err);
+  // ✅ SSR-safe check
+  if (!isPlatformBrowser(platformId)) {
+    // On server, don’t try to read localStorage → allow guest access
     return true;
   }
 
-  function getItem(key: string) {
-    if (isPlatformBrowser(platformId)) {
-      return localStorage.getItem(key);
+  try {
+    const userProfile = localStorage.getItem("user_profile");
+
+    if (userProfile) {
+      // ✅ Already logged in → redirect to home
+      return router.parseUrl("/home");
     }
-    return null;
+
+    // ✅ No profile → allow guest
+    return true;
+  } catch (err) {
+    console.error("LocalStorage access error:", err);
+    return true;
   }
 };
