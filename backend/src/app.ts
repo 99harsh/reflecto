@@ -49,6 +49,12 @@ app.use("/api/v1/stats", statsRouter);
 app.use("/api/v1/profile", profileRouter);
 
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
     console.log(`SERVER IS RUNNING ON: ${process.env.PORT}`);
-})
+});
+
+server.on("error", (err) => {
+  console.error("Server failed to start:");
+  console.error(err);
+  process.exit(1); // optional: exit if critical
+});
