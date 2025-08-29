@@ -238,6 +238,7 @@ export class Reflection implements OnInit {
   }
 
   addPromptToEditor = (prompt: string) => {
+    if(this.isEncrypted()) return;
     if (this.reflectionText().trim().length <= 7) {
       this.reflectionText.set(`<h3 style='color:#78350f; background-color: yellow; padding: .312rem'>${prompt}</h3><br />`);
       return;
