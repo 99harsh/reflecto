@@ -43,7 +43,6 @@ export class DashboardHeader implements OnInit {
     let user_profile: any = this.getItem("user_profile");
     if (user_profile) {
       user_profile = JSON.parse(user_profile);
-      console.log(user_profile)
       this.profileData.update((prev: any) => ({
         ...prev,
         name: user_profile?.name || "User",

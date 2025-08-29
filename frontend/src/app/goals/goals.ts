@@ -49,7 +49,6 @@ export class Goals implements OnInit {
   getTasks = () => {
     this.http.get("task/get").subscribe({
       next: (resp: any) => {
-        console.log(resp);
         if (resp && resp.status === 200) {
           this.allTasks.set(resp.data);
           this.totalTasks.set(resp.data?.length || 0);
@@ -87,7 +86,6 @@ export class Goals implements OnInit {
       task: this.newTaskInput()
     }).subscribe({
       next: (resp: any) => {
-        console.log(resp);
         if (resp && resp.status === 200) {
           this.allTasks.update((prev: any[]) => [resp.data, ...prev]);
           this.totalTasks.update(value => value + 1);
@@ -140,7 +138,6 @@ export class Goals implements OnInit {
       task_id
     }).subscribe({
       next: (resp) => {
-        console.log(resp);
         this.totalTasks.update(value => value - 1);
         if (isCompleted) {
           this.completedTasks.update(value => value - 1);

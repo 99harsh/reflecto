@@ -56,7 +56,6 @@ export class Profile implements OnInit, OnDestroy {
 
   resetInputTextChange = (value: any) => {
     const normalized = value.trim().toLowerCase();
-    console.log(normalized === "delete my profile data")
     if (normalized === "delete my profile data") {
       this.isResetBtnDisabled.set(false);
     } else {
@@ -70,7 +69,6 @@ export class Profile implements OnInit, OnDestroy {
       this.http.get("profile/reset").subscribe({
         next: (resp: any) => {
           if (resp && resp.status === 200) {
-            console.log(resp);
             this.isDataResetting.set(false);
             this.toggleDeletePopup()
             this.toastr.success('Your profile data has been successfully reset. The page will automatically refresh in 3 seconds.');

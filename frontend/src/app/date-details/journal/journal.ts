@@ -96,7 +96,6 @@ export class Journal implements OnInit {
         
         // Convert to HTML
         const html = this.editorText();
-        console.log(html);
         // Example: download as file
         const blob = new Blob([html], { type: 'text/html' });
         const url = window.URL.createObjectURL(blob);

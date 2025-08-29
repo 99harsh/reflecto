@@ -1,7 +1,6 @@
 import { format, differenceInMinutes, differenceInHours } from 'date-fns';
 export function getRelativeTime(dateString: string | Date): string {
     const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
-    console.log(date);
     const now = new Date();
 
     const mins = differenceInMinutes(now, date);

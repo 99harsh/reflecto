@@ -183,8 +183,8 @@
                 </div>
                 <div class="rfto-card-body">
                     @for(prompt of prompts(); track prompt){
-                    <div class="rfto-prompts" (click)="addPromptToEditor(prompt.description)">
-                        <p>{{prompt.description}}</p>
+                    <div class="rfto-prompts" (click)="addPromptToEditor(prompt.prompt)">
+                        <p>{{prompt.prompt}}</p>
                     </div>
                     }
                 </div>
