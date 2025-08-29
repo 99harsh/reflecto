@@ -68,21 +68,21 @@ export const resetProfileData = async (req: any, res: Response) => {
             return;
         }
 
-        // await prisma.$transaction([
-        //   prisma.users.update({
-        //     data: {
-        //       xp: 0,
-        //       current_streak: 1,
-        //       highest_streak: 1,
-        //     },
-        //     where: { user_id: userId },
-        //   }),
+        await prisma.$transaction([
+          prisma.users.update({
+            data: {
+              xp: 0,
+              current_streak: 1,
+              highest_streak: 1,
+            },
+            where: { user_id: userId },
+          }),
 
-        //   prisma.journals.deleteMany({ where: { user_id: userId } }),
-        //   prisma.self_reflection.deleteMany({ where: { user_id: userId } }),
-        //   prisma.user_mood.deleteMany({ where: { user_id: userId } }),
-        //   prisma.task.deleteMany({ where: { user_id: userId } }),
-        // ]);
+          prisma.journals.deleteMany({ where: { user_id: userId } }),
+          prisma.self_reflection.deleteMany({ where: { user_id: userId } }),
+          prisma.user_mood.deleteMany({ where: { user_id: userId } }),
+          prisma.task.deleteMany({ where: { user_id: userId } }),
+        ]);
 
         res.json(SUCCESS());
     } catch (error) {

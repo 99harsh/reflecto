@@ -53,103 +53,6 @@ export const getDashboardCardDetails = async (req: any, res: Response) => {
     }
 }
 
-// export const getXPStreakDetails = async (req: any, res: Response) => {
-//     try {
-//         let user_details = await prisma.users.findUnique({
-//             where: {
-//                 user_id: req.payload.user_id
-//             }
-//         });
-
-//         if (!user_details) {
-//             res.json(SUCCESS({ message: "NO USER FOUND!" }));
-//             return;
-//         }
-//         const last_login = new Date(user_details.last_login).toLocaleString();
-//         const current_date = new Date().toLocaleString();
-//         let payload = {
-//             xp: user_details.xp,
-//             current_streak: user_details.current_streak,
-//             highest_streak: user_details.highest_streak,
-//         }
-//         if (differenceInDays(current_date, last_login) === 1) {
-//             payload.current_streak += 1;
-//         } else if (differenceInDays(current_date, last_login) > 1) {
-//             payload.current_streak = 1;
-//         }
-
-//         console.log(last_login, current_date)
-
-//         if (!isSameDay(last_login, current_date)) {
-//             if (payload.highest_streak === 0) {
-//                 payload.highest_streak = payload.current_streak;
-//             } else if (payload.highest_streak < payload.current_streak) {
-//                 payload.highest_streak = payload.current_streak
-//             }
-//             payload.xp = user_details.xp + xpInfo.dailyLogin;
-//             user_details = await prisma.users.update({
-//                 data: payload,
-//                 where: {
-//                     user_id: req.payload.user_id
-//                 }
-//             });
-
-//             //Log in the user streak table for daily login
-//             await prisma.users_streak.create({
-//                 data: {
-//                     user_id: req.payload.user_id,
-//                     streak_id: streak_activity_ids.daily_login,
-//                 }
-//             })
-//         }
-
-//         const levelInfo = checkLevel(user_details.xp);
-
-//         const journal = await prisma.journals.count({
-//             where: { updated_at: dateFilter() }
-//         });
-
-//         const reflection = await prisma.self_reflection.count({
-//             where: {
-//                 updated_at: dateFilter()
-//             }
-//         });
-
-//         const tasks = await prisma.task.count({
-//             where: {
-//                 created_at: dateFilter()
-//             }
-//         });
-
-//         const user_mood = await prisma.user_mood.count({
-//             where: {
-//                 updated_at: dateFilter()
-//             }
-//         });
-
-//         const activity_xp = all_activites;
-
-//         activity_xp[0].is_completed = isSameDay(last_login, current_date) ? 1 : 0;
-//         activity_xp[1].is_completed = reflection;
-//         activity_xp[2].is_completed = user_mood;
-//         activity_xp[3].is_completed = journal;
-//         activity_xp[4].is_completed = tasks;
-
-//         res.json(SUCCESS({
-//             xp: user_details.xp,
-//             current_streak: user_details.current_streak,
-//             highest_streak: user_details.highest_streak,
-//             current_level: levelInfo.currentLevel,
-//             xp_next_level: levelInfo.nextLevelXP,
-//             progress: levelInfo.progress,
-//             all_activites: activity_xp,
-//         }));
-
-//     } catch (error) {
-//         console.log(`GET XP STREAK DETAILS FAILED ${error}`);
-//         res.status(500).json(ISE());
-//     }
-// }
 export const getXPStreakDetails = async (req: any, res: Response) => {
     try {
         let user_details = await prisma.users.findUnique({
@@ -162,67 +65,67 @@ export const getXPStreakDetails = async (req: any, res: Response) => {
             res.json(SUCCESS({ message: "NO USER FOUND!" }));
             return;
         }
-
-        const last_login = new Date(user_details.last_login);
-        const current_date = new Date();
-
+        const last_login = new Date(user_details.last_login).toLocaleString();
+        console.log(last_login)
+        const current_date = new Date().toLocaleString();
         let payload = {
             xp: user_details.xp,
             current_streak: user_details.current_streak,
             highest_streak: user_details.highest_streak,
-        };
+        }
+        if (differenceInDays(current_date, last_login) === 1) {
+            payload.current_streak += 1;
+        } else if (differenceInDays(current_date, last_login) > 1) {
+            payload.current_streak = 1;
+        }
 
-        // ✅ Only update if today is not the same day as last login
-        if (!isSameDay(current_date, last_login)) {
-            const diff = differenceInDays(current_date, last_login);
+        console.log(last_login, current_date)
 
-            if (diff === 1) {
-                // consecutive day → streak++
-                payload.current_streak += 1;
-            } else if (diff > 1) {
-                // missed more than 1 day → reset streak
-                payload.current_streak = 1;
+        if (!isSameDay(last_login, current_date)) {
+            if (payload.highest_streak === 0) {
+                payload.highest_streak = payload.current_streak;
+            } else if (payload.highest_streak < payload.current_streak) {
+                payload.highest_streak = payload.current_streak
             }
-
-            // ✅ Update highest streak
-            payload.highest_streak = Math.max(payload.highest_streak, payload.current_streak);
-
-            // ✅ Add daily login XP
             payload.xp = user_details.xp + xpInfo.dailyLogin;
-
-            // ✅ Save updated user details
             user_details = await prisma.users.update({
                 data: payload,
-                where: { user_id: req.payload.user_id }
+                where: {
+                    user_id: req.payload.user_id
+                }
             });
 
-            // ✅ Log streak activity
+            //Log in the user streak table for daily login
             await prisma.users_streak.create({
                 data: {
                     user_id: req.payload.user_id,
                     streak_id: streak_activity_ids.daily_login,
                 }
-            });
+            })
         }
 
-        // ✅ Level Info
         const levelInfo = checkLevel(user_details.xp);
 
-        // ✅ Activities completed today
         const journal = await prisma.journals.count({
             where: { updated_at: dateFilter() }
         });
 
         const reflection = await prisma.self_reflection.count({
-            where: { updated_at: dateFilter() }
+            where: {
+                updated_at: dateFilter()
+            }
         });
 
         const tasks = await prisma.task.count({
-            where: { created_at: dateFilter() }
+            where: {
+                created_at: dateFilter()
+            }
         });
 
         const user_mood = await prisma.user_mood.count({
-            where: { updated_at: dateFilter() }
+            where: {
+                updated_at: dateFilter()
+            }
         });
 
         const activity_xp = all_activites;
@@ -247,7 +150,12 @@ export const getXPStreakDetails = async (req: any, res: Response) => {
         console.log(`GET XP STREAK DETAILS FAILED ${error}`);
         res.status(500).json(ISE());
     }
-};
+}
+// ✅ Helper for IST conversion
+
+
+
+
 
 export const getReflectionProgress = async (req: any, res: Response) => {
     try {

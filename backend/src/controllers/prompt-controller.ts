@@ -11,3 +11,18 @@ export const allPrompts = async(req:any, res: Response) => {
         res.status(500).json(ISE());
     }
 }
+
+export const insertPrompts = async(req:any, res: Response) => {
+    try{
+        const prompts = await prisma.prompts.create({
+            data: {
+                prompt: req.body.prompt,
+                description: req.body.desc
+            }
+        })
+        res.json(SUCCESS(prompts));
+    }catch(error){
+        console.log(`INSERT PROMPTS FAILED ${error}`);
+        res.status(500).json(ISE());
+    }
+}

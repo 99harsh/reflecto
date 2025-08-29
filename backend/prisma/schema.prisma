@@ -46,7 +46,7 @@ model task{
   task String
   completed Boolean
 
-  created_at DateTime @default(now())
+  created_at DateTime @default(now()) @db.DateTime(6)
 }
 
 model all_moods {
@@ -69,7 +69,7 @@ model user_mood{
   users users @relation(fields: [user_id], references: [user_id])
   user_id Int
 
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @db.DateTime(6)
 }
 
 model journals{
@@ -81,14 +81,14 @@ model journals{
     ciphertext Bytes @db.LongBlob
   iv Bytes
 
-  updated_at DateTime @updatedAt
+  updated_at DateTime @default(now()) @db.DateTime(6)
 }
 
 model prompts{
   prompt_id Int @id @default(autoincrement())
   prompt String
   description String @db.MediumText
-  created_at DateTime @default(now())
+  created_at DateTime @default(now()) @db.DateTime(6)
 
 }
 
@@ -103,5 +103,5 @@ model self_reflection{
   ciphertext Bytes @db.LongBlob
   iv Bytes
 
-  updated_at DateTime @updatedAt @unique
+  updated_at DateTime @default(now()) @db.DateTime(6) @unique
 }

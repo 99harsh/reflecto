@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE `task` MODIFY `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6);
+
+-- AlterTable
+ALTER TABLE `users` MODIFY `salt` MEDIUMBLOB NOT NULL;
