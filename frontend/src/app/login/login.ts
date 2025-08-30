@@ -18,7 +18,7 @@ export class Login implements OnInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
   isBrowser = false;
   ngOnInit(): void {
-    this.analytics.track("Login Page View");
+    this.analytics.trackLanding("Login Page View");
   }
 
   loginWithGoogle = () =>{
