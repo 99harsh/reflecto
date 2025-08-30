@@ -24,7 +24,7 @@ router.post("/track", verifyUserAuthToken, (req:any, res) => {
     return;
 });
 
-router.post("/track-landing", verifyUserAuthToken, (req, res) => {
+router.post("/track-landing", (req, res) => {
     const { event } = req.body;
     const ip =
     (req.headers["x-forwarded-for"] as string)?.split(",")[0] ||
