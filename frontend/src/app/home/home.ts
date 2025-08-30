@@ -3,6 +3,7 @@ import { Progressbar } from '../shared/progressbar/progressbar';import { SmartHt
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { Skeleton } from '../shared/skeleton/skeleton';
+import { AnalyticsService } from '../services/analytics.service';
 
 interface HomeLoading{ isDashboardCards: boolean, isLevelXPStats: boolean }
 
@@ -35,6 +36,7 @@ export class Home implements OnInit {
 
   private http = inject(SmartHttpService);
   private platformId = inject(PLATFORM_ID)
+  private analytics = inject(AnalyticsService);
 
   dashboardStats = signal<any>({});
   profileProgress = signal<any>({});
@@ -46,6 +48,7 @@ export class Home implements OnInit {
 
 
   ngOnInit(): void {
+    this.analytics.track("Dashboard View")
     this.getDasboardData();
     this.getProfileProgress();
   }
