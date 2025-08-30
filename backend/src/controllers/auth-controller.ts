@@ -9,6 +9,7 @@ import { base64ToUint8Array, uint8ArrayToBase64 } from '../utils/encryption-help
 import { differenceInDays } from 'date-fns/differenceInDays';
 import { isSameDay } from 'date-fns/isSameDay';
 import { streak_activity_ids, xpInfo } from '../utils/stats-helper';
+import { getIP, track } from '../utils/mixpanel-helper';
 
 const client = new OAuth2Client(process.env.CLIENT_ID)
 
@@ -93,6 +94,8 @@ export const authenticate = async (req: any, res: Response) => {
                 })
             }
 
+            track("User Login", {distinct_id: user_data.user_id, ip: getIP(req)})
+
             const token = await createUserAuthToken({ name: user_data.name, email: user_data.email, user_id: user_data.user_id });
             res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'lax',  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), maxAge: 90 * 24 * 60 * 60 * 1000  });
             res.json(SUCCESS({ name: user_data.name, email: user_data.email, profile_photo: user_data.profile_photo, xp: user_data.xp, salt: user_data?.salt }));
@@ -131,6 +134,7 @@ export const profile = async (req: any, res: any) => {
 
 export const logout = async (req: any, res: any) => {
     try {
+        track("User Logout", {distinct_id: req.payload.user_id, ip: getIP(req)})
         res.clearCookie("token", { httpOnly: true, secure: true, sameSite: 'lax' });
         res.json(SUCCESS())
     } catch (error) {

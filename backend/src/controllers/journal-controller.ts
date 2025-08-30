@@ -5,6 +5,7 @@ import prisma from '../utils/db';
 import { dateFilter } from "../utils/date-helper";
 import { streak_activity_ids, xpInfo } from "../utils/stats-helper";
 import { base64ToBytes, bytesToBase64 } from "../utils/encryption-helper";
+import { getIP, track } from "../utils/mixpanel-helper";
 
 export const getJournal = async (req: any, res: Response) => {
     try {
@@ -29,7 +30,7 @@ export const saveJournal = async (req: any, res: Response) => {
             res.status(400).json(BADREQ());
             return;
         }
-
+        track("Save Journal", {distinct_id: req.payload.user_id, ip: getIP(req)})
         if (v_data.data?.journal_id) {
             const updated = await prisma.journals.update({
                 data: {

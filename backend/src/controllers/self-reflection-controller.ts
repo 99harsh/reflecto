@@ -5,6 +5,7 @@ import { dateFilter } from '../utils/date-helper';
 import { saveSelfReflectionSchema } from '../utils/validations';
 import { streak_activity_ids, xpInfo } from '../utils/stats-helper';
 import { base64ToBytes, bytesToBase64 } from '../utils/encryption-helper';
+import { track,getIP } from '../utils/mixpanel-helper';
 
 export const getSelfReflection = async (req: any, res: Response) => {
     try {
@@ -44,6 +45,8 @@ export const saveSelfReflection = async (req: any, res: any) => {
             res.status(400).json(BADREQ());
             return;
         }
+
+        track("Save Journal", {distinct_id: req.payload.user_id, ip: getIP(req)})
 
         if (v_data.data?.self_reflection_id) {
             const updated = await prisma.self_reflection.update({
