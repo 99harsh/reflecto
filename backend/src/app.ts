@@ -10,6 +10,7 @@ import promptRouter from './routers/prompt-router';
 import statsRouter from './routers/stat-route';
 import selfReflectionRouter from './routers/self-reflection-router';
 import profileRouter from './routers/profile-router';
+import analyticsRoutes from './routers/analytics-router';
 import rateLimit from "express-rate-limit";
 
 dotenv.config();
@@ -36,7 +37,7 @@ app.use(cors({
 app.use(cookieParse());
 app.use(express.json());
 
-app.set('trust proxy', 1);
+app.set('trust proxy', true);
 app.get("/health", (req, res) => {
     res.json({ status: 200 })
 })
@@ -49,6 +50,7 @@ app.use("/api/v1/prompt", promptRouter);
 app.use("/api/v1/self-reflection", selfReflectionRouter);
 app.use("/api/v1/stats", statsRouter);
 app.use("/api/v1/profile", profileRouter);
+app.use("/api/v1/analytics", analyticsRoutes);
 
 
 const server = app.listen(process.env.PORT, () => {

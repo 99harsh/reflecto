@@ -19,7 +19,8 @@
     "express-rate-limit": "^8.0.1",
     "express-session": "^1.18.1",
     "google-auth-library": "^10.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "mixpanel": "^0.18.1"
   },
   "devDependencies": {
     "@prisma/client": "^6.11.1",
