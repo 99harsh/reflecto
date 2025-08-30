@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { getRelativeTime } from '../shared/helper';
 import { Skeleton } from '../shared/skeleton/skeleton';
 import { trigger, style, transition, animate } from '@angular/animations';
+import { AnalyticsService } from '../services/analytics.service';
 
 interface MoodLoading{
   isAllMoods:boolean,
@@ -41,9 +42,11 @@ export class Mood implements OnInit {
     moodStats: true
   });
   statsData = signal<any>({});
-  http = inject(SmartHttpService);
+  private http = inject(SmartHttpService);
+  private analytics = inject(AnalyticsService);
 
   ngOnInit(): void {
+    this.analytics.track("Mood Page View");
     this.getAllMoods();
     this.getMoodStats();
   }

@@ -8,6 +8,7 @@ import { Popup } from '../shared/popup/popup';
 import { FormsModule } from '@angular/forms';
 import { Spinner } from '../shared/spinner/spinner';
 import { ToastrService } from 'ngx-toastr';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-profile',
@@ -32,10 +33,14 @@ export class Profile implements OnInit, OnDestroy {
   isDataResetting = signal<boolean>(false);
   isDataReset = signal<boolean>(false);
   resetInputText = signal<string>("");
-  http = inject(SmartHttpService);
-  toastr = inject(ToastrService);
+
+  private http = inject(SmartHttpService);
+  private toastr = inject(ToastrService);
+  private analytics = inject(AnalyticsService);
   private refreshTimeout: any;
+
   ngOnInit(): void {
+    this.analytics.track("Profile Page View");
     this.loadProfileDetails();
   }
 

@@ -1,6 +1,7 @@
 import { PLATFORM_ID, Inject, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthGoogleService } from '../services/auth-google.service';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,13 @@ import { AuthGoogleService } from '../services/auth-google.service';
 // Declare google as a global variable
 
 export class Login implements OnInit {
-  authService = inject(AuthGoogleService);
+  private authService = inject(AuthGoogleService);
+  private analytics = inject(AnalyticsService);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
   isBrowser = false;
   ngOnInit(): void {
-
+    this.analytics.track("Login Page View");
   }
 
   loginWithGoogle = () =>{

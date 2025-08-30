@@ -15,13 +15,25 @@ export class AnalyticsService {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  track(event: string) {
+  track(event: string, properties?: any) {
     if (!this.isBrowser) return;
 
     this.http.post("analytics/track", {
       event,
+      properties
     }).subscribe({
       error: (err) => console.error("Analytics track failed", err),
     });
+  }
+
+  trackLanding(event:string, properties?: any) {
+    if(!this.isBrowser) return;
+
+    this.http.post("analytics/track-landing", {
+        event,
+        properties
+    }).subscribe({
+        error: (err) => console.error("Analytics track failed", err) 
+    })
   }
 }

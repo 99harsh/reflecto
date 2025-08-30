@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Skeleton } from '../shared/skeleton/skeleton';
 import { trigger, style, transition, animate } from '@angular/animations';
+import { AnalyticsService } from '../services/analytics.service';
 
 interface TaskLoading{
   userTasksLoading:boolean,
@@ -40,8 +41,11 @@ export class Goals implements OnInit {
     statsLoading: true
   })
 
+  private analytics = inject(AnalyticsService);
+
 
   ngOnInit(): void {
+    this.analytics.track("Task Page View");
     this.getTasks();
     this.getTasksProgress();
   }

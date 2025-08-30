@@ -2,13 +2,14 @@ import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Editor, NgxEditorComponent, toHTML, toDoc } from 'ngx-editor';
+import { Editor, NgxEditorComponent, } from 'ngx-editor';
 import { format } from 'date-fns';
 import { SmartHttpService } from '../../services/smart-http.service';
 import { Skeleton } from '../../shared/skeleton/skeleton';
 import { EncryptionService } from '../../services/encryption.service';
 import { ToastrService } from 'ngx-toastr';
 import { StorageService } from '../../services/storage.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-self-reflection',
@@ -36,6 +37,7 @@ export class SelfReflection implements OnInit {
   private encryptionService = inject(EncryptionService);
   private toastr = inject(ToastrService);
   private storage = inject(StorageService);
+  private analytics = inject(AnalyticsService);
 
   route = inject(ActivatedRoute);
   http = inject(SmartHttpService);
@@ -53,6 +55,7 @@ export class SelfReflection implements OnInit {
     try {
       this.dateParam.set(this.route.snapshot.paramMap.get("date") || "");
       this.currentDate.set(format(new Date(this.dateParam()), "EEEE, MMMM d, yyyy"));
+      this.analytics.track("Date Details Reflection Page View", {date: this.currentDate()});
       this.http.post("stats/self-reflection-insights", { date: this.dateParam() }).subscribe({
         next: (res: any) => {
           if (res && res.status === 200) {
@@ -105,6 +108,7 @@ export class SelfReflection implements OnInit {
         a.href = url;
         a.download = `${this.currentDate()}-self-reflection.html`;
         a.click();
+        this.analytics.track("Date Details Self Reflection Export Click", {date: this.currentDate()})
       }
   
     }

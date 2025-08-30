@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Header } from '../shared/header/header';
 import { Footer } from '../shared/footer/footer';
 import { RouterLink } from '@angular/router';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,6 +11,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './landing.html',
   styleUrl: './landing.scss'
 })
-export class Landing {
+export class Landing implements OnInit {
+  private analytics = inject(AnalyticsService);
 
+  ngOnInit(): void {
+    this.analytics.trackLanding("Landing Page View");
+  }
 }

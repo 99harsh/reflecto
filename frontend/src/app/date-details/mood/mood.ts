@@ -5,6 +5,7 @@ import { SmartHttpService } from '../../services/smart-http.service';
 import { format } from 'date-fns'
 import { Location } from '@angular/common';
 import { Skeleton } from '../../shared/skeleton/skeleton';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-mood',
@@ -21,7 +22,8 @@ export class Mood implements OnInit {
   route = inject(ActivatedRoute);
   http = inject(SmartHttpService);
 
-    private location = inject(Location);
+  private location = inject(Location);
+  private analytics = inject(AnalyticsService); 
 
   ngOnInit(): void {
     this.fetchInsights();
@@ -31,6 +33,7 @@ export class Mood implements OnInit {
     try {
       this.dateParam.set(this.route.snapshot.paramMap.get("date") || "");
       this.currentDate.set(format(new Date(this.dateParam()), "EEEE, MMMM d, yyyy"));
+      this.analytics.track("Date Details Mood Page View", {date: this.currentDate()});
       this.http.post("stats/mood-insights", { date: this.dateParam() }).subscribe({
         next: (res: any) => {
           if (res && res.status === 200) {

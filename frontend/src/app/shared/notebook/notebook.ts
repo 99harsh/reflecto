@@ -10,6 +10,7 @@ import { Skeleton } from '../skeleton/skeleton';
 import { EncryptionService } from '../../services/encryption.service';
 import { StorageService } from '../../services/storage.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-notebook',
@@ -42,6 +43,7 @@ export class Notebook implements OnInit {
   private encryptionService = inject(EncryptionService);
   private storage = inject(StorageService);
   private toastr = inject(ToastrService);
+  private analytics = inject(AnalyticsService);
 
   private inputSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
@@ -98,6 +100,9 @@ export class Notebook implements OnInit {
           this.key
         );
         this.journalText.set(decrypt);
+        this.analytics.track("Unlock Journal");
+      }else{
+        this.analytics.track("Lock Journal");
       }
       this.isEncrypted.set(false);
     } catch (error: any) {

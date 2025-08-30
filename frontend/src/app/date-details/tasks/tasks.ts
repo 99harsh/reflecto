@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { format } from 'date-fns';
 import { CommonModule, Location } from '@angular/common';
 import { Skeleton } from '../../shared/skeleton/skeleton';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-tasks',
@@ -12,9 +13,11 @@ import { Skeleton } from '../../shared/skeleton/skeleton';
   styleUrl: './tasks.scss'
 })
 export class Tasks implements OnInit {
-  http = inject(SmartHttpService);
-  route = inject(ActivatedRoute);
+  private http = inject(SmartHttpService);
+  private route = inject(ActivatedRoute);
   private location = inject(Location);
+  private analytics = inject(AnalyticsService);
+
   loading = signal<boolean>(true);
 
   dateParam = signal<string>("");
@@ -31,6 +34,7 @@ export class Tasks implements OnInit {
     try {
       this.dateParam.set(this.route.snapshot.paramMap.get("date") || "");
       this.currentDate.set(format(new Date(this.dateParam()), "EEEE, MMMM d, yyyy"));
+      this.analytics.track("Date Details Task Page View", {date: this.currentDate()});
       this.http.post("stats/task-insights", { date: this.dateParam() }).subscribe({
         next: (res: any) => {
           if (res && res.status === 200) {

@@ -48,7 +48,7 @@ export class Home implements OnInit {
 
 
   ngOnInit(): void {
-    this.analytics.track("Dashboard View")
+    this.analytics.track("Dashboard Page View")
     this.getDasboardData();
     this.getProfileProgress();
   }

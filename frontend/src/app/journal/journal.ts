@@ -5,6 +5,7 @@ import { SmartHttpService } from '../services/smart-http.service';
 import { Skeleton } from '../shared/skeleton/skeleton';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { EncryptionService } from '../services/encryption.service';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-journal',
@@ -31,8 +32,10 @@ export class Journal implements OnInit {
 
   encryptionService = inject(EncryptionService);
   http = inject(SmartHttpService);
+  private journal = inject(AnalyticsService);
 
   ngOnInit(): void {
+    this.journal.track("Journal Page View");
     this.currentDate.set(format(new Date(), "EEEE, MMMM d, yyyy"))
     this.getInsightsData();
   }

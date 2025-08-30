@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { SmartHttpService } from '../../services/smart-http.service';
 import { Location } from '@angular/common';
 import { Skeleton } from '../../shared/skeleton/skeleton';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-landing',
@@ -20,7 +21,7 @@ export class Landing implements OnInit {
 
   route = inject(ActivatedRoute);
   http = inject(SmartHttpService);
-
+  private analytics  = inject(AnalyticsService);
   private location = inject(Location);
 
   ngOnInit(): void {
@@ -31,6 +32,7 @@ export class Landing implements OnInit {
     try {
       this.dateParam.set(this.route.snapshot.paramMap.get("date") || "");
       this.currentDate.set(format(new Date(this.dateParam()), "EEEE, MMMM d, yyyy"));
+      this.analytics.track("Date Details Page View", {date: this.currentDate()});
       this.http.post("stats/date-insights", { date: this.dateParam() }).subscribe({
         next: (res: any) => {
           if (res && res.status === 200) {

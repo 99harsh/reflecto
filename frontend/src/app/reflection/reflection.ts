@@ -18,6 +18,7 @@ import { trigger, style, transition, animate } from '@angular/animations';
 import { EncryptionService } from '../services/encryption.service';
 import { StorageService } from '../services/storage.service';
 import { ToastrService } from 'ngx-toastr';
+import { AnalyticsService } from '../services/analytics.service';
 
 interface ReflectionLoading {
   isUserReflectionLoading: boolean,
@@ -68,6 +69,7 @@ export class Reflection implements OnInit {
   private encryptionService = inject(EncryptionService);
   private storage = inject(StorageService);
   private toastr = inject(ToastrService);
+  private analytics = inject(AnalyticsService);
 
   private inputSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
@@ -75,6 +77,7 @@ export class Reflection implements OnInit {
   private salt!: Uint8Array;
 
   ngOnInit(): void {
+    this.analytics.track("Reflection Page View")
     this.currentDate.set(format(new Date(), "EEEE, MMMM d, yyyy"));
     if (isPlatformBrowser(this.platformId)) {
       this.editor = new Editor();
@@ -103,7 +106,11 @@ export class Reflection implements OnInit {
           this.cipherData().iv,
           this.key
         );
+        this.analytics.track("Unlock Reflection");
         this.reflectionText.set(decrypt);
+        
+      }else{
+        this.analytics.track("Lock Reflection");
       }
 
       this.isEncrypted.set(false);
@@ -239,6 +246,7 @@ export class Reflection implements OnInit {
 
   addPromptToEditor = (prompt: string) => {
     if(this.isEncrypted()) return;
+    this.analytics.track("Reflection Prompt Click", {prompt});
     if (this.reflectionText().trim().length <= 7) {
       this.reflectionText.set(`<h3 style='color:#78350f; background-color: yellow; padding: .312rem'>${prompt}</h3><br />`);
       return;

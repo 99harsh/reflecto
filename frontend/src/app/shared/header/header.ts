@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +12,10 @@ import { RouterLink } from '@angular/router';
 export class Header {
 
   isHome = input<boolean>(true);
+  private analytics = inject(AnalyticsService);
   
   scrollToSection(sectionId: string, event: Event) {
+    this.analytics.trackLanding("Landing Header Click", {nav: sectionId});
     event.preventDefault(); // prevent default anchor behavior
     const element = document.getElementById(sectionId);
     if (element) {

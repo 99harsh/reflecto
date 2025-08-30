@@ -6,6 +6,7 @@ import { SmartHttpService } from '../../services/smart-http.service';
 import { format } from 'date-fns';
 import { Skeleton } from '../skeleton/skeleton';
 import { trigger, style, transition, animate } from '@angular/animations';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-calendar',
@@ -37,9 +38,11 @@ export class Calendar implements OnInit {
   entries: any[] = [];
 
   private http = inject(SmartHttpService);
+  private analytics = inject(AnalyticsService);
   router = inject(Router);
 
   ngOnInit(): void {
+    this.analytics.track("Calendar Page View");
     const baseYear = new Date().getFullYear();
     this.yearList = Array.from({ length: 21 }, (_, i) => baseYear - 10 + i);
     this.fetchCalendarData();

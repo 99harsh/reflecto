@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Header } from '../shared/header/header';
+import { AnalyticsService } from '../services/analytics.service';
 
 @Component({
   selector: 'app-tnc',
@@ -7,6 +8,10 @@ import { Header } from '../shared/header/header';
   templateUrl: './tnc.html',
   styleUrl: './tnc.scss'
 })
-export class Tnc {
+export class Tnc implements OnInit {
+  private analytics = inject(AnalyticsService);
 
+  ngOnInit(): void {
+    this.analytics.trackLanding("TNC Page View")
+  }
 }

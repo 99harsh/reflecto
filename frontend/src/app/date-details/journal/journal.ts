@@ -9,6 +9,7 @@ import { Skeleton } from '../../shared/skeleton/skeleton';
 import { StorageService } from '../../services/storage.service';
 import { EncryptionService } from '../../services/encryption.service';
 import { ToastrService } from 'ngx-toastr';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-journal',
@@ -38,6 +39,7 @@ export class Journal implements OnInit {
   private http = inject(SmartHttpService);
   private encryptionService = inject(EncryptionService);
   private toastr = inject(ToastrService);
+  private anlytics  = inject(AnalyticsService);
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -51,6 +53,7 @@ export class Journal implements OnInit {
     try {
       this.dateParam.set(this.route.snapshot.paramMap.get("date") || "");
       this.currentDate.set(format(new Date(this.dateParam()), "EEEE, MMMM d, yyyy"));
+      this.anlytics.track("Date Details Journal Page View", {date: this.currentDate()})
       this.http.post("stats/journal-insights", { date: this.dateParam() }).subscribe({
         next: (res: any) => {
           if (res && res.status === 200) {
@@ -103,6 +106,7 @@ export class Journal implements OnInit {
         a.href = url;
         a.download = `${this.currentDate()}-journal.html`;
         a.click();
+        this.anlytics.track("Date Details Journal Export Click", {date: this.currentDate()})
       }
   
     }
