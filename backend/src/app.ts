@@ -10,9 +10,20 @@ import promptRouter from './routers/prompt-router';
 import statsRouter from './routers/stat-route';
 import selfReflectionRouter from './routers/self-reflection-router';
 import profileRouter from './routers/profile-router';
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 const app = express();
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1, // 1 minute
+    max: 100, // limit each IP
+    message: "Too many requests from this IP, please try again later.",
+    standardHeaders: true, // return rate limit info in headers
+    legacyHeaders: false,  // disable `X-RateLimit-*` headers
+  });
+
+  app.use(limiter);
 
 app.use(cors({
     origin: [

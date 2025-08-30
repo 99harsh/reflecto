@@ -107,24 +107,27 @@ export const getXPStreakDetails = async (req: any, res: Response) => {
         const levelInfo = checkLevel(user_details.xp);
 
         const journal = await prisma.journals.count({
-            where: { updated_at: dateFilter() }
+            where: { updated_at: dateFilter(), user_id: req.payload.user_id }
         });
 
         const reflection = await prisma.self_reflection.count({
             where: {
-                updated_at: dateFilter()
+                updated_at: dateFilter(),
+                user_id: req.payload.user_id
             }
         });
 
         const tasks = await prisma.task.count({
             where: {
-                created_at: dateFilter()
+                created_at: dateFilter(),
+                user_id: req.payload.user_id
             }
         });
 
         const user_mood = await prisma.user_mood.count({
             where: {
-                updated_at: dateFilter()
+                updated_at: dateFilter(),
+                user_id: req.payload.user_id
             }
         });
 

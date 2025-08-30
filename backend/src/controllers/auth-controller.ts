@@ -47,11 +47,7 @@ export const authenticate = async (req: any, res: Response) => {
                 }
             })
 
-            let user_details = await prisma.users.findUnique({
-                where: {
-                    user_id: req.payload.user_id
-                }
-            });
+            let user_details = user_data;
     
             if (!user_details) {
                 res.json(SUCCESS({ message: "NO USER FOUND!" }));

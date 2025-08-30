@@ -82,6 +82,7 @@ export const resetProfileData = async (req: any, res: Response) => {
           prisma.self_reflection.deleteMany({ where: { user_id: userId } }),
           prisma.user_mood.deleteMany({ where: { user_id: userId } }),
           prisma.task.deleteMany({ where: { user_id: userId } }),
+          prisma.users_streak.deleteMany({where: {user_id: userId}})
         ]);
 
         res.json(SUCCESS());
